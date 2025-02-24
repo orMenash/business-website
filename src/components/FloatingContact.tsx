@@ -1,5 +1,5 @@
 
-import { Phone, Facebook, Twitter, Instagram, WhatsApp } from "lucide-react";
+import { Phone, Facebook, Twitter, Instagram, MessageCircle } from "lucide-react";
 import { useBusiness } from "@/contexts/BusinessContext";
 import { TiktokIcon } from "./TiktokIcon";
 
@@ -55,7 +55,7 @@ export const FloatingContact = () => {
           rel="noopener noreferrer"
           className="bg-[#25D366] text-white p-3 rounded-full shadow-lg hover:bg-[#25D366]/90 transition-colors"
         >
-          <WhatsApp className="w-6 h-6" />
+          <MessageCircle className="w-6 h-6" />
         </a>
       )}
       {contact.showFloatingPhone && (
