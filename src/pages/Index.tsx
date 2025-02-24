@@ -22,7 +22,7 @@ const Index = () => {
         return <HeroSection key="hero" section={section} />;
       case 'services':
         return <ServicesSection key="services" section={section} />;
-      case 'employees':
+      case 'team':
         return <TeamSection key="team" section={section} />;
       case 'testimonials':
         return <TestimonialsSection key="testimonials" section={section} />;

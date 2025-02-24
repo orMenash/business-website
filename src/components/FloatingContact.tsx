@@ -1,5 +1,5 @@
 
-import { MessageSquare, Phone, Facebook, Twitter, Instagram } from "lucide-react";
+import { Phone, Facebook, Twitter, Instagram, WhatsApp } from "lucide-react";
 import { useBusiness } from "@/contexts/BusinessContext";
 import { TiktokIcon } from "./TiktokIcon";
 
@@ -53,9 +53,9 @@ export const FloatingContact = () => {
           href={`https://wa.me/${contact.whatsapp}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors"
+          className="bg-[#25D366] text-white p-3 rounded-full shadow-lg hover:bg-[#25D366]/90 transition-colors"
         >
-          <MessageSquare className="w-6 h-6" />
+          <WhatsApp className="w-6 h-6" />
         </a>
       )}
       {contact.showFloatingPhone && (

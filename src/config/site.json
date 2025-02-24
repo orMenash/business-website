@@ -44,49 +44,7 @@
       "order": 6,
       "max_display": null,
       "title": "גלריה",
-      "description": "תמונות נבחרות מהפרויקטים שלנו",
-      "albums": [
-        {
-          "id": "projects",
-          "name": "פרויקטים",
-          "show_album": true,
-          "max_images": 5,
-          "images": [
-            {
-              "url": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
-              "show_image": true,
-              "order": 1,
-              "description": "פרויקט 1"
-            },
-            {
-              "url": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-              "show_image": true,
-              "order": 2,
-              "description": "פרויקט 2"
-            }
-          ]
-        },
-        {
-          "id": "events",
-          "name": "אירועים",
-          "show_album": true,
-          "max_images": 3,
-          "images": [
-            {
-              "url": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
-              "show_image": true,
-              "order": 1,
-              "description": "אירוע 1"
-            },
-            {
-              "url": "https://images.unsplash.com/photo-1519389950473-47ba0276ae86",
-              "show_image": true,
-              "order": 2,
-              "description": "אירוע 2"
-            }
-          ]
-        }
-      ]
+      "description": "תמונות נבחרות מהפרויקטים שלנו"
     },
     "contact": {
       "show": true,
@@ -101,32 +59,38 @@
       {
         "title": "דף הבית",
         "path": "/",
-        "show": true
+        "show": true,
+        "order": 1
       },
       {
         "title": "שירותים",
         "path": "/services",
-        "show": true
+        "show": true,
+        "order": 2
       },
       {
         "title": "הצוות שלנו",
         "path": "/team",
-        "show": true
+        "show": true,
+        "order": 3
       },
       {
         "title": "פרויקטים",
         "path": "/projects",
-        "show": true
+        "show": true,
+        "order": 4
       },
       {
         "title": "גלריה",
         "path": "/gallery",
-        "show": true
+        "show": true,
+        "order": 5
       },
       {
         "title": "צור קשר",
         "path": "/contact",
-        "show": true
+        "show": true,
+        "order": 6
       }
     ]
   }
