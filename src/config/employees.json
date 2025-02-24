@@ -1,0 +1,41 @@
+
+{
+  "employees": [
+    {
+      "id": "1",
+      "name": "יובל כהן",
+      "title": "מנכ״ל ומייסד",
+      "description": "20 שנות ניסיון בתחום, מוביל את החברה להצלחות",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&h=256&q=80",
+      "fullDescription": "יובל כהן הוא המייסד והמנכ״ל של החברה. עם ניסיון של למעלה מ-20 שנה בתחום, הוא מוביל את החברה להצלחות רבות ומשמעותיות. יובל מאמין במתן שירות מקצועי ואיכותי ללקוחות החברה.",
+      "email": "yuval@example.com",
+      "phone": "050-1234567",
+      "show": true,
+      "clickable": true
+    },
+    {
+      "id": "2",
+      "name": "מיכל לוי",
+      "title": "סמנכ״לית פיתוח עסקי",
+      "description": "מומחית בפיתוח עסקי ואסטרטגיה",
+      "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&h=256&q=80",
+      "fullDescription": "מיכל לוי היא סמנכ״לית הפיתוח העסקי שלנו. עם ניסיון רב בתחום, היא מובילה את האסטרטגיה העסקית של החברה ומפתחת שווקים חדשים.",
+      "email": "michal@example.com",
+      "phone": "050-7654321",
+      "show": true,
+      "clickable": true
+    },
+    {
+      "id": "3",
+      "name": "דני שמעוני",
+      "title": "מנהל טכנולוגיות ראשי",
+      "description": "מוביל את הפיתוח הטכנולוגי של החברה",
+      "image": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&h=256&q=80",
+      "fullDescription": "דני שמעוני הוא מנהל הטכנולוגיות הראשי שלנו. הוא מוביל את כל הפיתוחים הטכנולוגיים בחברה ומביא חדשנות מתמדת.",
+      "email": "danny@example.com",
+      "phone": "050-9876543",
+      "show": true,
+      "clickable": true
+    }
+  ]
+}

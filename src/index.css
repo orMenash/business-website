@@ -1,3 +1,6 @@
+/* Add Noto Sans Hebrew font */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -99,3 +102,75 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .grayscale {
+    filter: grayscale(100%);
+  }
+
+  .high-contrast {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .high-contrast * {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .high-contrast a {
+    color: #0066ff !important;
+  }
+
+  .high-contrast button {
+    background-color: #ffee00 !important;
+    color: #000000 !important;
+  }
+
+  .inverted-contrast {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .inverted-contrast * {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .inverted-contrast a {
+    color: #ffee00 !important;
+  }
+
+  .inverted-contrast button {
+    background-color: #ffee00 !important;
+    color: #000000 !important;
+  }
+
+  .light-background {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .light-background * {
+    background-image: none !important;
+  }
+
+  .highlight-links a {
+    text-decoration: underline !important;
+    color: #0000EE !important;
+  }
+
+  .readable-font,
+  .readable-font * {
+    font-family: "Noto Sans Hebrew", Arial, sans-serif !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* Fix button positioning when font size changes */
+button {
+  position: relative !important;
+  transform: none !important;
+}
+
+

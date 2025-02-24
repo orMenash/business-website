@@ -1,0 +1,36 @@
+
+{
+  "name": "שם העסק",
+  "description": "תיאור מקצועי של העסק שלך",
+  "logo": {
+    "url": "/logo.svg",
+    "height": "32px",
+    "width": "auto"
+  },
+  "contact": {
+    "email": "contact@example.com",
+    "phone": "050-1234567",
+    "address": "רחוב הרצל 1, תל אביב",
+    "whatsapp": "972501234567",
+    "showFloatingWhatsapp": true,
+    "showFloatingPhone": true,
+    "social": {
+      "facebook": {
+        "show": true,
+        "url": "https://facebook.com/your-page"
+      },
+      "instagram": {
+        "show": true,
+        "url": "https://instagram.com/your-profile"
+      },
+      "tiktok": {
+        "show": false,
+        "url": "https://tiktok.com/@your-profile"
+      },
+      "twitter": {
+        "show": false,
+        "url": "https://twitter.com/your-profile"
+      }
+    }
+  }
+}

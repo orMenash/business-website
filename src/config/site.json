@@ -1,0 +1,129 @@
+
+{
+  "sections": {
+    "hero": {
+      "show": true,
+      "order": 1,
+      "max_display": 1,
+      "title": "ברוכים הבאים",
+      "description": "אנחנו כאן בשבילכם",
+      "image": "https://images.unsplash.com/photo-1649972904349-6e44c42644a7"
+    },
+    "services": {
+      "show": true,
+      "order": 2,
+      "max_display": 3,
+      "title": "השירותים שלנו",
+      "description": "מגוון השירותים המקצועיים שאנו מציעים"
+    },
+    "team": {
+      "show": true,
+      "order": 3,
+      "max_display": 3,
+      "title": "הצוות שלנו",
+      "description": "הכירו את הצוות המקצועי שלנו"
+    },
+    "testimonials": {
+      "show": true,
+      "order": 4,
+      "max_display": 3,
+      "title": "מה אומרים עלינו",
+      "description": "לקוחות מספרים על החוויה שלהם איתנו"
+    },
+    "projects": {
+      "show": true,
+      "order": 5,
+      "max_display": 3,
+      "title": "הפרויקטים שלנו",
+      "description": "פרויקטים נבחרים שביצענו"
+    },
+    "gallery": {
+      "show": true,
+      "order": 6,
+      "title": "גלריה",
+      "description": "תמונות נבחרות מהפרויקטים שלנו",
+      "albums": [
+        {
+          "id": "projects",
+          "name": "פרויקטים",
+          "show_album": true,
+          "max_images": 5,
+          "images": [
+            {
+              "url": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+              "show_image": true,
+              "order": 1,
+              "description": "פרויקט 1"
+            },
+            {
+              "url": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+              "show_image": true,
+              "order": 2,
+              "description": "פרויקט 2"
+            }
+          ]
+        },
+        {
+          "id": "events",
+          "name": "אירועים",
+          "show_album": true,
+          "max_images": 3,
+          "images": [
+            {
+              "url": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
+              "show_image": true,
+              "order": 1,
+              "description": "אירוע 1"
+            },
+            {
+              "url": "https://images.unsplash.com/photo-1519389950473-47ba0276ae86",
+              "show_image": true,
+              "order": 2,
+              "description": "אירוע 2"
+            }
+          ]
+        }
+      ]
+    },
+    "contact": {
+      "show": true,
+      "order": 7,
+      "title": "צור קשר",
+      "description": "נשמח לעמוד לרשותכם"
+    }
+  },
+  "navigation": {
+    "links": [
+      {
+        "title": "דף הבית",
+        "path": "/",
+        "show": true
+      },
+      {
+        "title": "שירותים",
+        "path": "/services",
+        "show": true
+      },
+      {
+        "title": "הצוות שלנו",
+        "path": "/team",
+        "show": true
+      },
+      {
+        "title": "פרויקטים",
+        "path": "/projects",
+        "show": true
+      },
+      {
+        "title": "גלריה",
+        "path": "/gallery",
+        "show": true
+      },
+      {
+        "title": "צור קשר",
+        "path": "/contact",
+        "show": true
+      }
+    ]
+  }
+}

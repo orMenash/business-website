@@ -1,0 +1,29 @@
+
+{
+  "services": [
+    {
+      "id": "1",
+      "title": "שירות 1",
+      "description": "תיאור מפורט של השירות הראשון",
+      "icon": "sparkles",
+      "show": true,
+      "clickable": true
+    },
+    {
+      "id": "2", 
+      "title": "שירות 2",
+      "description": "תיאור מפורט של השירות השני",
+      "icon": "zap",
+      "show": true,
+      "clickable": true
+    },
+    {
+      "id": "3",
+      "title": "שירות 3", 
+      "description": "תיאור מפורט של השירות השלישי",
+      "icon": "star",
+      "show": true,
+      "clickable": true
+    }
+  ]
+}
