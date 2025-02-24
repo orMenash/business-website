@@ -18,6 +18,8 @@ import ContactPage from "./pages/ContactPage";
 import ProjectPage from "./pages/ProjectPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import TeamPage from "./pages/TeamPage";
+import GalleryPage from "./pages/GalleryPage";
+import AlbumPage from "./pages/AlbumPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,6 +47,8 @@ const AppContent = () => {
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/project/:id" element={<ProjectPage />} />
               <Route path="/team" element={<TeamPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/gallery/:albumId" element={<AlbumPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
