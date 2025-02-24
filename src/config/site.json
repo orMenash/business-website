@@ -6,7 +6,9 @@
       "order": 1,
       "max_display": 1,
       "title": "ברוכים הבאים",
+      "subtitle": "השירותים המקצועיים שלנו",
       "description": "אנחנו כאן בשבילכם",
+      "cta": "צור קשר",
       "image": "https://images.unsplash.com/photo-1649972904349-6e44c42644a7"
     },
     "services": {
@@ -40,6 +42,7 @@
     "gallery": {
       "show": true,
       "order": 6,
+      "max_display": null,
       "title": "גלריה",
       "description": "תמונות נבחרות מהפרויקטים שלנו",
       "albums": [
@@ -88,6 +91,7 @@
     "contact": {
       "show": true,
       "order": 7,
+      "max_display": null,
       "title": "צור קשר",
       "description": "נשמח לעמוד לרשותכם"
     }

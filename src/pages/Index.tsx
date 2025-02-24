@@ -8,27 +8,29 @@ import { EmployeeCard } from "@/components/EmployeeCard";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { ProjectCard } from "@/components/ProjectCard";
 import { FloatingContact } from "@/components/FloatingContact";
-import homepageConfig from "@/config/homepage.json";
-import sectionsConfig from "@/config/sections.json";
+import siteConfig from "@/config/site.json";
 import testimonialsConfig from "@/config/testimonials.json";
 import projectsConfig from "@/config/projects.json";
 
 const Index = () => {
   const { name, description, services, employees } = useBusiness();
 
-  const sections = Object.entries(sectionsConfig.sections)
+  // מיון האזורים לפי הסדר שהוגדר בקונפיגורציה
+  const sections = Object.entries(siteConfig.sections)
     .sort(([, a], [, b]) => a.order - b.order)
     .filter(([, section]) => section.show);
 
   const renderSection = (sectionId: string) => {
+    const section = siteConfig.sections[sectionId];
+    
     switch (sectionId) {
       case 'hero':
         return (
           <section key="hero" className="pt-32 pb-16 bg-gradient-to-b from-secondary to-white relative">
-            {homepageConfig.hero.image && (
+            {section.image && (
               <div className="absolute inset-0 z-0 opacity-10">
                 <img
-                  src={homepageConfig.hero.image}
+                  src={section.image}
                   alt="Hero"
                   className="w-full h-full object-cover"
                 />
@@ -46,7 +48,7 @@ const Index = () => {
                   to="/contact"
                   className="inline-flex items-center space-x-2 bg-accent text-white px-6 py-3 rounded-md hover:bg-accent/90 transition-colors animate-fadeIn"
                 >
-                  <span>צור קשר</span>
+                  <span>{section.cta || "צור קשר"}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -60,23 +62,26 @@ const Index = () => {
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-serif font-semibold mb-4">
-                  השירותים שלנו
+                  {section.title}
                 </h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">
-                  אנו מציעים מגוון שירותים מקצועיים המותאמים לצרכים הספציפיים שלך
+                  {section.description}
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                {services.filter(service => service.show).map((service) => (
-                  <ServiceCard
-                    key={service.id}
-                    id={service.id}
-                    title={service.title}
-                    description={service.description}
-                    icon={service.icon}
-                    clickable={service.clickable}
-                  />
-                ))}
+                {services
+                  .filter(service => service.show)
+                  .slice(0, section.max_display)
+                  .map((service) => (
+                    <ServiceCard
+                      key={service.id}
+                      id={service.id}
+                      title={service.title}
+                      description={service.description}
+                      icon={service.icon}
+                      clickable={service.clickable}
+                    />
+                  ))}
               </div>
             </div>
           </section>
@@ -88,24 +93,27 @@ const Index = () => {
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-serif font-semibold mb-4">
-                  הצוות שלנו
+                  {siteConfig.sections.team.title}
                 </h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">
-                  הכירו את הצוות המקצועי והמסור שלנו
+                  {siteConfig.sections.team.description}
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                {employees.filter(employee => employee.show).map((employee) => (
-                  <EmployeeCard
-                    key={employee.id}
-                    id={employee.id}
-                    name={employee.name}
-                    title={employee.title}
-                    description={employee.description}
-                    image={employee.image}
-                    clickable={employee.clickable}
-                  />
-                ))}
+                {employees
+                  .filter(employee => employee.show)
+                  .slice(0, siteConfig.sections.team.max_display)
+                  .map((employee) => (
+                    <EmployeeCard
+                      key={employee.id}
+                      id={employee.id}
+                      name={employee.name}
+                      title={employee.title}
+                      description={employee.description}
+                      image={employee.image}
+                      clickable={employee.clickable}
+                    />
+                  ))}
               </div>
             </div>
           </section>
@@ -117,25 +125,26 @@ const Index = () => {
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-serif font-semibold mb-4">
-                  {testimonialsConfig.title}
+                  {section.title}
                 </h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">
-                  {testimonialsConfig.description}
+                  {section.description}
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 {testimonialsConfig.testimonials
                   .filter((testimonial: any) => testimonial.show)
+                  .slice(0, section.max_display)
                   .map((testimonial) => (
-                  <TestimonialCard
-                    key={testimonial.id}
-                    name={testimonial.name}
-                    role={testimonial.role}
-                    company={testimonial.company}
-                    content={testimonial.content}
-                    rating={testimonial.rating}
-                  />
-                ))}
+                    <TestimonialCard
+                      key={testimonial.id}
+                      name={testimonial.name}
+                      role={testimonial.role}
+                      company={testimonial.company}
+                      content={testimonial.content}
+                      rating={testimonial.rating}
+                    />
+                  ))}
               </div>
             </div>
           </section>
@@ -147,26 +156,27 @@ const Index = () => {
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-serif font-semibold mb-4">
-                  {projectsConfig.title}
+                  {section.title}
                 </h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">
-                  {projectsConfig.description}
+                  {section.description}
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 {projectsConfig.projects
                   .filter(project => project.show)
+                  .slice(0, section.max_display)
                   .map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    title={project.title}
-                    description={project.description}
-                    image={project.image}
-                    category={project.category}
-                    clickable={project.clickable}
-                    id={project.id}
-                  />
-                ))}
+                    <ProjectCard
+                      key={project.id}
+                      title={project.title}
+                      description={project.description}
+                      image={project.image}
+                      category={project.category}
+                      clickable={project.clickable}
+                      id={project.id}
+                    />
+                  ))}
               </div>
             </div>
           </section>
@@ -179,10 +189,10 @@ const Index = () => {
               <div className="max-w-xl mx-auto">
                 <div className="text-center mb-12">
                   <h2 className="text-3xl font-serif font-semibold mb-4">
-                    צור קשר
+                    {section.title}
                   </h2>
                   <p className="text-gray-600">
-                    צרו איתנו קשר עוד היום ונשמח לסייע לכם להשיג את המטרות שלכם
+                    {section.description}
                   </p>
                 </div>
                 <ContactForm />
