@@ -9,6 +9,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FloatingContact } from "@/components/FloatingContact";
 import { AccessibilityTools } from "@/components/AccessibilityTools";
+import { CookieConsent } from "@/components/CookieConsent";
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import ServicesPage from "./pages/ServicesPage";
@@ -56,6 +57,7 @@ const AppContent = () => {
           <Footer />
           <FloatingContact />
           <AccessibilityTools />
+          <CookieConsent />
         </div>
       </BrowserRouter>
     </div>

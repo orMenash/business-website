@@ -1,3 +1,4 @@
+
 /* Add Noto Sans Hebrew font */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;700&display=swap');
 
@@ -167,10 +168,17 @@
   }
 }
 
+/* Fix rtl switch behavior */
+[dir="rtl"] .peer[data-state="checked"] > span {
+  transform: translateX(-100%) !important;
+}
+
+[dir="rtl"] .peer[data-state="unchecked"] > span {
+  transform: translateX(0%) !important;
+}
+
 /* Fix button positioning when font size changes */
 button {
   position: relative !important;
   transform: none !important;
 }
-
-

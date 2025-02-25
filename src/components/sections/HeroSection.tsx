@@ -9,11 +9,14 @@ export const HeroSection = ({ section }: SectionProps) => {
 
   return (
     <section className="pt-32 pb-16 bg-gradient-to-b from-secondary to-white relative">
-      {section.image && (
-        <div className="absolute inset-0 z-0 opacity-10">
+      {section.background && (
+        <div 
+          className="absolute inset-0 z-0"
+          style={{ opacity: section.background.opacity }}
+        >
           <img
-            src={section.image}
-            alt="Hero"
+            src={section.background.image}
+            alt={section.background.alt}
             className="w-full h-full object-cover"
           />
         </div>

@@ -1,0 +1,29 @@
+
+{
+  "email": "4701094280676a877a8bd5b14430cab1",
+  "fields": {
+    "name": {
+      "type": "text",
+      "placeholder": "שם מלא",
+      "required": true
+    },
+    "email": {
+      "type": "email", 
+      "placeholder": "אימייל",
+      "required": true
+    },
+    "message": {
+      "type": "textarea",
+      "placeholder": "ההודעה שלך",
+      "required": true
+    }
+  },
+  "options": {
+    "_next": "",
+    "_captcha": false,
+    "_subject": "פנייה חדשה מהאתר",
+    "_autoresponse": "תודה שפנית אלינו! נחזור אליך בהקדם.",
+    "_template": "basic",
+    "_debug": false
+  }
+}

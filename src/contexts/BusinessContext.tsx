@@ -29,6 +29,18 @@ type Employee = {
 type SocialLink = {
   show: boolean;
   url: string;
+  showInFooter?: boolean;
+  showFloating?: boolean;
+};
+
+type FormConfig = {
+  redirectAfterSubmit: boolean;
+  autoResponse: {
+    enabled: boolean;
+    message: string;
+  };
+  subject: string;
+  captcha: boolean;
 };
 
 type BusinessContextType = {
@@ -48,6 +60,7 @@ type BusinessContextType = {
     whatsapp: string;
     showFloatingWhatsapp: boolean;
     showFloatingPhone: boolean;
+    form: FormConfig;
     social?: {
       facebook?: SocialLink;
       instagram?: SocialLink;
@@ -84,3 +97,4 @@ export const useBusiness = () => {
   }
   return context;
 };
+

@@ -5,9 +5,15 @@ export interface Section {
   max_display?: number | null;
   title: string;
   description: string;
+  fullDescription?: string;
   cta?: string;
   image?: string;
   interval?: number;
+  background?: {
+    image: string;
+    alt: string;
+    opacity: number;
+  };
 }
 
 export interface SectionProps {

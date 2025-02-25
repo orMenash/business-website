@@ -1,15 +1,14 @@
 
 {
   "showAccessibilityIcon": true,
+  "showAccessibilityStatement": true,
+  "accessibilityStatementPath": "/accessibility-statement.html",
   "tools": {
     "fontSize": {
       "show": true,
       "increment": 2,
       "minSize": 12,
       "maxSize": 24
-    },
-    "decreaseFont": {
-      "show": true
     },
     "grayscale": {
       "show": true

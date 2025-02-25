@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import {
   Accessibility,
@@ -9,6 +8,7 @@ import {
   Link2,
   Type,
   RotateCcw,
+  FileText,
 } from "lucide-react";
 import accessibilityConfig from "@/config/accessibility.json";
 import {
@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { Separator } from "@/components/ui/separator";
 
 export const AccessibilityTools = () => {
   const [fontSize, setFontSize] = useState(16);
@@ -88,6 +89,10 @@ export const AccessibilityTools = () => {
     setIsReadableFont(false);
   };
 
+  const openAccessibilityStatement = () => {
+    window.open(accessibilityConfig.accessibilityStatementPath, '_blank');
+  };
+
   if (!accessibilityConfig.showAccessibilityIcon) return null;
 
   return (
@@ -110,6 +115,7 @@ export const AccessibilityTools = () => {
                     size="icon"
                     variant="outline"
                     onClick={decreaseFontSize}
+                    className="w-10 h-10 flex items-center justify-center"
                   >
                     <TextIcon className="h-4 w-4" />-
                   </Button>
@@ -117,6 +123,7 @@ export const AccessibilityTools = () => {
                     size="icon"
                     variant="outline"
                     onClick={increaseFontSize}
+                    className="w-10 h-10 flex items-center justify-center"
                   >
                     <TextIcon className="h-4 w-4" />+
                   </Button>
@@ -130,6 +137,7 @@ export const AccessibilityTools = () => {
                 <Switch
                   checked={isGrayscale}
                   onCheckedChange={setIsGrayscale}
+                  className="data-[state=checked]:bg-accent"
                 />
                 <span>גווני אפור</span>
               </div>
@@ -140,6 +148,7 @@ export const AccessibilityTools = () => {
                 <Switch
                   checked={isHighContrast}
                   onCheckedChange={setIsHighContrast}
+                  className="data-[state=checked]:bg-accent"
                 />
                 <span>ניגודיות גבוהה</span>
               </div>
@@ -150,6 +159,7 @@ export const AccessibilityTools = () => {
                 <Switch
                   checked={isInvertedContrast}
                   onCheckedChange={setIsInvertedContrast}
+                  className="data-[state=checked]:bg-accent"
                 />
                 <span>ניגודיות הפוכה</span>
               </div>
@@ -160,6 +170,7 @@ export const AccessibilityTools = () => {
                 <Switch
                   checked={isLightBackground}
                   onCheckedChange={setIsLightBackground}
+                  className="data-[state=checked]:bg-accent"
                 />
                 <span>רקע בהיר</span>
               </div>
@@ -170,6 +181,7 @@ export const AccessibilityTools = () => {
                 <Switch
                   checked={areLinksHighlighted}
                   onCheckedChange={setAreLinksHighlighted}
+                  className="data-[state=checked]:bg-accent"
                 />
                 <span>הדגשת קישורים</span>
               </div>
@@ -180,15 +192,29 @@ export const AccessibilityTools = () => {
                 <Switch
                   checked={isReadableFont}
                   onCheckedChange={setIsReadableFont}
+                  className="data-[state=checked]:bg-accent"
                 />
                 <span>פונט קריא</span>
               </div>
             )}
 
+            <Separator className="my-4" />
+
+            {accessibilityConfig.showAccessibilityStatement && (
+              <Button
+                variant="outline"
+                className="w-full justify-start"
+                onClick={openAccessibilityStatement}
+              >
+                <FileText className="h-4 w-4 ml-2" />
+                הצהרת נגישות
+              </Button>
+            )}
+
             {accessibilityConfig.tools.reset.show && (
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full justify-start"
                 onClick={resetAll}
               >
                 <RotateCcw className="h-4 w-4 ml-2" />

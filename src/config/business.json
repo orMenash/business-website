@@ -8,12 +8,21 @@
     "width": "auto"
   },
   "contact": {
-    "email": "contact@example.com",
+    "email": "ormenash@gmail.com",
     "phone": "050-1234567",
     "address": "רחוב הרצל 1, תל אביב",
     "whatsapp": "972501234567",
     "showFloatingWhatsapp": true,
     "showFloatingPhone": true,
+    "form": {
+      "redirectAfterSubmit": false,
+      "autoResponse": {
+        "enabled": true,
+        "message": "תודה שפנית אלינו! נחזור אליך בהקדם."
+      },
+      "subject": "פנייה חדשה מהאתר",
+      "captcha": false
+    },
     "social": {
       "facebook": {
         "show": true,
