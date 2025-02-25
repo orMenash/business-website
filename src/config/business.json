@@ -17,18 +17,26 @@
     "social": {
       "facebook": {
         "show": true,
+        "showInFooter": true,
+        "showFloating": true,
         "url": "https://facebook.com/your-page"
       },
       "instagram": {
         "show": true,
+        "showInFooter": true,
+        "showFloating": true,
         "url": "https://instagram.com/your-profile"
       },
       "tiktok": {
         "show": false,
+        "showInFooter": false,
+        "showFloating": false,
         "url": "https://tiktok.com/@your-profile"
       },
       "twitter": {
         "show": false,
+        "showInFooter": false,
+        "showFloating": false,
         "url": "https://twitter.com/your-profile"
       }
     }

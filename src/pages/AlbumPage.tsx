@@ -83,38 +83,41 @@ const AlbumPage = () => {
                   alt={images[selectedImageIndex].description}
                   className="max-h-full max-w-full object-contain"
                 />
-                <button 
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/50 p-3 rounded-full hover:bg-black/70 transition-colors transform -translate-x-2 hover:translate-x-0"
-                  onClick={handlePrevious}
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button 
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/50 p-3 rounded-full hover:bg-black/70 transition-colors transform translate-x-2 hover:translate-x-0"
-                  onClick={handleNext}
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
+
                 {images[selectedImageIndex].description && (
-                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-black/50 backdrop-blur-sm text-white text-center">
+                  <div className="absolute bottom-20 left-0 right-0 p-6 bg-black/50 backdrop-blur-sm text-white text-center">
                     {images[selectedImageIndex].description}
                   </div>
                 )}
 
-                {/* Thumbnail Navigation */}
-                <div className="absolute bottom-20 left-0 right-0 px-4">
-                  <div className="flex justify-center gap-2">
-                    {images.map((_, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setSelectedImageIndex(idx)}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                          idx === selectedImageIndex 
-                            ? "bg-white scale-125" 
-                            : "bg-white/50 hover:bg-white/80"
-                        }`}
-                      />
-                    ))}
+                {/* Thumbnail and Navigation Controls */}
+                <div className="absolute bottom-4 left-0 right-0 flex flex-col items-center gap-4">
+                  <div className="flex items-center gap-4">
+                    <button 
+                      onClick={handlePrevious}
+                      className="bg-white/90 hover:bg-white text-black p-3 rounded-full transition-colors transform hover:-translate-x-1"
+                    >
+                      <ChevronLeft className="w-6 h-6" />
+                    </button>
+                    <div className="flex justify-center gap-2">
+                      {images.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setSelectedImageIndex(idx)}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            idx === selectedImageIndex 
+                              ? "bg-white scale-125" 
+                              : "bg-white/50 hover:bg-white/80"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <button 
+                      onClick={handleNext}
+                      className="bg-white/90 hover:bg-white text-black p-3 rounded-full transition-colors transform hover:translate-x-1"
+                    >
+                      <ChevronRight className="w-6 h-6" />
+                    </button>
                   </div>
                 </div>
               </>

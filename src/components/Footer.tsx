@@ -59,8 +59,29 @@ export const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
-          <p>© {new Date().getFullYear()} {name}. כל הזכויות שמורות.</p>
+
+        {/* Social Links */}
+        <div className="mt-8 pt-8 border-t border-gray-800">
+          <div className="flex justify-center gap-6">
+            {Object.entries(contact.social).map(([platform, data]) => {
+              if (!data.show || !data.showInFooter) return null;
+              
+              return (
+                <a
+                  key={platform}
+                  href={data.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors hover:scale-110 transform duration-200"
+                >
+                  <span className="capitalize">{platform}</span>
+                </a>
+              );
+            })}
+          </div>
+          <div className="mt-4 text-center text-gray-400">
+            <p>© {new Date().getFullYear()} {name}. כל הזכויות שמורות.</p>
+          </div>
         </div>
       </div>
     </footer>
