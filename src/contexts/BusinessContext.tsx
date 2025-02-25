@@ -3,7 +3,6 @@ import React, { createContext, useContext, ReactNode } from "react";
 import businessConfig from "../config/business.json";
 import servicesConfig from "../config/services.json";
 import employeesConfig from "../config/employees.json";
-import type { BusinessConfig } from "@/types/business";
 
 type Service = {
   id: string;
@@ -27,9 +26,35 @@ type Employee = {
   clickable?: boolean;
 };
 
-type BusinessContextType = BusinessConfig & {
+type SocialLink = {
+  show: boolean;
+  url: string;
+};
+
+type BusinessContextType = {
+  name: string;
+  description: string;
+  logo: {
+    url: string;
+    height: string;
+    width: string;
+  };
   services: Service[];
   employees: Employee[];
+  contact: {
+    email: string;
+    phone: string;
+    address: string;
+    whatsapp: string;
+    showFloatingWhatsapp: boolean;
+    showFloatingPhone: boolean;
+    social?: {
+      facebook?: SocialLink;
+      instagram?: SocialLink;
+      tiktok?: SocialLink;
+      twitter?: SocialLink;
+    };
+  };
 };
 
 const BusinessContext = createContext<BusinessContextType>({
