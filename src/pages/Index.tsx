@@ -6,6 +6,7 @@ import { ServicesSection } from "@/components/sections/ServicesSection";
 import { TeamSection } from "@/components/sections/TeamSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { GallerySection } from "@/components/sections/GallerySection";
 import { ContactSection } from "@/components/sections/ContactSection";
 
 const Index = () => {
@@ -28,6 +29,8 @@ const Index = () => {
         return <TestimonialsSection key="testimonials" section={section} />;
       case 'projects':
         return <ProjectsSection key="projects" section={section} />;
+      case 'gallery':
+        return <GallerySection key="gallery" section={section} />;
       case 'contact':
         return <ContactSection key="contact" section={section} />;
       default:

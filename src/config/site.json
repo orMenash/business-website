@@ -8,8 +8,7 @@
       "title": "ברוכים הבאים",
       "subtitle": "השירותים המקצועיים שלנו",
       "description": "אנחנו כאן בשבילכם",
-      "cta": "צור קשר",
-      "image": "https://images.unsplash.com/photo-1649972904349-6e44c42644a7"
+      "cta": "צור קשר"
     },
     "services": {
       "show": true,
@@ -42,9 +41,10 @@
     "gallery": {
       "show": true,
       "order": 6,
-      "max_display": null,
+      "max_display": 2,
       "title": "גלריה",
-      "description": "תמונות נבחרות מהפרויקטים שלנו"
+      "description": "תמונות נבחרות מהפרויקטים שלנו",
+      "interval": 5000
     },
     "contact": {
       "show": true,

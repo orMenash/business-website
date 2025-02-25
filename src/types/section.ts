@@ -7,6 +7,7 @@ export interface Section {
   description: string;
   cta?: string;
   image?: string;
+  interval?: number;
 }
 
 export interface SectionProps {
