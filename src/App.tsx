@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { BusinessProvider, useBusiness } from "@/contexts/BusinessContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -24,6 +24,31 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+const PageContainer = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    // Reset scroll position on page change
+    window.scrollTo(0, 0);
+    
+    // Add animation classes to elements
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    animatedElements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  return <div className="transition-opacity duration-300">{children}</div>;
+};
+
 const AppContent = () => {
   const { name } = useBusiness();
 
@@ -32,32 +57,28 @@ const AppContent = () => {
   }, [name]);
 
   return (
-    <div dir="rtl" className="font-sans">
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/service/:id" element={<ServicePage />} />
-              <Route path="/employee/:id" element={<EmployeePage />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/project/:id" element={<ProjectPage />} />
-              <Route path="/team" element={<TeamPage />} />
-              <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="/gallery/:albumId" element={<AlbumPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <Footer />
-          <FloatingContact />
-          <AccessibilityTools />
-        </div>
-      </BrowserRouter>
+    <div dir="rtl" className="font-sans min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-grow">
+        <PageContainer>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/service/:id" element={<ServicePage />} />
+            <Route path="/employee/:id" element={<EmployeePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/project/:id" element={<ProjectPage />} />
+            <Route path="/team" element={<TeamPage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/gallery/:albumId" element={<AlbumPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageContainer>
+      </main>
+      <Footer />
+      <FloatingContact />
+      <AccessibilityTools />
     </div>
   );
 };
@@ -66,7 +87,11 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <BusinessProvider>
       <TooltipProvider>
-        <AppContent />
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
+        <Toaster />
+        <Sonner />
       </TooltipProvider>
     </BusinessProvider>
   </QueryClientProvider>
