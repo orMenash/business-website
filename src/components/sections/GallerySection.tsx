@@ -37,7 +37,9 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
 
   useEffect(() => {
     if (images.length <= 1) return;
-    const interval = setInterval(nextImage, section.interval || 5000);
+    // בדיקה אם interval קיים, אחרת משתמש בברירת מחדל של 5000 (5 שניות)
+    const intervalTime = section.interval || 5000;
+    const interval = setInterval(nextImage, intervalTime);
     return () => clearInterval(interval);
   }, [section.interval]);
 
