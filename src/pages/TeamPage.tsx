@@ -71,4 +71,18 @@ const TeamPage: React.FC = () => {
                   </PaginationItem>
                 ))}
 
-                {
+                {currentPage < totalPages && (
+                  <PaginationItem>
+                    <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />
+                  </PaginationItem>
+                )}
+              </PaginationContent>
+            </Pagination>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TeamPage;
