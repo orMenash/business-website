@@ -8,3 +8,13 @@ export interface Section {
   fullDescription?: string;
   cta?: string;
   image?: string;
+  background?: {
+    image: string;
+    alt: string;
+    opacity: number;
+  };
+}
+
+export interface SectionProps {
+  section: Section;
+}
