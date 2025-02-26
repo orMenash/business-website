@@ -1,7 +1,7 @@
 
-import { FloatingContact } from "@/components/FloatingContact";
 import siteConfig from "@/config/site.json";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { AboutSection } from "@/components/sections/AboutSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { TeamSection } from "@/components/sections/TeamSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -21,6 +21,8 @@ const Index = () => {
     switch (sectionId) {
       case 'hero':
         return <HeroSection key="hero" section={section} />;
+      case 'about':
+        return <AboutSection key="about" section={section} />;
       case 'services':
         return <ServicesSection key="services" section={section} />;
       case 'team':
@@ -40,7 +42,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <FloatingContact />
       {sections.map(([sectionId]) => renderSection(sectionId))}
     </div>
   );

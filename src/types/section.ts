@@ -8,14 +8,3 @@ export interface Section {
   fullDescription?: string;
   cta?: string;
   image?: string;
-  interval?: number;
-  background?: {
-    image: string;
-    alt: string;
-    opacity: number;
-  };
-}
-
-export interface SectionProps {
-  section: Section;
-}
