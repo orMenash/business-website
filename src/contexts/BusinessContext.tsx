@@ -20,30 +20,44 @@ export interface Employee {
   id: string;
   name: string;
   title: string;
-  bio: string;
+  description: string;  // שינוי מ-bio ל-description
   image: string;
+  fullDescription: string;
+  email: string;
+  phone: string;
   show: boolean;
+  clickable: boolean;
 }
 
 export interface Project {
   id: string;
   title: string;
   description: string;
+  fullDescription: string;
   image: string;
   category: string;
   date: string;
   show: boolean;
+  clickable: boolean;
 }
 
 export interface Testimonial {
   id: string;
   name: string;
-  position: string;
+  position: string;  // תואם למאפיין position ב-JSON
   company: string;
   content: string;
+  fullContent: string;
   avatar?: string;
   rating: number;
   show: boolean;
+}
+
+export interface SocialLink {
+  show: boolean;
+  showInFooter: boolean;
+  showFloating: boolean;
+  url: string;
 }
 
 export interface BusinessContextType {
@@ -61,13 +75,15 @@ export interface BusinessContextType {
     phone: string;
     whatsapp: string;
     address: string;
+    showFloatingWhatsapp: boolean;
+    showFloatingPhone: boolean;
     social: {
-      facebook: string;
-      instagram: string;
-      linkedin: string;
-      twitter: string;
-      youtube: string;
-      tiktok: string;
+      facebook: SocialLink;
+      instagram: SocialLink;
+      linkedin: SocialLink;
+      twitter: SocialLink;
+      youtube: SocialLink;
+      tiktok: SocialLink;
     };
   };
   services: Service[];
@@ -91,13 +107,15 @@ const BusinessContext = createContext<BusinessContextType>({
     phone: "",
     whatsapp: "",
     address: "",
+    showFloatingWhatsapp: false,
+    showFloatingPhone: false,
     social: {
-      facebook: "",
-      instagram: "",
-      linkedin: "",
-      twitter: "",
-      youtube: "",
-      tiktok: "",
+      facebook: { show: false, showInFooter: false, showFloating: false, url: "" },
+      instagram: { show: false, showInFooter: false, showFloating: false, url: "" },
+      linkedin: { show: false, showInFooter: false, showFloating: false, url: "" },
+      twitter: { show: false, showInFooter: false, showFloating: false, url: "" },
+      youtube: { show: false, showInFooter: false, showFloating: false, url: "" },
+      tiktok: { show: false, showInFooter: false, showFloating: false, url: "" },
     },
   },
   services: [],

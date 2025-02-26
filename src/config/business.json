@@ -47,6 +47,18 @@
         "showInFooter": false,
         "showFloating": false,
         "url": "https://twitter.com/your-profile"
+      },
+      "linkedin": {
+        "show": false,
+        "showInFooter": false,
+        "showFloating": false,
+        "url": "https://linkedin.com/in/your-profile"
+      },
+      "youtube": {
+        "show": false,
+        "showInFooter": false,
+        "showFloating": false,
+        "url": "https://youtube.com/c/your-channel"
       }
     }
   }

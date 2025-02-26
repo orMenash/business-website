@@ -8,7 +8,7 @@ export const FloatingContact = () => {
 
   return (
     <div className="fixed bottom-6 left-6 flex flex-col space-y-4 z-50">
-      {contact.social?.facebook?.show && (
+      {contact.social.facebook.show && contact.social.facebook.showFloating && (
         <a
           href={contact.social.facebook.url}
           target="_blank"
@@ -18,7 +18,7 @@ export const FloatingContact = () => {
           <Facebook className="w-6 h-6" />
         </a>
       )}
-      {contact.social?.instagram?.show && (
+      {contact.social.instagram.show && contact.social.instagram.showFloating && (
         <a
           href={contact.social.instagram.url}
           target="_blank"
@@ -28,7 +28,7 @@ export const FloatingContact = () => {
           <Instagram className="w-6 h-6" />
         </a>
       )}
-      {contact.social?.tiktok?.show && (
+      {contact.social.tiktok.show && contact.social.tiktok.showFloating && (
         <a
           href={contact.social.tiktok.url}
           target="_blank"
@@ -38,7 +38,7 @@ export const FloatingContact = () => {
           <TiktokIcon className="w-6 h-6" />
         </a>
       )}
-      {contact.social?.twitter?.show && (
+      {contact.social.twitter.show && contact.social.twitter.showFloating && (
         <a
           href={contact.social.twitter.url}
           target="_blank"
