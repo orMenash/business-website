@@ -1,8 +1,9 @@
 
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useBusiness } from "@/contexts/BusinessContext";
 import { SectionProps } from "@/types/section";
+import { Button } from "@/components/ui/button";
 
 export const HeroSection = ({ section }: SectionProps) => {
   const { name, description } = useBusiness();
@@ -23,19 +24,20 @@ export const HeroSection = ({ section }: SectionProps) => {
       )}
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-serif font-semibold mb-4 animate-fadeIn">
+          <h1 className="text-4xl md:text-5xl font-serif font-semibold mb-4 animate-on-scroll">
             {name}
           </h1>
-          <p className="text-xl text-gray-600 mb-8 animate-fadeIn">
+          <p className="text-xl text-gray-600 mb-8 animate-on-scroll delay-200">
             {description}
           </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center space-x-2 bg-accent text-white px-6 py-3 rounded-md hover:bg-accent/90 transition-colors animate-fadeIn"
-          >
-            <span>{section.cta || "צור קשר"}</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex justify-center animate-on-scroll delay-300">
+            <Link to="/contact">
+              <Button className="group hover-lift flex items-center gap-2">
+                <span>{section.cta || "צור קשר"}</span>
+                <ArrowLeft className="w-4 h-4 transform transition-transform group-hover:-translate-x-1" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>

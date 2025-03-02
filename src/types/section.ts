@@ -8,6 +8,8 @@ export interface Section {
   fullDescription?: string;
   cta?: string;
   image?: string;
+  showImage?: boolean;
+  showButton?: boolean;
   interval?: number;
   background?: {
     image: string;

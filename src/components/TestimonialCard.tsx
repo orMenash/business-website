@@ -3,13 +3,13 @@ import { Star } from "lucide-react";
 
 type TestimonialCardProps = {
   name: string;
-  role: string;
+  position: string;  // שינוי מ-role ל-position
   company: string;
   content: string;
   rating: number;
 };
 
-export const TestimonialCard = ({ name, role, company, content, rating }: TestimonialCardProps) => {
+export const TestimonialCard = ({ name, position, company, content, rating }: TestimonialCardProps) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
       <div className="flex items-center space-x-1 mb-4 flex-row-reverse">
@@ -20,7 +20,7 @@ export const TestimonialCard = ({ name, role, company, content, rating }: Testim
       <p className="text-gray-600 mb-4">{content}</p>
       <div className="border-t pt-4">
         <p className="font-semibold">{name}</p>
-        <p className="text-sm text-gray-500">{role}, {company}</p>
+        <p className="text-sm text-gray-500">{position}, {company}</p>
       </div>
     </div>
   );

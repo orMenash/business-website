@@ -3,6 +3,7 @@ import { useBusiness } from "@/contexts/BusinessContext";
 import { useParams, Link } from "react-router-dom";
 import { ChevronRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const ServicePage = () => {
   const { id } = useParams();
@@ -20,18 +21,17 @@ const ServicePage = () => {
     );
   }
 
+  const breadcrumbItems = [
+    { label: "דף הבית", path: "/" },
+    { label: "שירותים", path: "/services" },
+    { label: service.title, path: `/service/${id}` }
+  ];
+
   return (
     <div className="min-h-screen pt-32 pb-16 animate-fadeIn">
       <div className="container mx-auto px-4">
-        {/* Breadcrumbs */}
-        <div className="flex items-center text-sm text-gray-500 mb-8">
-          <Link to="/" className="hover:text-accent transition-colors">דף הבית</Link>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <Link to="/services" className="hover:text-accent transition-colors">שירותים</Link>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <span className="text-accent">{service.title}</span>
-        </div>
-
+        <Breadcrumb items={breadcrumbItems} />
+        
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-xl shadow-xl p-8 card-gradient">
             <div className="w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center mb-6 hover:bg-accent/20 transition-colors">

@@ -1,7 +1,9 @@
 
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import NotFound from "./NotFound";
 import projectsConfig from "@/config/projects.json";
+import { Breadcrumb } from "@/components/Breadcrumb";
+import { Button } from "@/components/ui/button";
 
 const ProjectPage = () => {
   const { id } = useParams();
@@ -11,9 +13,17 @@ const ProjectPage = () => {
     return <NotFound />;
   }
 
+  const breadcrumbItems = [
+    { label: "דף הבית", path: "/" },
+    { label: "פרויקטים", path: "/projects" },
+    { label: project.title, path: `/project/${id}` }
+  ];
+
   return (
     <div className="min-h-screen pt-24">
       <div className="container mx-auto px-4">
+        <Breadcrumb items={breadcrumbItems} />
+        
         <div className="max-w-4xl mx-auto">
           <div className="aspect-w-16 aspect-h-9 mb-8 rounded-lg overflow-hidden">
             <img

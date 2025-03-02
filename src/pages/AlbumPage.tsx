@@ -1,10 +1,10 @@
-
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import galleryConfig from "@/config/gallery.json";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const AlbumPage = () => {
   const { albumId } = useParams();
@@ -17,6 +17,12 @@ const AlbumPage = () => {
     navigate("/gallery");
     return null;
   }
+
+  const breadcrumbItems = [
+    { label: "דף הבית", path: "/" },
+    { label: "גלריה", path: "/gallery" },
+    { label: album.name, path: `/gallery/${albumId}` }
+  ];
 
   const images = album.images.filter(img => img.show_image).sort((a, b) => a.order - b.order);
 
@@ -40,6 +46,8 @@ const AlbumPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-24">
+      <Breadcrumb items={breadcrumbItems} />
+      
       <div className="flex items-center justify-between mb-12">
         <h1 className="text-4xl font-serif font-semibold">{album.name}</h1>
         <Button 

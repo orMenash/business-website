@@ -1,13 +1,21 @@
 
 import { useBusiness } from "@/contexts/BusinessContext";
 import { ServiceCard } from "@/components/ServiceCard";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const ServicesPage = () => {
   const { services } = useBusiness();
 
+  const breadcrumbItems = [
+    { label: "דף הבית", path: "/" },
+    { label: "שירותים", path: "/services" }
+  ];
+
   return (
     <div className="min-h-screen pt-32 pb-16">
       <div className="container mx-auto px-4">
+        <Breadcrumb items={breadcrumbItems} />
+        
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h1 className="text-4xl font-serif font-semibold mb-4">
             השירותים שלנו

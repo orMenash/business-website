@@ -3,9 +3,12 @@
   "name": "שם העסק",
   "description": "תיאור מקצועי של העסק שלך",
   "logo": {
-    "url": "/logo.svg",
+    "url": "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
     "height": "32px",
     "width": "auto"
+  },
+  "favicon": {
+    "url": "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
   },
   "contact": {
     "email": "ormenash@gmail.com",

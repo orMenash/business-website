@@ -2,13 +2,21 @@
 import { useBusiness } from "@/contexts/BusinessContext";
 import { ContactForm } from "@/components/ContactForm";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const ContactPage = () => {
   const { contact } = useBusiness();
 
+  const breadcrumbItems = [
+    { label: "דף הבית", path: "/" },
+    { label: "צור קשר", path: "/contact" }
+  ];
+
   return (
     <div className="min-h-screen pt-32 pb-16">
       <div className="container mx-auto px-4">
+        <Breadcrumb items={breadcrumbItems} />
+        
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h1 className="text-4xl font-serif font-semibold mb-4">צור קשר</h1>
           <p className="text-gray-600">

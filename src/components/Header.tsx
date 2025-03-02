@@ -10,30 +10,37 @@ export const Header = () => {
   const { name, logo } = useBusiness();
   const location = useLocation();
 
-  // סינון הקישורים בהתאם להגדרות התצוגה של האזורים
   const navigationLinks = siteConfig.navigation.links.filter(link => {
     const sectionKey = link.path.replace("/", "") || "hero";
     return siteConfig.sections[sectionKey]?.show && link.show;
   });
 
+  // Helper function to handle logo width
+  const getLogoWidth = () => {
+    const width = logo.width;
+    if (width === "auto" || !width) return "auto";
+    return typeof width === "number" ? `${width}px` : width;
+  };
+
   return (
     <header className="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-3 text-xl font-serif font-semibold">
+          <Link to="/" className="flex items-center gap-3">
             <img 
               src={logo.url} 
-              alt={name} 
+              alt={name}
+              className="object-contain"
               style={{ 
                 height: logo.height,
-                width: logo.width 
+                width: getLogoWidth()
               }} 
             />
-            <span>{name}</span>
+            <span className="text-xl font-serif font-semibold">{name}</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center gap-8">
             {navigationLinks.map((link) => (
               <Link
                 key={link.path}

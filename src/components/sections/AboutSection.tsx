@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SectionProps } from "@/types/section";
 import { Button } from "@/components/ui/button";
 
@@ -21,8 +21,8 @@ export const AboutSection = ({ section }: SectionProps) => {
       )}
       
       <div className="container container-padding mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="animate-on-scroll">
+        <div className={`grid ${section.showImage ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'} gap-12 items-center justify-center`}>
+          <div className="animate-on-scroll flex flex-col items-center text-center">
             <h2 className="text-3xl font-serif font-semibold mb-4">
               {section.title}
             </h2>
@@ -31,19 +31,19 @@ export const AboutSection = ({ section }: SectionProps) => {
             </p>
             <div className="mb-6 prose prose-gray max-w-none">
               <p className="text-balance">
-                {section.fullDescription.slice(0, 200)}...
+                {section.fullDescription?.slice(0, 200)}...
               </p>
             </div>
             <Link to="/about">
               <Button className="group hover-lift flex items-center gap-2">
-                {section.cta || "קרא עוד"}
-                <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
+                <span>{section.cta || "קרא עוד"}</span>
+                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>
           
-          {section.image && (
-            <div className="relative animate-on-scroll">
+          {section.showImage && section.image && (
+            <div className="relative animate-on-scroll flex justify-center">
               <div className="rounded-lg overflow-hidden shadow-xl animated-border">
                 <img 
                   src={section.image} 

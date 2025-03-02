@@ -20,7 +20,7 @@ export interface Employee {
   id: string;
   name: string;
   title: string;
-  description: string;  // שינוי מ-bio ל-description
+  description: string;
   image: string;
   fullDescription: string;
   email: string;
@@ -44,7 +44,7 @@ export interface Project {
 export interface Testimonial {
   id: string;
   name: string;
-  position: string;  // תואם למאפיין position ב-JSON
+  position: string;
   company: string;
   content: string;
   fullContent: string;
@@ -67,8 +67,9 @@ export interface BusinessContextType {
   logo: {
     url: string;
     alt: string;
-    width: number;
-    height: number;
+    width: number | string;
+    height: number | string;
+    faviconUrl: string;
   };
   contact: {
     email: string;
@@ -101,6 +102,7 @@ const BusinessContext = createContext<BusinessContextType>({
     alt: "",
     width: 0,
     height: 0,
+    faviconUrl: "",
   },
   contact: {
     email: "",
@@ -133,7 +135,17 @@ export const BusinessProvider = ({ children }: { children: React.ReactNode }) =>
   return (
     <BusinessContext.Provider
       value={{
-        ...businessConfig,
+        name: businessConfig.name,
+        tagline: "",
+        description: businessConfig.description,
+        logo: {
+          url: businessConfig.logo.url,
+          alt: businessConfig.name,
+          width: businessConfig.logo.width,
+          height: businessConfig.logo.height,
+          faviconUrl: businessConfig.favicon?.url || businessConfig.logo.url
+        },
+        contact: businessConfig.contact,
         services: filteredServices,
         employees: filteredEmployees,
         projects: filteredProjects,

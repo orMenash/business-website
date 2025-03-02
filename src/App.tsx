@@ -52,11 +52,17 @@ const PageContainer = ({ children }: { children: React.ReactNode }) => {
 };
 
 const AppContent = () => {
-  const { name } = useBusiness();
+  const { name, logo } = useBusiness();
 
   useEffect(() => {
     document.title = name;
-  }, [name]);
+    
+    // Set favicon from business config
+    const favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
+    if (favicon && logo.faviconUrl) {
+      favicon.href = logo.faviconUrl;
+    }
+  }, [name, logo.faviconUrl]);
 
   return (
     <div dir="rtl" className="font-sans min-h-screen flex flex-col">

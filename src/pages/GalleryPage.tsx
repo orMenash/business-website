@@ -4,10 +4,16 @@ import { Link } from "react-router-dom";
 import galleryConfig from "@/config/gallery.json";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const GalleryPage = () => {
   const [selectedAlbum, setSelectedAlbum] = useState<string | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+
+  const breadcrumbItems = [
+    { label: "דף הבית", path: "/" },
+    { label: "גלריה", path: "/gallery" }
+  ];
 
   const albums = galleryConfig.albums.filter((album) => album.show_album);
   
@@ -38,6 +44,8 @@ const GalleryPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-24">
+      <Breadcrumb items={breadcrumbItems} />
+      
       <h1 className="text-4xl font-serif font-semibold mb-12 text-center">גלריה</h1>
       <div className="space-y-16">
         {albums.map((album) => (

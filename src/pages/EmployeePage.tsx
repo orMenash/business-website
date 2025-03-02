@@ -1,7 +1,8 @@
 
 import { useBusiness } from "@/contexts/BusinessContext";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { User, Mail, Phone } from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const EmployeePage = () => {
   const { id } = useParams();
@@ -12,9 +13,17 @@ const EmployeePage = () => {
     return <div className="min-h-screen pt-32 pb-16 text-center">העובד לא נמצא</div>;
   }
 
+  const breadcrumbItems = [
+    { label: "דף הבית", path: "/" },
+    { label: "הצוות שלנו", path: "/team" },
+    { label: employee.name, path: `/employee/${id}` }
+  ];
+
   return (
     <div className="min-h-screen pt-32 pb-16">
       <div className="container mx-auto px-4">
+        <Breadcrumb items={breadcrumbItems} />
+        
         <div className="max-w-3xl mx-auto">
           <div className="bg-white rounded-lg shadow-xl p-8">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">

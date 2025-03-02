@@ -37,7 +37,6 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
 
   useEffect(() => {
     if (images.length <= 1) return;
-    // בדיקה אם interval קיים, אחרת משתמש בברירת מחדל של 5000 (5 שניות)
     const intervalTime = section.interval || 5000;
     const interval = setInterval(nextImage, intervalTime);
     return () => clearInterval(interval);
@@ -48,12 +47,12 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
   return (
     <section className="py-24 bg-gradient-to-b from-secondary to-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 animate-fade-in">
+        <div className="text-center mb-12 animate-on-scroll">
           <h2 className="text-4xl font-serif font-semibold mb-4">{section.title}</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">{section.description}</p>
         </div>
 
-        <div className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl">
+        <div className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl animate-on-scroll delay-200">
           <div className="aspect-[16/9] bg-black">
             <img
               src={images[currentIndex].url}
@@ -64,7 +63,6 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
           
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           
-          {/* Navigation Controls */}
           <div className="absolute inset-0 flex items-center justify-between p-4">
             <button
               onClick={prevImage}
@@ -80,13 +78,11 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
             </button>
           </div>
 
-          {/* Image Info */}
           <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
             <h3 className="text-2xl font-medium mb-2">{images[currentIndex].albumName}</h3>
             <p className="text-white/90">{images[currentIndex].description}</p>
           </div>
 
-          {/* Thumbnail Navigation */}
           <div className="absolute bottom-0 left-0 right-0 px-8 pb-24">
             <div className="flex justify-center gap-2">
               {images.map((_, idx) => (
@@ -104,14 +100,13 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
           </div>
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-12 flex justify-center animate-on-scroll delay-300">
           <Link to="/gallery">
             <Button 
-              variant="outline" 
-              size="lg"
-              className="hover:scale-105 transition-transform duration-300"
+              className="group hover-lift flex items-center gap-2"
             >
-              לגלריה המלאה
+              <span>לגלריה המלאה</span>
+              <ChevronLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
             </Button>
           </Link>
         </div>

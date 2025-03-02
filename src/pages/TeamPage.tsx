@@ -13,11 +13,17 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const TeamPage: React.FC = () => {
   const { employees } = useBusiness();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
+
+  const breadcrumbItems = [
+    { label: "דף הבית", path: "/" },
+    { label: "הצוות שלנו", path: "/team" }
+  ];
 
   const visibleEmployees = employees
     .filter((employee) => employee.show)
@@ -31,6 +37,8 @@ const TeamPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-24">
       <div className="container mx-auto px-4">
+        <Breadcrumb items={breadcrumbItems} />
+        
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-serif font-semibold mb-2">הצוות שלנו</h1>
