@@ -1,5 +1,5 @@
 
-import { ChevronRight } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { EmployeeCard } from "@/components/EmployeeCard";
 import { useBusiness } from "@/contexts/BusinessContext";
@@ -33,7 +33,7 @@ const AboutPage = () => {
         {/* Breadcrumbs */}
         <div className="flex items-center text-sm text-gray-500 mb-8">
           <Link to="/" className="hover:text-accent transition-colors">דף הבית</Link>
-          <ChevronRight className="w-4 h-4 mx-2" />
+          <ChevronLeft className="w-4 h-4 mx-2" />
           <span className="text-accent">{aboutConfig.title.text}</span>
         </div>
         
