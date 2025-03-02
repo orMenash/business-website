@@ -60,9 +60,11 @@ const ServicePage = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
-              <Button className="hover-lift">
-                צור קשר לקבלת הצעת מחיר
-              </Button>
+              <Link to="/contact">
+                <Button className="hover-lift">
+                  צור קשר
+                </Button>
+              </Link>
               <Link to="/services">
                 <Button variant="outline" className="hover-lift">
                   לכל השירותים
