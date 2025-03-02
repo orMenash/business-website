@@ -43,7 +43,10 @@ const EmployeePage = () => {
                   {employee.name}
                 </h1>
                 <h2 className="text-xl text-gray-600 mb-4">{employee.title}</h2>
-                <p className="text-gray-700 mb-6">{employee.fullDescription}</p>
+                <div 
+                  className="text-gray-700 mb-6"
+                  dangerouslySetInnerHTML={{ __html: employee.fullDescription }}
+                />
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-center md:justify-start gap-2">
                     <Mail className="w-5 h-5 text-accent" />

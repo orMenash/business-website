@@ -27,7 +27,10 @@ export const EmployeeCard = ({ id, name, title, description, image, clickable }:
           <p className="text-gray-600">{title}</p>
         </div>
       </div>
-      <p className="text-gray-600">{description}</p>
+      <div 
+        className="text-gray-600"
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
     </div>
   );
 
@@ -41,4 +44,3 @@ export const EmployeeCard = ({ id, name, title, description, image, clickable }:
 
   return <CardContent />;
 };
-

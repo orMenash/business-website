@@ -18,9 +18,10 @@ export const TeamSection = ({ section }: SectionProps) => {
           <h2 className="text-3xl font-serif font-semibold mb-4">
             {section.title}
           </h2>
-          <p className="text-gray-600 mb-6">
-            {section.description}
-          </p>
+          <div 
+            className="text-gray-600 mb-6"
+            dangerouslySetInnerHTML={{ __html: section.description }}
+          />
         </div>
         <div className="flex flex-wrap justify-center gap-8 mb-8">
           {employees
