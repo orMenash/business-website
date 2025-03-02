@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { SectionProps } from "@/types/section";
 import { Button } from "@/components/ui/button";
 
@@ -37,7 +37,7 @@ export const AboutSection = ({ section }: SectionProps) => {
             <Link to="/about">
               <Button className="group hover-lift flex items-center gap-2">
                 <span>{section.cta || "קרא עוד"}</span>
-                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>

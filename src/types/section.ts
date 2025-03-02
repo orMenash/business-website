@@ -16,6 +16,7 @@ export interface Section {
     alt: string;
     opacity: number;
   };
+  tagline?: string;
 }
 
 export interface SectionProps {
