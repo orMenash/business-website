@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 
 type TestimonialCardProps = {
   name: string;
-  position: string;  // שינוי מ-role ל-position
+  position: string;
   company: string;
   content: string;
   rating: number;
@@ -17,7 +17,10 @@ export const TestimonialCard = ({ name, position, company, content, rating }: Te
           <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
         ))}
       </div>
-      <p className="text-gray-600 mb-4">{content}</p>
+      <div 
+        className="text-gray-600 mb-4"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
       <div className="border-t pt-4">
         <p className="font-semibold">{name}</p>
         <p className="text-sm text-gray-500">{position}, {company}</p>

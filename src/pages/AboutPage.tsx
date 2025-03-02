@@ -43,9 +43,10 @@ const AboutPage = () => {
             <h1 className="text-4xl md:text-5xl font-serif font-semibold mb-4">
               {aboutConfig.title.text}
             </h1>
-            <p className="text-xl text-gray-600">
-              {aboutConfig.title.subtitle}
-            </p>
+            <p 
+              className="text-xl text-gray-600"
+              dangerouslySetInnerHTML={{ __html: aboutConfig.title.subtitle }}
+            />
           </div>
         )}
         
@@ -77,7 +78,10 @@ const AboutPage = () => {
                           className="flex-1 min-w-[300px] max-w-[400px] p-8 bg-white/90 shadow-lg rounded-xl glassmorphism"
                         >
                           <h2 className="text-2xl font-serif font-semibold mb-4 gradient-text">{box.title}</h2>
-                          <p className="text-gray-700 text-balance">{box.content}</p>
+                          <p 
+                            className="text-gray-700 text-balance"
+                            dangerouslySetInnerHTML={{ __html: box.content }}
+                          />
                         </div>
                       ))
                     }
@@ -102,7 +106,10 @@ const AboutPage = () => {
                           className="flex-1 min-w-[280px] max-w-[400px] p-6 card-gradient rounded-lg border border-gray-100 shadow-md hover-lift"
                         >
                           <h3 className="text-xl font-semibold mb-2 text-accent">{value.title}</h3>
-                          <p className="text-gray-600">{value.description}</p>
+                          <p 
+                            className="text-gray-600"
+                            dangerouslySetInnerHTML={{ __html: value.description }}
+                          />
                         </div>
                       ))
                     }
@@ -119,7 +126,10 @@ const AboutPage = () => {
                     </h2>
                   )}
                   <div className="prose prose-lg max-w-none">
-                    <p className="text-balance whitespace-pre-line">{section.content}</p>
+                    <div 
+                      className="text-balance whitespace-pre-line"
+                      dangerouslySetInnerHTML={{ __html: section.content }}
+                    />
                   </div>
                 </div>
               );

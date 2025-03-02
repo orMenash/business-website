@@ -39,11 +39,17 @@ const ProjectPage = () => {
             </span>
           </div>
           <div className="prose max-w-none">
-            <p className="text-gray-600 mb-8">{project.description}</p>
+            <div 
+              className="text-gray-600 mb-8"
+              dangerouslySetInnerHTML={{ __html: project.description }}
+            />
             {project.fullDescription && (
               <div className="mt-8">
                 <h2 className="text-2xl font-serif font-semibold mb-4">על הפרויקט</h2>
-                <p className="text-gray-600">{project.fullDescription}</p>
+                <div 
+                  className="text-gray-600"
+                  dangerouslySetInnerHTML={{ __html: project.fullDescription }}
+                />
               </div>
             )}
           </div>

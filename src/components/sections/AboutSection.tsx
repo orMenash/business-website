@@ -26,13 +26,17 @@ export const AboutSection = ({ section }: SectionProps) => {
             <h2 className="text-3xl font-serif font-semibold mb-4">
               {section.title}
             </h2>
-            <p className="text-gray-600 mb-6">
-              {section.description}
-            </p>
+            <p 
+              className="text-gray-600 mb-6"
+              dangerouslySetInnerHTML={{ __html: section.description }}
+            />
             <div className="mb-6 prose prose-gray max-w-none">
-              <p className="text-balance">
-                {section.fullDescription?.slice(0, 200)}...
-              </p>
+              {section.fullDescription && (
+                <div 
+                  className="text-balance"
+                  dangerouslySetInnerHTML={{ __html: section.fullDescription.slice(0, 200) + '...' }}
+                />
+              )}
             </div>
             <Link to="/about">
               <Button className="group hover-lift flex items-center gap-2">

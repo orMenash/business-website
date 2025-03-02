@@ -19,7 +19,10 @@ export const ProjectCard = ({ id, title, description, image, category, clickable
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
         <span className="text-sm text-white/80 mb-2">{category}</span>
         <h3 className="text-xl font-serif text-white mb-2">{title}</h3>
-        <p className="text-white/90 text-sm">{description}</p>
+        <div 
+          className="text-white/90 text-sm"
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
       </div>
     </div>
   );

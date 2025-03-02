@@ -17,7 +17,10 @@ export const ServiceCard = ({ id, title, description, icon, clickable }: Service
         <Star className="w-6 h-6 text-accent" />
       </div>
       <h3 className="text-xl font-serif font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      <div 
+        className="text-gray-600"
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
     </div>
   );
 

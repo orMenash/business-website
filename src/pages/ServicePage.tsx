@@ -43,13 +43,19 @@ const ServicePage = () => {
             </h1>
             
             <div className="mb-8 text-lg text-gray-700">
-              <p className="font-medium">{service.description}</p>
+              <p 
+                className="font-medium"
+                dangerouslySetInnerHTML={{ __html: service.description }}
+              />
             </div>
             
             <div className="prose prose-lg prose-gray max-w-none mb-8">
               <h3 className="text-xl font-semibold mb-4">פרטים נוספים</h3>
               <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
-                <p className="text-balance whitespace-pre-line">{service.fullDescription}</p>
+                <div 
+                  className="text-balance whitespace-pre-line"
+                  dangerouslySetInnerHTML={{ __html: service.fullDescription }}
+                />
               </div>
             </div>
             
