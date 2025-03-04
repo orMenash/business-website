@@ -1,46 +1,69 @@
 
+import { useState } from "react";
 import { TestimonialCard } from "@/components/TestimonialCard";
-import { SectionProps } from "@/types/section";
-import testimonialsConfig from "@/config/testimonials.json";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { SectionProps } from "@/types/section";
+import testimonialsData from "@/config/testimonials.json";
+import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
 export const TestimonialsSection = ({ section }: SectionProps) => {
-  if (testimonialsConfig.testimonials.length === 0) return null;
+  const [visibleCount, setVisibleCount] = useState(3);
+  const { testimonials } = testimonialsData;
+
+  // Filter testimonials by show flag
+  const filteredTestimonials = testimonials.filter(
+    (testimonial) => testimonial.show
+  );
+
+  if (filteredTestimonials.length === 0) return null;
 
   return (
-    <section className="py-16">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-6 animate-on-scroll">
+        <div className="text-center mb-12 max-w-2xl mx-auto animate-on-scroll">
           <h2 className="text-3xl font-serif font-semibold mb-4">
-            {section.title}
+            {testimonialsData.title}
           </h2>
-          <p className="text-gray-600 mb-6">
-            {section.description}
-          </p>
+          <div
+            className="text-gray-600"
+            dangerouslySetInnerHTML={{ __html: testimonialsData.description }}
+          />
         </div>
-        <div className="flex flex-wrap justify-center gap-8 mb-8">
-          {testimonialsConfig.testimonials
-            .filter((testimonial: any) => testimonial.show)
-            .slice(0, section.max_display)
-            .map((testimonial, index) => (
-              <div key={testimonial.id} className={`w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] animate-on-scroll delay-${index * 100}`}>
-                <TestimonialCard
-                  name={testimonial.name}
-                  position={testimonial.position}
-                  company={testimonial.company}
-                  content={testimonial.content}
-                  rating={testimonial.rating}
-                />
-              </div>
-            ))}
+
+        <div className="flex flex-wrap justify-center gap-6 mb-10">
+          {filteredTestimonials.slice(0, visibleCount).map((testimonial, index) => (
+            <div
+              key={testimonial.id}
+              className={`w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1rem)] animate-on-scroll delay-${
+                index * 100
+              }`}
+            >
+              <TestimonialCard testimonial={testimonial} />
+            </div>
+          ))}
         </div>
-        {section.showButton !== false && (
-          <div className="flex justify-center animate-on-scroll delay-300">
+
+        {visibleCount < filteredTestimonials.length && (
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
+              onClick={() => setVisibleCount(filteredTestimonials.length)}
+              className="animate-on-scroll delay-300"
+            >
+              {section.cta || "הצג עוד"}
+            </Button>
+          </div>
+        )}
+
+        {section.showButton !== false && filteredTestimonials.length > 3 && (
+          <div className="flex justify-center mt-8">
             <Link to="/testimonials">
-              <Button className="group hover-lift flex items-center gap-2">
-                <span>{section.cta || "לכל חוות הדעת"}</span>
+              <Button
+                variant="default"
+                className="group flex items-center gap-2 animate-on-scroll delay-400"
+              >
+                <span>כל חוות הדעת</span>
                 <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
               </Button>
             </Link>
