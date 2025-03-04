@@ -3,7 +3,6 @@ import { Phone, Mail, MapPin } from "lucide-react";
 import { useBusiness } from "@/contexts/BusinessContext";
 import { Link } from "react-router-dom";
 import siteConfig from "@/config/site.json";
-import { cn } from "@/lib/utils";
 
 export const Footer = () => {
   const { name, description, contact } = useBusiness();
@@ -13,24 +12,10 @@ export const Footer = () => {
     return siteConfig.sections[sectionKey]?.show && link.show;
   });
 
-  // Calculate how many columns we need based on the number of quick links
-  // with a maximum of 3 links per column
-  const linksPerColumn = 3;
-  const columnCount = Math.ceil(quickLinks.length / linksPerColumn);
-  
-  // Create an array of columns, each containing up to 3 links
-  const linkColumns = Array.from({ length: columnCount }, (_, columnIndex) => {
-    const startIndex = columnIndex * linksPerColumn;
-    return quickLinks.slice(startIndex, startIndex + linksPerColumn);
-  });
-
   return (
     <footer className="bg-primary text-white">
       <div className="container mx-auto px-4 py-12">
-        <div className={cn("grid grid-cols-1 md:grid-cols-3 gap-8", {
-          "md:grid-cols-4": columnCount > 1,
-          "md:grid-cols-5": columnCount > 2,
-        })}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-serif mb-4">{name}</h3>
             <p className="text-gray-300">
@@ -58,25 +43,21 @@ export const Footer = () => {
               </div>
             </div>
           </div>
-          
-          {/* Render each column of quick links */}
-          {linkColumns.map((columnLinks, columnIndex) => (
-            <div key={`link-column-${columnIndex}`}>
-              <h4 className="text-lg font-semibold mb-4">קישורים מהירים {columnCount > 1 ? columnIndex + 1 : ''}</h4>
-              <ul className="space-y-2">
-                {columnLinks.map((link) => (
-                  <li key={link.path}>
-                    <Link
-                      to={link.path}
-                      className="text-gray-300 hover:text-white transition-colors"
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">קישורים מהירים</h4>
+            <ul className="space-y-2">
+              {quickLinks.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* Social Links */}
