@@ -34,7 +34,7 @@
       "fullDescription": "דני שמעוני הוא מנהל הטכנולוגיות הראשי שלנו. הוא מוביל את כל הפיתוחים הטכנולוגיים בחברה ומביא חדשנות מתמדת.",
       "email": "danny@example.com",
       "phone": "050-9876543",
-      "show": true,
+      "show": false,
       "clickable": true
     }
   ]
