@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export const AboutSection = ({ section }: SectionProps) => {
   return (
     <section className="section-spacing relative overflow-hidden">
-      {section.background && (
+      {section.background && section.showBackground && (
         <div 
           className="absolute inset-0 z-0"
           style={{ opacity: section.background.opacity }}

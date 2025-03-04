@@ -12,8 +12,20 @@ export const TeamSection = ({ section }: SectionProps) => {
   if (employees.length === 0) return null;
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section className="py-16 bg-gray-50 relative">
+      {section.background && section.showBackground && (
+        <div 
+          className="absolute inset-0 z-0"
+          style={{ opacity: section.background.opacity }}
+        >
+          <img
+            src={section.background.image}
+            alt={section.background.alt}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      )}
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-6 animate-on-scroll">
           <h2 className="text-3xl font-serif font-semibold mb-4">
             {section.title}

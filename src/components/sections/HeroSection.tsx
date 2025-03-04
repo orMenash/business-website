@@ -10,7 +10,7 @@ export const HeroSection = ({ section }: SectionProps) => {
 
   return (
     <section className="pt-32 pb-16 bg-gradient-to-b from-secondary to-white relative">
-      {section.background && (
+      {section.background && section.showBackground && (
         <div 
           className="absolute inset-0 z-0"
           style={{ opacity: section.background.opacity }}

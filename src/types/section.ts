@@ -10,6 +10,7 @@ export interface Section {
   image?: string;
   showImage?: boolean;
   showButton?: boolean;
+  showBackground?: boolean;
   interval?: number;
   background?: {
     image: string;
