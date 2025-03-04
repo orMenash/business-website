@@ -1,15 +1,24 @@
 
 import { Star } from "lucide-react";
 
-type TestimonialCardProps = {
+export type TestimonialType = {
+  id: string;
   name: string;
   position: string;
   company: string;
   content: string;
+  fullContent: string;
   rating: number;
+  show: boolean;
 };
 
-export const TestimonialCard = ({ name, position, company, content, rating }: TestimonialCardProps) => {
+export type TestimonialCardProps = {
+  testimonial: TestimonialType;
+};
+
+export const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
+  const { name, position, company, content, rating } = testimonial;
+  
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
       <div className="flex items-center space-x-1 mb-4 flex-row-reverse">
