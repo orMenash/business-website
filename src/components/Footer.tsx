@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import siteConfig from "@/config/site.json";
 
 export const Footer = () => {
-  const { name, contact } = useBusiness();
+  const { name, description, contact } = useBusiness();
 
   const quickLinks = siteConfig.navigation.links.filter(link => {
     const sectionKey = link.path.replace("/", "") || "hero";
@@ -19,7 +19,7 @@ export const Footer = () => {
           <div>
             <h3 className="text-xl font-serif mb-4">{name}</h3>
             <p className="text-gray-300">
-              מספקים שירותים מקצועיים במצוינות ובמסירות
+              {description}
             </p>
           </div>
           <div>
