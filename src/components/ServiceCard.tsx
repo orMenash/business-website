@@ -14,7 +14,7 @@ export const ServiceCard = ({ id, title, description, icon, clickable }: Service
   const Card = () => (
     <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
       <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-        <Star className="w-6 h-6 text-accent" />
+        <Star className="w-6 h-6 text-accent" aria-hidden="true" />
       </div>
       <h3 className="text-xl font-serif font-semibold mb-2">{title}</h3>
       <div 
@@ -26,7 +26,7 @@ export const ServiceCard = ({ id, title, description, icon, clickable }: Service
 
   if (clickable) {
     return (
-      <Link to={`/service/${id}`} className="block group">
+      <Link to={`/service/${id}`} className="block group" aria-label={`שירות: ${title}`}>
         <Card />
       </Link>
     );

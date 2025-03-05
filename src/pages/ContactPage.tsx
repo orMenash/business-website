@@ -42,14 +42,24 @@ const ContactPage = () => {
                   <Phone className="w-6 h-6 text-accent" />
                   <div>
                     <h3 className="font-semibold mb-1">טלפון</h3>
-                    <p className="text-gray-600">{contact.phone}</p>
+                    <a 
+                      href={`tel:${contact.phone}`} 
+                      className="text-gray-600 hover:text-accent transition-colors"
+                    >
+                      {contact.phone}
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
                   <Mail className="w-6 h-6 text-accent" />
                   <div>
                     <h3 className="font-semibold mb-1">אימייל</h3>
-                    <p className="text-gray-600">{contact.email}</p>
+                    <a 
+                      href={`mailto:${contact.email}`} 
+                      className="text-gray-600 hover:text-accent transition-colors"
+                    >
+                      {contact.email}
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">

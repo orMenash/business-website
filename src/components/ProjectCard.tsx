@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import { ResponsiveImage } from "@/components/ui/optimized-image";
 
 type ProjectCardProps = {
   id?: string;
@@ -13,8 +14,16 @@ type ProjectCardProps = {
 export const ProjectCard = ({ id, title, description, image, category, clickable }: ProjectCardProps) => {
   const Card = () => (
     <div className="group relative overflow-hidden rounded-lg shadow-lg">
-      <div className="aspect-w-16 aspect-h-9">
-        <img src={image} alt={title} className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300" />
+      <div className="aspect-w-16 aspect-h-9" style={{ paddingBottom: '56.25%', position: 'relative' }}>
+        <ResponsiveImage 
+          src={image} 
+          alt={title} 
+          className="absolute inset-0 object-cover w-full h-full group-hover:scale-110 transition-transform duration-300" 
+          width={400} 
+          height={225}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, 400px"
+        />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
         <span className="text-sm text-white/80 mb-2">{category}</span>
@@ -29,7 +38,7 @@ export const ProjectCard = ({ id, title, description, image, category, clickable
 
   if (clickable && id) {
     return (
-      <Link to={`/project/${id}`} className="block">
+      <Link to={`/project/${id}`} className="block" aria-label={`פרויקט: ${title}`}>
         <Card />
       </Link>
     );

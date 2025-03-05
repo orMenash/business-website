@@ -22,8 +22,10 @@ import ProjectsPage from "./pages/ProjectsPage";
 import TeamPage from "./pages/TeamPage";
 import GalleryPage from "./pages/GalleryPage";
 import AlbumPage from "./pages/AlbumPage";
+import TestimonialsPage from "./pages/TestimonialsPage";
 import NotFound from "./pages/NotFound";
 
+// Create a query client that will be used in the entire app
 const queryClient = new QueryClient();
 
 const PageContainer = ({ children }: { children: React.ReactNode }) => {
@@ -80,6 +82,7 @@ const AppContent = () => {
             <Route path="/team" element={<TeamPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/gallery/:albumId" element={<AlbumPage />} />
+            <Route path="/testimonials" element={<TestimonialsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
@@ -97,7 +100,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <BusinessProvider>
       <TooltipProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/">
           <AppContent />
         </BrowserRouter>
         <Toaster />

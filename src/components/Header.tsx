@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { useBusiness } from "@/contexts/BusinessContext";
 import { Link, useLocation } from "react-router-dom";
 import siteConfig from "@/config/site.json";
+import { ResponsiveImage } from "@/components/ui/optimized-image";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +12,7 @@ export const Header = () => {
   const location = useLocation();
 
   const navigationLinks = siteConfig.navigation.links.filter(link => {
+    if (link.path === "/testimonials") return link.show;
     const sectionKey = link.path.replace("/", "") || "hero";
     return siteConfig.sections[sectionKey]?.show && link.show;
   });
@@ -26,11 +28,15 @@ export const Header = () => {
     <header className="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <img 
+          <Link to="/" className="flex items-center gap-3" aria-label="דף בית">
+            <ResponsiveImage 
               src={logo.url} 
-              alt={name}
+              alt={`${name} לוגו`}
               className="object-contain"
+              width={logo.width || 60}
+              height={logo.height || 60}
+              loading="eager"
+              fetchPriority="high"
               style={{ 
                 height: logo.height,
                 width: getLogoWidth()
@@ -48,6 +54,8 @@ export const Header = () => {
                 className={`text-gray-600 hover:text-accent transition-colors px-2 ${
                   location.pathname === link.path ? "text-accent" : ""
                 }`}
+                aria-label={link.title}
+                aria-current={location.pathname === link.path ? "page" : undefined}
               >
                 {link.title}
               </Link>
@@ -58,12 +66,13 @@ export const Header = () => {
           <button
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="תפריט"
+            aria-label={isMenuOpen ? "סגור תפריט" : "פתח תפריט"}
+            aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-6 w-6" aria-hidden="true" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6" aria-hidden="true" />
             )}
           </button>
         </nav>
@@ -80,6 +89,8 @@ export const Header = () => {
                     location.pathname === link.path ? "text-accent" : ""
                   }`}
                   onClick={() => setIsMenuOpen(false)}
+                  aria-label={link.title}
+                  aria-current={location.pathname === link.path ? "page" : undefined}
                 >
                   {link.title}
                 </Link>

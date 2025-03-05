@@ -1,5 +1,5 @@
 
-import { Star } from "lucide-react";
+import { Star, ExternalLink } from "lucide-react";
 
 export type TestimonialType = {
   id: string;
@@ -9,7 +9,10 @@ export type TestimonialType = {
   content: string;
   fullContent: string;
   rating: number;
+  link?: string;
+  showLink?: boolean;
   show: boolean;
+  linkText?: string; // New property for custom link text
 };
 
 export type TestimonialCardProps = {
@@ -17,7 +20,7 @@ export type TestimonialCardProps = {
 };
 
 export const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
-  const { name, position, company, content, rating } = testimonial;
+  const { name, position, company, content, rating, link, showLink, linkText } = testimonial;
   
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
@@ -33,6 +36,18 @@ export const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
       <div className="border-t pt-4">
         <p className="font-semibold">{name}</p>
         <p className="text-sm text-gray-500">{position}, {company}</p>
+        
+        {link && showLink && (
+          <a 
+            href={link} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-accent flex items-center gap-1 mt-2 text-sm hover:underline"
+          >
+            <span>{linkText || link}</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        )}
       </div>
     </div>
   );

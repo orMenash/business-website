@@ -5,6 +5,7 @@ import { SectionProps } from "@/types/section";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { ResponsiveImage } from "@/components/ui/optimized-image";
 
 export const ServicesSection = ({ section }: SectionProps) => {
   const { services } = useBusiness();
@@ -18,21 +19,27 @@ export const ServicesSection = ({ section }: SectionProps) => {
           className="absolute inset-0 z-0"
           style={{ opacity: section.background.opacity }}
         >
-          <img
+          <ResponsiveImage
             src={section.background.image}
-            alt={section.background.alt}
+            alt={section.background.alt || "תמונת רקע של שירותי FlashWeb"}
             className="w-full h-full object-cover"
+            width={1920}
+            height={1080}
+            loading="lazy"
+            sizes="100vw"
           />
         </div>
       )}
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-6 animate-on-scroll">
-          <h2 className="text-3xl font-serif font-semibold mb-4">
-            {section.title}
-          </h2>
-          <p className="text-gray-600 mb-6">
-            {section.description}
-          </p>
+          <h2 
+            className="text-3xl font-serif font-semibold mb-4"
+            dangerouslySetInnerHTML={{ __html: section.title }}
+          />
+          <div 
+            className="text-gray-600 mb-6"
+            dangerouslySetInnerHTML={{ __html: section.description }}
+          />
         </div>
         <div className="flex flex-wrap justify-center gap-8 mb-8">
           {services

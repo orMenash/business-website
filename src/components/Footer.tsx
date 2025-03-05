@@ -8,6 +8,7 @@ export const Footer = () => {
   const { name, description, contact } = useBusiness();
 
   const quickLinks = siteConfig.navigation.links.filter(link => {
+    if (link.path === "/testimonials") return link.show;
     const sectionKey = link.path.replace("/", "") || "hero";
     return siteConfig.sections[sectionKey]?.show && link.show;
   });
@@ -26,19 +27,19 @@ export const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">פרטי התקשרות</h4>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                <a href={`tel:${contact.phone}`} className="hover:text-accent transition-colors">
+                <Phone className="h-4 w-4" aria-hidden="true" />
+                <a href={`tel:${contact.phone}`} className="hover:text-accent transition-colors" aria-label={`טלפון: ${contact.phone}`}>
                   {contact.phone}
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4" />
-                <a href={`mailto:${contact.email}`} className="hover:text-accent transition-colors">
+                <Mail className="h-4 w-4" aria-hidden="true" />
+                <a href={`mailto:${contact.email}`} className="hover:text-accent transition-colors" aria-label={`אימייל: ${contact.email}`}>
                   {contact.email}
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4" />
+                <MapPin className="h-4 w-4" aria-hidden="true" />
                 <span>{contact.address}</span>
               </div>
             </div>
@@ -51,6 +52,7 @@ export const Footer = () => {
                   <Link
                     to={link.path}
                     className="text-gray-300 hover:text-white transition-colors"
+                    aria-label={link.title}
                   >
                     {link.title}
                   </Link>
@@ -73,6 +75,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors hover:scale-110 transform duration-200"
+                  aria-label={platform}
                 >
                   <span className="capitalize">{platform}</span>
                 </a>

@@ -100,7 +100,36 @@
 
   body {
     @apply bg-background text-foreground;
+    text-rendering: optimizeSpeed;
   }
+  
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+  }
+  
+  img {
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  img:not([width]) {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: #f9fafb;
+  color: #1f2937;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 @layer utilities {
@@ -166,8 +195,6 @@
     line-height: 1.6 !important;
   }
 
-  /* Scroll Animation Utilities */
-  /* Animation Base Styles */
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
@@ -179,7 +206,6 @@
     transform: translateY(0);
   }
 
-  /* Animation Variants */
   .animate-on-scroll.slide-right {
     transform: translateX(-30px);
   }
@@ -208,7 +234,6 @@
     transform: none;
   }
   
-  /* Animation Delay Utilities */
   .delay-100 {
     transition-delay: 100ms;
   }
@@ -269,9 +294,33 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
+  
+  .layout-stable {
+    transform: translateZ(0);
+    will-change: auto;
+  }
+  
+  .img-optimize {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+  }
+  
+  .hardware-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  .transition-slow {
+    transition-duration: 800ms;
+  }
+  
+  .duration-800 {
+    transition-duration: 800ms;
+  }
 }
 
-/* Fix rtl switch behavior */
 [dir="rtl"] .peer[data-state="checked"] > span {
   transform: translateX(-100%) !important;
 }
@@ -280,7 +329,6 @@
   transform: translateX(0%) !important;
 }
 
-/* Fix button positioning when font size changes */
 button {
   position: relative !important;
   transform: none !important;

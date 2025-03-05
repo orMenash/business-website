@@ -30,12 +30,15 @@ const EmployeePage = () => {
               {employee.image ? (
                 <img
                   src={employee.image}
-                  alt={employee.name}
-                  className="w-40 h-40 rounded-full object-cover"
+                  alt={`${employee.name} - ${employee.title}`}
+                  className="w-24 h-24 rounded-full object-cover"
+                  width="96"
+                  height="96"
+                  loading="lazy"
                 />
               ) : (
-                <div className="w-40 h-40 bg-accent/10 rounded-full flex items-center justify-center">
-                  <User className="w-20 h-20 text-accent" />
+                <div className="w-24 h-24 bg-accent/10 rounded-full flex items-center justify-center">
+                  <User className="w-12 h-12 text-accent" />
                 </div>
               )}
               <div className="text-center md:text-right flex-1">
@@ -49,7 +52,7 @@ const EmployeePage = () => {
                 />
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-center md:justify-start gap-2">
-                    <Mail className="w-5 h-5 text-accent" />
+                    <Mail className="w-5 h-5 text-accent" aria-hidden="true" />
                     <a
                       href={`mailto:${employee.email}`}
                       className="text-accent hover:underline"
@@ -58,7 +61,7 @@ const EmployeePage = () => {
                     </a>
                   </div>
                   <div className="flex items-center justify-center md:justify-start gap-2">
-                    <Phone className="w-5 h-5 text-accent" />
+                    <Phone className="w-5 h-5 text-accent" aria-hidden="true" />
                     <a
                       href={`tel:${employee.phone}`}
                       className="text-accent hover:underline"

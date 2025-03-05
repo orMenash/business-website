@@ -18,19 +18,23 @@ export const ProjectsSection = ({ section }: SectionProps) => {
         >
           <img
             src={section.background.image}
-            alt={section.background.alt}
+            alt={section.background.alt || "רקע למדור פרויקטים"}
             className="w-full h-full object-cover"
+            width="1920"
+            height="1080"
           />
         </div>
       )}
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-6 animate-on-scroll">
-          <h2 className="text-3xl font-serif font-semibold mb-4">
-            {section.title}
-          </h2>
-          <p className="text-gray-600 mb-6">
-            {section.description}
-          </p>
+          <h2 
+            className="text-3xl font-serif font-semibold mb-4"
+            dangerouslySetInnerHTML={{ __html: section.title }}
+          />
+          <div 
+            className="text-gray-600 mb-6"
+            dangerouslySetInnerHTML={{ __html: section.description }}
+          />
         </div>
         <div className="flex flex-wrap justify-center gap-8 mb-8">
           {projectsConfig.projects
@@ -51,10 +55,10 @@ export const ProjectsSection = ({ section }: SectionProps) => {
         </div>
         {section.showButton !== false && (
           <div className="flex justify-center animate-on-scroll delay-300">
-            <Link to="/projects">
+            <Link to="/projects" aria-label="לכל הפרויקטים">
               <Button className="group hover-lift flex items-center gap-2">
                 <span>{section.cta || "לכל הפרויקטים"}</span>
-                <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
+                <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
               </Button>
             </Link>
           </div>

@@ -27,9 +27,10 @@ export const TeamSection = ({ section }: SectionProps) => {
       )}
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-6 animate-on-scroll">
-          <h2 className="text-3xl font-serif font-semibold mb-4">
-            {section.title}
-          </h2>
+          <h2 
+            className="text-3xl font-serif font-semibold mb-4"
+            dangerouslySetInnerHTML={{ __html: section.title }}
+          />
           <div 
             className="text-gray-600 mb-6"
             dangerouslySetInnerHTML={{ __html: section.description }}

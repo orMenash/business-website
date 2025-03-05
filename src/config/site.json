@@ -1,3 +1,4 @@
+
 {
   "sections": {
     "hero": {
@@ -9,6 +10,7 @@
       "description": "<p><strong>אתר עסקי מניע לקוחות לפעולה – אנחנו כאן כדי לגרום לזה לקרות!</strong></p>\n<p>עסק בלי אתר מפסיד לקוחות מדי יום. ב-<strong>FlashWeb</strong> אנחנו מציעים לך פתרון מלא:</p>\n<ul>\n<li>✔ <strong>בניית אתר מקצועי</strong> תוך 48 שעות בלבד</li>\n<li>✔ <strong>קידום בגוגל</strong> – יותר חשיפה, יותר פניות</li>\n<li>✔ <strong>תחזוקה שוטפת</strong> – האתר מתעדכן עבורך</li>\n<li>✔ <strong>ניהול מלא</strong> – אין צורך בידע טכני, אנחנו דואגים להכל</li>\n</ul>\n<p>📢 <strong>תן לנו לבנות עבורך אתר שישרת אותך 24/7 – צור קשר עכשיו!</strong></p>",
       "fullDescription": "",
       "cta": "קבל הצעת מחיר",
+      "showButton": true,
       "showBackground": false,
       "background": {
         "image": "",
@@ -24,6 +26,7 @@
       "description": "<p><strong>הפתרון המושלם לבעלי עסקים</strong></p>",
       "fullDescription": "<p>ב-<strong>FlashWeb</strong> אנחנו עוזרים לעסקים קטנים ובינוניים להקים ולנהל <strong>אתרים מקצועיים, ממירים ומתקדמים</strong> – בלי צורך בידע טכני.</p>\n<ul>\n<li>✔ <strong>אתר מוכן תוך 48 שעות</strong></li>\n<li>✔ <strong>תמיכה מלאה</strong> – ניהול תוכן, אחסון ועדכונים</li>\n<li>✔ <strong>מודל חודשי משתלם</strong> – הכל כלול במחיר אחד</li>\n</ul>\n<p>📢 <strong>רוצה אתר שיעבוד בשבילך? צור קשר עכשיו!</strong></p>",
       "cta": "למד עוד",
+      "showButton": true,
       "image": "",
       "showImage": false,
       "showBackground": true,
@@ -41,6 +44,7 @@
       "description": "<p><strong>אתר מקצועי זה רק ההתחלה – הנה מה שאתה מקבל:</strong></p>",
       "fullDescription": "<ul>\n<li>✔ <strong>בניית אתרים מותאמים לעסקים</strong> – אתר פרסומי תוך 48 שעות</li>\n<li>✔ <strong>קידום אורגני בגוגל (SEO)</strong> – יותר חשיפה, יותר פניות</li>\n<li>✔ <strong>ניהול תוכן ועדכונים</strong> – האתר שלך תמיד מעודכן</li>\n<li>✔ <strong>אחסון, דומיין ואבטחה</strong> – הכל כלול במקום אחד</li>\n</ul>\n<p>📢 <strong>תן לנו לדאוג לכל הפרטים הטכניים – צור קשר עוד היום!</strong></p>",
       "cta": "",
+      "showButton": true,
       "showBackground": true,
       "background": {
         "image": "/imags/services/services_background.webp",
@@ -56,6 +60,7 @@
       "description": "הכירו את הצוות המקצועי שלנו",
       "fullDescription": "הצוות שלנו מורכב מאנשי מקצוע מנוסים ומסורים, שמביאים איתם שנים של ניסיון וידע מקצועי. כל אחד מחברי הצוות מתמחה בתחומו ויחד אנחנו מספקים פתרונות מקיפים ומותאמים אישית ללקוחותינו.",
       "cta": "",
+      "showButton": true,
       "showBackground": false,
       "background": {
         "image": "",
@@ -64,13 +69,14 @@
       }
     },
     "testimonials": {
-      "show": false,
+      "show": true,
       "order": 4,
       "max_display": 3,
       "title": "מה אומרים עלינו",
       "description": "<p><strong>אל תסתמך רק על המילה שלנו – הנה מה שלקוחות אומרים:</strong></p>",
       "fullDescription": "<p>לקוחות מרוצים הם ההוכחה הכי טובה להצלחה שלנו.</p>\n<p>📢 <strong>רוצה לראות איך אתר מקצועי יכול להקפיץ לך את העסק?</strong> צור קשר עוד היום!</p>",
       "cta": "",
+      "showButton": true,
       "showBackground": true,
       "background": {
         "image": "/imags/testimonials/testimonials_background.webp",
@@ -79,13 +85,14 @@
       }
     },
     "projects": {
-      "show": false,
+      "show": true,
       "order": 5,
       "max_display": 3,
       "title": "הפרויקטים שלנו",
       "description": "פרויקטים נבחרים שביצענו",
       "fullDescription": "גלו את הפרויקטים המגוונים שביצענו עבור לקוחותינו. כל פרויקט מייצג את המחויבות שלנו למצוינות, החדשנות והיכולת שלנו להתאים פתרונות לצרכים הייחודיים של כל לקוח.",
       "cta": "",
+      "showButton": true,
       "showBackground": true,
       "background": {
         "image": "",
@@ -101,6 +108,7 @@
       "description": "<p><strong>הצצה לאתרים המוצלחים שלנו</strong></p>",
       "fullDescription": "<p>לכל אתר שאנחנו יוצרים יש סיפור של הצלחה.</p>\n<p>📢 <strong>רוצה להיות הבא?</strong> דבר איתנו עכשיו!</p>",
       "cta": "",
+      "showButton": true,
       "interval": 5000,
       "showBackground": true,
       "background": {
@@ -117,6 +125,7 @@
       "description": "<p><strong>רוצה אתר מקצועי שיביא לך לקוחות?</strong></p>",
       "fullDescription": "<p>אנחנו כאן כדי לעזור לך להקים את האתר שלך במהירות, בקלות ובמחיר משתלם.</p>\n<p>📢 <strong>אל תישאר מאחור – צור קשר עכשיו!</strong></p>",
       "cta": "",
+      "showButton": true,
       "showBackground": true,
       "background": {
         "image": "/imags/contact/contact_background.webp",
@@ -148,13 +157,19 @@
       {
         "title": "הצוות שלנו",
         "path": "/team",
-        "show": false,
+        "show": true,
         "order": 4
+      },
+      {
+        "title": "מה אומרים עלינו",
+        "path": "/testimonials",
+        "show": true,
+        "order": 4.5
       },
       {
         "title": "פרויקטים",
         "path": "/projects",
-        "show": false,
+        "show": true,
         "order": 5
       },
       {

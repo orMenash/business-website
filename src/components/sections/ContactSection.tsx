@@ -20,12 +20,14 @@ export const ContactSection = ({ section }: SectionProps) => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-xl mx-auto">
           <div className="text-center mb-12 animate-on-scroll">
-            <h2 className="text-3xl font-serif font-semibold mb-4">
-              {section.title}
-            </h2>
-            <p className="text-gray-600">
-              {section.description}
-            </p>
+            <h2 
+              className="text-3xl font-serif font-semibold mb-4"
+              dangerouslySetInnerHTML={{ __html: section.title }}
+            />
+            <div 
+              className="text-gray-600"
+              dangerouslySetInnerHTML={{ __html: section.description }}
+            />
           </div>
           <div className="animate-on-scroll delay-200">
             <ContactForm />
