@@ -86,7 +86,7 @@
         "image": "/imags/testimonials/testimonials_background.webp",
         "alt": "תמונת רקע של לקוחות מרוצים",
         "opacity": 0.05,
-        "backgroundColor": "#f3f4f6"
+        "backgroundColor": "#ffffff"
       }
     },
     "projects": {
