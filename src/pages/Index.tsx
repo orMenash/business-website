@@ -17,27 +17,36 @@ const Index = () => {
 
   const renderSection = (sectionId: string) => {
     const section = siteConfig.sections[sectionId];
+    const sectionStyle = section.backgroundColor ? { backgroundColor: section.backgroundColor } : {};
     
-    switch (sectionId) {
-      case 'hero':
-        return <HeroSection key="hero" section={section} />;
-      case 'about':
-        return <AboutSection key="about" section={section} />;
-      case 'services':
-        return <ServicesSection key="services" section={section} />;
-      case 'team':
-        return <TeamSection key="team" section={section} />;
-      case 'testimonials':
-        return <TestimonialsSection key="testimonials" section={section} />;
-      case 'projects':
-        return <ProjectsSection key="projects" section={section} />;
-      case 'gallery':
-        return <GallerySection key="gallery" section={section} />;
-      case 'contact':
-        return <ContactSection key="contact" section={section} />;
-      default:
-        return null;
-    }
+    const SectionComponent = (() => {
+      switch (sectionId) {
+        case 'hero':
+          return <HeroSection key="hero" section={section} />;
+        case 'about':
+          return <AboutSection key="about" section={section} />;
+        case 'services':
+          return <ServicesSection key="services" section={section} />;
+        case 'team':
+          return <TeamSection key="team" section={section} />;
+        case 'testimonials':
+          return <TestimonialsSection key="testimonials" section={section} />;
+        case 'projects':
+          return <ProjectsSection key="projects" section={section} />;
+        case 'gallery':
+          return <GallerySection key="gallery" section={section} />;
+        case 'contact':
+          return <ContactSection key="contact" section={section} />;
+        default:
+          return null;
+      }
+    })();
+
+    return (
+      <div key={sectionId} style={sectionStyle}>
+        {SectionComponent}
+      </div>
+    );
   };
 
   return (

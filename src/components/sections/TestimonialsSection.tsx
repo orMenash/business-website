@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { Button } from "@/components/ui/button";
@@ -54,7 +53,7 @@ export const TestimonialsSection = ({ section }: SectionProps) => {
   if (filteredTestimonials.length === 0) return null;
 
   return (
-    <section className="py-16 bg-gray-50 relative">
+    <section className="py-10 bg-gray-50 relative">
       {section.background && section.showBackground && (
         <div 
           className="absolute inset-0 z-0"
@@ -68,7 +67,7 @@ export const TestimonialsSection = ({ section }: SectionProps) => {
         </div>
       )}
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12 max-w-2xl mx-auto animate-on-scroll">
+        <div className="text-center mb-8 max-w-2xl mx-auto animate-on-scroll">
           <h2 
             className="text-3xl font-serif font-semibold mb-4"
             dangerouslySetInnerHTML={{ __html: section.title }}
@@ -79,13 +78,27 @@ export const TestimonialsSection = ({ section }: SectionProps) => {
           />
         </div>
 
+        {section.showButton !== false && (
+          <div className="flex justify-center mb-6">
+            <Link to="/testimonials">
+              <Button
+                variant="default"
+                className="group flex items-center gap-2 animate-on-scroll"
+              >
+                <span>כל חוות הדעת</span>
+                <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+        )}
+
         <div 
           ref={carouselRef}
-          className="relative overflow-hidden mb-10"
-          style={{ minHeight: "320px" }}
+          className="relative overflow-hidden mb-8"
+          style={{ minHeight: "280px" }}
         >
           <div className="flex justify-center">
-            <div className="w-full max-w-5xl relative h-[320px]">
+            <div className="w-full max-w-5xl relative h-[280px]">
               {/* Container for the testimonials with conveyor belt animation */}
               <div className="flex gap-4 absolute inset-0">
                 {filteredTestimonials.map((testimonial, index) => {
@@ -147,22 +160,7 @@ export const TestimonialsSection = ({ section }: SectionProps) => {
             </div>
           </div>
         </div>
-
-        <div className="flex flex-col items-center gap-4 mt-6">
-          {section.showButton !== false && (
-            <Link to="/testimonials">
-              <Button
-                variant="default"
-                className="group flex items-center gap-2 animate-on-scroll delay-400"
-              >
-                <span>כל חוות הדעת</span>
-                <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          )}
-        </div>
       </div>
     </section>
   );
 };
-
