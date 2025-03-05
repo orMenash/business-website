@@ -8,9 +8,15 @@ import { ResponsiveImage } from "@/components/ui/optimized-image";
 
 export const HeroSection = ({ section }: SectionProps) => {
   const { name, description } = useBusiness();
+  
+  // Get background color from section configuration
+  const backgroundColor = section.background?.backgroundColor || "#ffffff";
 
   return (
-    <section className="pt-32 pb-16 bg-gradient-to-b from-secondary to-white relative">
+    <section 
+      className="pt-32 pb-16 bg-gradient-to-b from-secondary to-white relative"
+      style={{ backgroundColor }}
+    >
       {section.background && section.showBackground && (
         <div 
           className="absolute inset-0 z-0"

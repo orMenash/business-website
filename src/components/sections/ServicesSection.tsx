@@ -12,8 +12,14 @@ export const ServicesSection = ({ section }: SectionProps) => {
   
   if (services.length === 0) return null;
 
+  // Get background color from section configuration
+  const backgroundColor = section.background?.backgroundColor || "#ffffff";
+
   return (
-    <section className="py-16 relative">
+    <section 
+      className="py-16 relative"
+      style={{ backgroundColor }}
+    >
       {section.background && section.showBackground && (
         <div 
           className="absolute inset-0 z-0"

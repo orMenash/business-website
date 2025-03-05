@@ -12,11 +12,11 @@
       "cta": "קבל הצעת מחיר",
       "showButton": true,
       "showBackground": false,
-      "backgroundColor": "#ffffff",
       "background": {
         "image": "",
         "alt": "תמונת רקע של עסק מצליח",
-        "opacity": 0.45
+        "opacity": 0.45,
+        "backgroundColor": "#ffffff"
       }
     },
     "about": {
@@ -31,11 +31,11 @@
       "image": "",
       "showImage": false,
       "showBackground": true,
-      "backgroundColor": "#f8f9fa",
       "background": {
         "image": "",
         "alt": "תמונת רקע אודות",
-        "opacity": 0.05
+        "opacity": 0.05,
+        "backgroundColor": "#f8f9fa"
       }
     },
     "services": {
@@ -48,11 +48,11 @@
       "cta": "",
       "showButton": true,
       "showBackground": true,
-      "backgroundColor": "#ffffff",
       "background": {
         "image": "/imags/services/services_background.webp",
         "alt": "תמונת רקע של שירותי FlashWeb",
-        "opacity": 0.05
+        "opacity": 0.05,
+        "backgroundColor": "#ffffff"
       }
     },
     "team": {
@@ -65,11 +65,11 @@
       "cta": "",
       "showButton": true,
       "showBackground": false,
-      "backgroundColor": "#f8f9fa",
       "background": {
         "image": "",
         "alt": "תמונת רקע של צוות מקצועי",
-        "opacity": 0.05
+        "opacity": 0.05,
+        "backgroundColor": "#f8f9fa"
       }
     },
     "testimonials": {
@@ -82,11 +82,11 @@
       "cta": "",
       "showButton": true,
       "showBackground": true,
-      "backgroundColor": "#ffffff",
       "background": {
         "image": "/imags/testimonials/testimonials_background.webp",
         "alt": "תמונת רקע של לקוחות מרוצים",
-        "opacity": 0.05
+        "opacity": 0.05,
+        "backgroundColor": "#f3f4f6"
       }
     },
     "projects": {
@@ -99,11 +99,11 @@
       "cta": "",
       "showButton": true,
       "showBackground": true,
-      "backgroundColor": "#f8f9fa",
       "background": {
         "image": "",
         "alt": "תמונת רקע של פרויקטים מוצלחים",
-        "opacity": 0.05
+        "opacity": 0.05,
+        "backgroundColor": "#f8f9fa"
       }
     },
     "gallery": {
@@ -117,11 +117,11 @@
       "showButton": true,
       "interval": 5000,
       "showBackground": true,
-      "backgroundColor": "#ffffff",
       "background": {
         "image": "",
         "alt": "תמונת רקע של גלריית תמונות",
-        "opacity": 0.05
+        "opacity": 0.05,
+        "backgroundColor": "#ffffff"
       }
     },
     "contact": {
@@ -134,11 +134,11 @@
       "cta": "",
       "showButton": true,
       "showBackground": true,
-      "backgroundColor": "#f8f9fa",
       "background": {
         "image": "/imags/contact/contact_background.webp",
         "alt": "תמונת רקע של יצירת קשר",
-        "opacity": 0.05
+        "opacity": 0.05,
+        "backgroundColor": "#f8f9fa"
       }
     }
   },

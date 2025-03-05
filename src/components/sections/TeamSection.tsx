@@ -1,4 +1,3 @@
-
 import { useBusiness } from "@/contexts/BusinessContext";
 import { EmployeeCard } from "@/components/EmployeeCard";
 import { SectionProps } from "@/types/section";
@@ -11,8 +10,14 @@ export const TeamSection = ({ section }: SectionProps) => {
   
   if (employees.length === 0) return null;
 
+  // Get background color from section configuration
+  const backgroundColor = section.background?.backgroundColor || "#f8f9fa";
+
   return (
-    <section className="py-16 bg-gray-50 relative">
+    <section 
+      className="py-16 relative"
+      style={{ backgroundColor }}
+    >
       {section.background && section.showBackground && (
         <div 
           className="absolute inset-0 z-0"

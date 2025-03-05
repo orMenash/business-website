@@ -6,8 +6,14 @@ import { Button } from "@/components/ui/button";
 import { ResponsiveImage } from "@/components/ui/optimized-image";
 
 export const AboutSection = ({ section }: SectionProps) => {
+  // Get background color from section configuration
+  const backgroundColor = section.background?.backgroundColor || "#f8f9fa";
+  
   return (
-    <section className="section-spacing relative overflow-hidden">
+    <section 
+      className="section-spacing relative overflow-hidden"
+      style={{ backgroundColor }}
+    >
       {section.background && section.showBackground && (
         <div 
           className="absolute inset-0 z-0"

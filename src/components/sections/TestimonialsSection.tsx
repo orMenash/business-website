@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { Button } from "@/components/ui/button";
@@ -53,8 +52,14 @@ export const TestimonialsSection = ({ section }: SectionProps) => {
 
   if (filteredTestimonials.length === 0) return null;
 
+  // Get background color from section configuration
+  const backgroundColor = section.background?.backgroundColor || "#f3f4f6";
+
   return (
-    <section className="py-10 bg-gray-50 relative">
+    <section 
+      className="py-10 relative"
+      style={{ backgroundColor }}
+    >
       {section.background && section.showBackground && (
         <div 
           className="absolute inset-0 z-0"

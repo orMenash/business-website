@@ -3,8 +3,14 @@ import { ContactForm } from "@/components/ContactForm";
 import { SectionProps } from "@/types/section";
 
 export const ContactSection = ({ section }: SectionProps) => {
+  // Get background color from section configuration
+  const backgroundColor = section.background?.backgroundColor || "#f8f9fa";
+
   return (
-    <section className="py-16 bg-secondary relative">
+    <section 
+      className="py-16 relative"
+      style={{ backgroundColor }}
+    >
       {section.background && section.showBackground && (
         <div 
           className="absolute inset-0 z-0"

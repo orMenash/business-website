@@ -16,8 +16,8 @@ export interface Section {
     image: string;
     alt: string;
     opacity: number;
+    backgroundColor?: string;
   };
-  backgroundColor?: string;
   tagline?: string;
 }
 
