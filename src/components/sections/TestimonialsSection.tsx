@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { Button } from "@/components/ui/button";
@@ -78,20 +79,6 @@ export const TestimonialsSection = ({ section }: SectionProps) => {
           />
         </div>
 
-        {section.showButton !== false && (
-          <div className="flex justify-center mb-6">
-            <Link to="/testimonials">
-              <Button
-                variant="default"
-                className="group flex items-center gap-2 animate-on-scroll"
-              >
-                <span>כל חוות הדעת</span>
-                <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </div>
-        )}
-
         <div 
           ref={carouselRef}
           className="relative overflow-hidden mb-8"
@@ -160,6 +147,20 @@ export const TestimonialsSection = ({ section }: SectionProps) => {
             </div>
           </div>
         </div>
+
+        {section.showButton !== false && (
+          <div className="flex justify-center mt-6">
+            <Link to="/testimonials">
+              <Button
+                variant="default"
+                className="group flex items-center gap-2 animate-on-scroll"
+              >
+                <span>כל חוות הדעת</span>
+                <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
