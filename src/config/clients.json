@@ -1,0 +1,32 @@
+
+{
+  "clients": [
+    {
+      "id": "1",
+      "name": "לקוח 1",
+      "description": "תיאור קצר של הלקוח הראשון",
+      "logo": "https://images.unsplash.com/photo-1579389083395-4507e98b5e67?w=800&auto=format&fit=crop&q=80",
+      "show": true,
+      "url": "https://example.com",
+      "fullDescription": "תיאור מורחב ומפורט של הלקוח הראשון. כאן נוכל לספר על שיתוף הפעולה, הפרויקטים שביצענו, והתוצאות שהשגנו יחד."
+    },
+    {
+      "id": "2",
+      "name": "לקוח 2",
+      "description": "תיאור קצר של הלקוח השני",
+      "logo": "https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=800&auto=format&fit=crop&q=80",
+      "show": true,
+      "url": "https://example.org",
+      "fullDescription": "תיאור מורחב ומפורט של הלקוח השני. כאן נוכל לספר על שיתוף הפעולה, הפרויקטים שביצענו, והתוצאות שהשגנו יחד."
+    },
+    {
+      "id": "3",
+      "name": "לקוח 3",
+      "description": "תיאור קצר של הלקוח השלישי",
+      "logo": "https://images.unsplash.com/photo-1570126688035-1e6adbd61053?w=800&auto=format&fit=crop&q=80",
+      "show": true,
+      "url": "https://example.net",
+      "fullDescription": "תיאור מורחב ומפורט של הלקוח השלישי. כאן נוכל לספר על שיתוף הפעולה, הפרויקטים שביצענו, והתוצאות שהשגנו יחד."
+    }
+  ]
+}

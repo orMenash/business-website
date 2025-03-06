@@ -55,6 +55,23 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "clients": {
+      "show": true,
+      "order": 2.5,
+      "max_display": 6,
+      "title": "הלקוחות שלנו",
+      "description": "<p><strong>אנחנו גאים לעבוד עם עסקים מכל הגדלים והתחומים</strong></p>",
+      "fullDescription": "<p>אנחנו עובדים עם מגוון רחב של לקוחות, מעסקים קטנים ועד חברות גדולות, ולכל אחד מהם אנחנו מתאימים פתרון ייחודי שמתאים בדיוק לצרכים ולמטרות שלו.</p>\n<p>📢 <strong>רוצה להצטרף ללקוחות המרוצים שלנו? צור קשר עוד היום!</strong></p>",
+      "cta": "לכל הלקוחות",
+      "showButton": true,
+      "showBackground": true,
+      "background": {
+        "image": "",
+        "alt": "תמונת רקע של לקוחות",
+        "opacity": 0.05,
+        "backgroundColor": "#f8f9fa"
+      }
+    },
     "team": {
       "show": true,
       "order": 3,
@@ -161,6 +178,12 @@
         "path": "/services",
         "show": true,
         "order": 3
+      },
+      {
+        "title": "הלקוחות שלנו",
+        "path": "/clients",
+        "show": true,
+        "order": 3.5
       },
       {
         "title": "הצוות שלנו",

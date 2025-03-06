@@ -4,6 +4,7 @@ import NotFound from "./NotFound";
 import projectsConfig from "@/config/projects.json";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { Button } from "@/components/ui/button";
+import { ImageIcon } from "lucide-react";
 
 const ProjectPage = () => {
   const { id } = useParams();
@@ -33,10 +34,19 @@ const ProjectPage = () => {
             />
           </div>
           <h1 className="text-4xl font-serif font-semibold mb-4">{project.title}</h1>
-          <div className="mb-6">
+          <div className="mb-6 flex items-center gap-4">
             <span className="inline-block bg-accent/10 text-accent px-3 py-1 rounded-full text-sm">
               {project.category}
             </span>
+            
+            {project.showGalleryButton && (
+              <Link to={project.galleryLink} className="inline-block">
+                <Button variant="outline" size="sm" className="gap-2">
+                  <ImageIcon className="w-4 h-4" />
+                  <span>גלריית תמונות</span>
+                </Button>
+              </Link>
+            )}
           </div>
           <div className="prose max-w-none">
             <div 

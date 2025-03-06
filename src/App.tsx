@@ -23,6 +23,7 @@ import TeamPage from "./pages/TeamPage";
 import GalleryPage from "./pages/GalleryPage";
 import AlbumPage from "./pages/AlbumPage";
 import TestimonialsPage from "./pages/TestimonialsPage";
+import ClientsPage from "./pages/ClientsPage";
 import NotFound from "./pages/NotFound";
 
 // Create a query client that will be used in the entire app
@@ -79,6 +80,7 @@ const AppContent = () => {
             <Route path="/employee/:id" element={<EmployeePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/project/:id" element={<ProjectPage />} />
+            <Route path="/clients" element={<ClientsPage />} />
             <Route path="/team" element={<TeamPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/gallery/:albumId" element={<AlbumPage />} />

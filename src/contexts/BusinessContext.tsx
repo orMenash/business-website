@@ -5,6 +5,7 @@ import services from "@/config/services.json";
 import employees from "@/config/employees.json";
 import projects from "@/config/projects.json";
 import testimonials from "@/config/testimonials.json";
+import clients from "@/config/clients.json";
 
 export interface Service {
   id: string;
@@ -39,6 +40,18 @@ export interface Project {
   date: string;
   show: boolean;
   clickable: boolean;
+  showGalleryButton?: boolean;
+  galleryLink?: string;
+}
+
+export interface Client {
+  id: string;
+  name: string;
+  description: string;
+  fullDescription: string;
+  logo: string;
+  show: boolean;
+  url?: string;
 }
 
 export interface Testimonial {
@@ -91,6 +104,7 @@ export interface BusinessContextType {
   employees: Employee[];
   projects: Project[];
   testimonials: Testimonial[];
+  clients: Client[];
 }
 
 const BusinessContext = createContext<BusinessContextType>({
@@ -124,6 +138,7 @@ const BusinessContext = createContext<BusinessContextType>({
   employees: [],
   projects: [],
   testimonials: [],
+  clients: [],
 });
 
 export const BusinessProvider = ({ children }: { children: React.ReactNode }) => {
@@ -131,6 +146,7 @@ export const BusinessProvider = ({ children }: { children: React.ReactNode }) =>
   const filteredEmployees = employees.employees.filter((employee) => employee.show);
   const filteredProjects = projects.projects.filter((project) => project.show);
   const filteredTestimonials = testimonials.testimonials.filter((testimonial) => testimonial.show);
+  const filteredClients = clients.clients.filter((client) => client.show);
 
   return (
     <BusinessContext.Provider
@@ -150,6 +166,7 @@ export const BusinessProvider = ({ children }: { children: React.ReactNode }) =>
         employees: filteredEmployees,
         projects: filteredProjects,
         testimonials: filteredTestimonials,
+        clients: filteredClients,
       }}
     >
       {children}

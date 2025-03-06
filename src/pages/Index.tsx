@@ -8,6 +8,7 @@ import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { GallerySection } from "@/components/sections/GallerySection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { ClientsSection } from "@/components/sections/ClientsSection";
 
 const Index = () => {
   // מיון האזורים לפי הסדר שהוגדר בקונפיגורציה
@@ -17,7 +18,6 @@ const Index = () => {
 
   const renderSection = (sectionId: string) => {
     const section = siteConfig.sections[sectionId];
-    const sectionStyle = section.backgroundColor ? { backgroundColor: section.backgroundColor } : {};
     
     const SectionComponent = (() => {
       switch (sectionId) {
@@ -27,6 +27,8 @@ const Index = () => {
           return <AboutSection key="about" section={section} />;
         case 'services':
           return <ServicesSection key="services" section={section} />;
+        case 'clients':
+          return <ClientsSection key="clients" section={section} />;
         case 'team':
           return <TeamSection key="team" section={section} />;
         case 'testimonials':
@@ -43,7 +45,7 @@ const Index = () => {
     })();
 
     return (
-      <div key={sectionId} style={sectionStyle}>
+      <div key={sectionId}>
         {SectionComponent}
       </div>
     );
