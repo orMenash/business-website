@@ -50,16 +50,22 @@ const TestimonialsPage = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredTestimonials.map((testimonial, index) => (
-            <div
-              key={testimonial.id}
-              className={`animate-on-scroll delay-${index * 100}`}
-            >
-              <TestimonialCard testimonial={testimonial} />
-            </div>
-          ))}
-        </div>
+        {filteredTestimonials.length > 0 ? (
+          <div className="flex flex-wrap justify-center gap-6 mb-12 max-w-6xl mx-auto">
+            {filteredTestimonials.map((testimonial, index) => (
+              <div
+                key={testimonial.id}
+                className={`w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.33%-1rem)] animate-on-scroll delay-${index * 100}`}
+              >
+                <TestimonialCard testimonial={testimonial} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16">
+            <p className="text-lg text-gray-600">אין חוות דעת להצגה כרגע.</p>
+          </div>
+        )}
       </div>
     </div>
   );
