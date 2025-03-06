@@ -45,17 +45,18 @@ const TeamPage: React.FC = () => {
             <p className="text-gray-600">הכירו את הצוות המקצועי שלנו</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+          <div className="flex flex-wrap justify-center gap-8 mb-8">
             {currentEmployees.map((employee) => (
-              <EmployeeCard
-                key={employee.id}
-                id={employee.id}
-                name={employee.name}
-                title={employee.title}
-                description={employee.description}
-                image={employee.image}
-                clickable={employee.clickable}
-              />
+              <div className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]" key={employee.id}>
+                <EmployeeCard
+                  id={employee.id}
+                  name={employee.name}
+                  title={employee.title}
+                  description={employee.description}
+                  image={employee.image}
+                  clickable={employee.clickable}
+                />
+              </div>
             ))}
           </div>
 

@@ -44,17 +44,18 @@ const ProjectsPage = () => {
             <p className="text-gray-600">{projectsConfig.description}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+          <div className="flex flex-wrap justify-center gap-8 mb-8">
             {currentProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                id={project.id}
-                title={project.title}
-                description={project.description}
-                image={project.image}
-                category={project.category}
-                clickable={project.clickable}
-              />
+              <div className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]" key={project.id}>
+                <ProjectCard
+                  id={project.id}
+                  title={project.title}
+                  description={project.description}
+                  image={project.image}
+                  category={project.category}
+                  clickable={project.clickable}
+                />
+              </div>
             ))}
           </div>
 

@@ -42,7 +42,7 @@ export const ClientsSection = ({ section }: SectionProps) => {
             dangerouslySetInnerHTML={{ __html: section.description }}
           />
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mb-8">
+        <div className="flex flex-wrap justify-center gap-6 mb-8">
           {clientsConfig.clients
             .filter(client => client.show)
             .slice(0, section.max_display)
