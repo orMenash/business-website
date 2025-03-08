@@ -59,22 +59,28 @@ export const GalleryCarousel = ({
   const currentImage = images[currentIndex];
   const isVideoActive = currentImage?.type === "video";
 
-  // Clear the previous timer and set a new one
+  // Clear the previous timer and set a new one with consistent timing
   const resetAutoplayTimer = () => {
+    // Always clear any existing timer to prevent multiple timers
     if (autoplayTimerRef.current) {
       window.clearTimeout(autoplayTimerRef.current);
       autoplayTimerRef.current = null;
     }
     
+    // Only start a new timer if we're not paused and not in modal view
     if (!isPaused && !isModalOpen && images.length > 1) {
-      autoplayTimerRef.current = window.setTimeout(handleNextImage, autoplayInterval);
+      autoplayTimerRef.current = window.setTimeout(() => {
+        handleNextImage();
+      }, autoplayInterval);
     }
   };
 
-  // Set up autoplay
+  // Handle autoplay timing
   useEffect(() => {
+    // Reset the timer whenever relevant state changes
     resetAutoplayTimer();
     
+    // Clean up timer on unmount or when dependencies change
     return () => {
       if (autoplayTimerRef.current) {
         window.clearTimeout(autoplayTimerRef.current);
@@ -95,6 +101,7 @@ export const GalleryCarousel = ({
         onMouseEnter={() => pauseOnHover && setIsPaused(true)}
         onMouseLeave={() => pauseOnHover && setIsPaused(false)}
         data-carousel
+        data-interval={autoplayInterval}
       >
         <div className="aspect-[16/9] bg-black" style={{ height: '0', paddingBottom: '56.25%' }}>
           {images.map((image, index) => (

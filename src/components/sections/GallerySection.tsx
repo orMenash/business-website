@@ -21,6 +21,8 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   
   const images = processGalleryImages(galleryConfig.albums, section.max_display);
+  // Ensure the interval is always passed correctly from JSON config
+  const interval = section.interval || 5000;
 
   // Set up intersection observer to detect when section is visible
   useEffect(() => {
@@ -83,7 +85,7 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
         <div className="max-w-5xl mx-auto animate-on-scroll delay-200">
           <GalleryCarousel 
             images={images} 
-            autoplayInterval={section.interval || 5000}
+            autoplayInterval={interval}
             pauseOnHover={true}
             className="transform transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl"
           />
