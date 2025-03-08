@@ -63,6 +63,7 @@ export const GalleryCarousel = ({
   const resetAutoplayTimer = () => {
     if (autoplayTimerRef.current) {
       window.clearTimeout(autoplayTimerRef.current);
+      autoplayTimerRef.current = null;
     }
     
     if (!isPaused && !isModalOpen && images.length > 1) {
@@ -77,6 +78,7 @@ export const GalleryCarousel = ({
     return () => {
       if (autoplayTimerRef.current) {
         window.clearTimeout(autoplayTimerRef.current);
+        autoplayTimerRef.current = null;
       }
     };
   }, [currentIndex, isPaused, isModalOpen, autoplayInterval, images.length]);
@@ -123,7 +125,7 @@ export const GalleryCarousel = ({
             className="bg-black/30 hover:bg-black/50 text-white p-3 rounded-l-xl transition-all duration-300 transform hover:-translate-x-1 hover:scale-105"
             aria-label="תמונה קודמת"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronRight className="w-6 h-6" />
           </button>
         </div>
         <div className="absolute inset-y-0 left-0 flex items-center">
@@ -135,7 +137,7 @@ export const GalleryCarousel = ({
             className="bg-black/30 hover:bg-black/50 text-white p-3 rounded-r-xl transition-all duration-300 transform hover:translate-x-1 hover:scale-105"
             aria-label="תמונה הבאה"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronLeft className="w-6 h-6" />
           </button>
         </div>
 
