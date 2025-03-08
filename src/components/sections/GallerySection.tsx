@@ -1,51 +1,30 @@
 
-import { useState, useEffect, useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import galleryConfig from "@/config/gallery.json";
 import type { Section } from "@/types/section";
 import { ResponsiveImage } from "@/components/ui/optimized-image";
+import { processGalleryImages } from "@/utils/galleryUtils";
+import { GalleryCarousel } from "@/components/gallery/GalleryCarousel";
+import { GalleryModal } from "@/components/gallery/GalleryModal";
+import { GalleryImageWithAlbum } from "@/types/gallery";
 
 interface GallerySectionProps {
   section: Section;
 }
 
+/**
+ * Renders the gallery section on the homepage
+ */
 export const GallerySection = ({ section }: GallerySectionProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   
-  const images = galleryConfig.albums
-    .filter(album => album.show_album)
-    .flatMap(album => 
-      album.images
-        .filter(img => img.show_image)
-        .sort((a, b) => a.order - b.order)
-        .slice(0, section.max_display || 2)
-        .map(img => ({
-          ...img,
-          albumId: album.id,
-          albumName: album.name
-        }))
-    );
+  const images = processGalleryImages(galleryConfig.albums, section.max_display);
 
-  const nextImage = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  useEffect(() => {
-    if (images.length <= 1 || !isVisible) return;
-    
-    const intervalTime = section.interval || 5000;
-    const interval = setInterval(nextImage, intervalTime);
-    return () => clearInterval(interval);
-  }, [section.interval, isVisible, images.length]);
-
+  // Set up intersection observer to detect when section is visible
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -68,7 +47,11 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
   if (!images.length) return null;
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-b from-secondary to-background relative">
+    <section 
+      ref={sectionRef} 
+      className="py-24 bg-gradient-to-b from-secondary to-background relative"
+      id="gallery-section"
+    >
       {section.background && section.showBackground && (
         <div 
           className="absolute inset-0 z-0"
@@ -91,70 +74,55 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
             className="text-4xl font-serif font-semibold mb-4"
             dangerouslySetInnerHTML={{ __html: section.title }}
           />
-          <div 
-            className="text-muted-foreground max-w-2xl mx-auto"
-            dangerouslySetInnerHTML={{ __html: section.description }}
-          />
+          {section.description && (
+            <div 
+              className="text-muted-foreground max-w-2xl mx-auto"
+              dangerouslySetInnerHTML={{ __html: section.description }}
+            />
+          )}
         </div>
 
-        <div className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl animate-on-scroll delay-200">
-          <div className="aspect-[16/9] bg-black" style={{ height: '0', paddingBottom: '56.25%' }}>
-            {images.map((image, index) => (
-              <ResponsiveImage
-                key={index}
-                src={image.url}
-                alt={image.description || `תמונה ${index + 1} מתוך אלבום ${image.albumName}`}
-                className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
-                  index === currentIndex ? 'opacity-100' : 'opacity-0'
-                }`}
-                width={800}
-                height={450}
-                loading={index === 0 ? "eager" : "lazy"}
-                fetchPriority={index === 0 ? "high" : "auto"}
-                sizes="(max-width: 768px) 100vw, 800px"
-              />
-            ))}
-          </div>
+        <div className="max-w-5xl mx-auto animate-on-scroll delay-200 relative">
+          <GalleryCarousel 
+            images={images} 
+            autoplayInterval={section.interval || 5000}
+            pauseOnHover={true}
+          />
           
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          
-          <div className="absolute inset-0 flex items-center justify-between p-4">
-            <button
-              onClick={prevImage}
-              className="transform -translate-x-2 hover:translate-x-0 transition-all duration-300 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white p-3 rounded-full"
+          {/* Add navigation buttons */}
+          <div className="absolute inset-y-0 left-0 flex items-center">
+            <button 
+              onClick={() => {
+                const carousel = document.querySelector('[data-carousel]');
+                if (carousel) {
+                  const previous = carousel.querySelector('[data-carousel-previous]');
+                  if (previous instanceof HTMLElement) {
+                    previous.click();
+                  }
+                }
+              }}
+              className="bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all mx-2"
               aria-label="תמונה קודמת"
             >
-              <ChevronLeft className="w-6 h-6" aria-hidden="true" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
-            <button
-              onClick={nextImage}
-              className="transform translate-x-2 hover:translate-x-0 transition-all duration-300 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white p-3 rounded-full"
+          </div>
+          <div className="absolute inset-y-0 right-0 flex items-center">
+            <button 
+              onClick={() => {
+                const carousel = document.querySelector('[data-carousel]');
+                if (carousel) {
+                  const next = carousel.querySelector('[data-carousel-next]');
+                  if (next instanceof HTMLElement) {
+                    next.click();
+                  }
+                }
+              }}
+              className="bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all mx-2"
               aria-label="תמונה הבאה"
             >
-              <ChevronRight className="w-6 h-6" aria-hidden="true" />
+              <ChevronRight className="w-5 h-5" />
             </button>
-          </div>
-
-          <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-            <h3 className="text-2xl font-medium mb-2">{images[currentIndex].albumName}</h3>
-            <p className="text-white/90">{images[currentIndex].description}</p>
-          </div>
-
-          <div className="absolute bottom-0 left-0 right-0 px-8 pb-24">
-            <div className="flex justify-center gap-2">
-              {images.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    idx === currentIndex 
-                      ? "bg-white scale-125" 
-                      : "bg-white/50 hover:bg-white/80"
-                  }`}
-                  aria-label={`עבור לתמונה ${idx + 1}`}
-                />
-              ))}
-            </div>
           </div>
         </div>
 

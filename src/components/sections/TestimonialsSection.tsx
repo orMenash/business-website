@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
 export const TestimonialsSection = ({ section }: SectionProps) => {
-  const [activeIndices, setActiveIndices] = useState([0, 1, 2]);
+  const [activeIndices, setActiveIndices] = useState<number[]>([0, 1, 2]);
   const [isAnimating, setIsAnimating] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const { testimonials } = testimonialsData;
@@ -93,61 +94,62 @@ export const TestimonialsSection = ({ section }: SectionProps) => {
             <div className="w-full max-w-5xl relative h-[280px]">
               {/* Container for the testimonials with conveyor belt animation */}
               <div className="flex gap-4 absolute inset-0">
-                {filteredTestimonials.map((testimonial, index) => {
-                  // Determine if this testimonial should be visible or in transition
-                  const isActive = activeIndices.includes(index);
-                  
-                  // For entering card (from right)
-                  const isEntering = isAnimating && index === (activeIndices[2] + 1) % filteredTestimonials.length;
-                  
-                  // For exiting card (to left)
-                  const isExiting = isAnimating && index === activeIndices[0];
-                  
-                  // If not active and not animating, don't render
-                  if (!isActive && !isEntering && !isExiting) return null;
-                  
-                  // Calculate position class for conveyor belt effect
-                  let position = "";
-                  let translateX = 0;
-                  
-                  if (isEntering) {
-                    position = "right-entering"; // Starting to enter from right
-                    translateX = 100; // Start from 100% right (fully off-screen)
-                  } else if (isExiting) {
-                    position = "left-exiting"; // Exiting to left
-                    translateX = isAnimating ? -100 : 0; // Move from 0 to -100% (fully off-screen)
-                  } else {
-                    // Position based on index in activeIndices
-                    const positionIndex = activeIndices.indexOf(index);
-                    if (positionIndex === 0) {
-                      position = "left"; // Leftmost card
-                      translateX = isAnimating ? -100 : 0; // Move from 0 to -100% when animating
-                    } else if (positionIndex === 1) {
-                      position = "center"; // Center card
-                      translateX = isAnimating ? -100 : 0; // Move from 0 to -100% when animating
-                    } else if (positionIndex === 2) {
-                      position = "right"; // Rightmost card
-                      translateX = isAnimating ? -100 : 0; // Move from 0 to -100% when animating
+                {filteredTestimonials.length > 0 && 
+                  filteredTestimonials.map((testimonial, index) => {
+                    // Determine if this testimonial should be visible or in transition
+                    const isActive = activeIndices.includes(index);
+                    
+                    // For entering card (from right)
+                    const isEntering = isAnimating && index === (activeIndices[2] + 1) % filteredTestimonials.length;
+                    
+                    // For exiting card (to left)
+                    const isExiting = isAnimating && index === activeIndices[0];
+                    
+                    // If not active and not animating, don't render
+                    if (!isActive && !isEntering && !isExiting) return null;
+                    
+                    // Calculate position class for conveyor belt effect
+                    let position = "";
+                    let translateX = 0;
+                    
+                    if (isEntering) {
+                      position = "right-entering"; // Starting to enter from right
+                      translateX = 100; // Start from 100% right (fully off-screen)
+                    } else if (isExiting) {
+                      position = "left-exiting"; // Exiting to left
+                      translateX = isAnimating ? -100 : 0; // Move from 0 to -100% (fully off-screen)
+                    } else {
+                      // Position based on index in activeIndices
+                      const positionIndex = activeIndices.indexOf(index);
+                      if (positionIndex === 0) {
+                        position = "left"; // Leftmost card
+                        translateX = isAnimating ? -100 : 0; // Move from 0 to -100% when animating
+                      } else if (positionIndex === 1) {
+                        position = "center"; // Center card
+                        translateX = isAnimating ? -100 : 0; // Move from 0 to -100% when animating
+                      } else if (positionIndex === 2) {
+                        position = "right"; // Rightmost card
+                        translateX = isAnimating ? -100 : 0; // Move from 0 to -100% when animating
+                      }
                     }
-                  }
-                  
-                  return (
-                    <div
-                      key={testimonial.id}
-                      className="transition-all duration-800 ease-in-out w-full md:w-1/3 absolute"
-                      style={{ 
-                        transitionDuration: "800ms",
-                        transform: isAnimating ? `translateX(${translateX}%)` : "translateX(0)",
-                        right: position === "right" ? "0%" : 
-                               position === "center" ? "33.33%" : 
-                               position === "left" ? "66.66%" :
-                               position === "right-entering" ? "-33.33%" : "100%"
-                      }}
-                    >
-                      <TestimonialCard testimonial={testimonial} />
-                    </div>
-                  );
-                })}
+                    
+                    return (
+                      <div
+                        key={testimonial.id}
+                        className="transition-all duration-800 ease-in-out w-full md:w-1/3 absolute"
+                        style={{ 
+                          transitionDuration: "800ms",
+                          transform: isAnimating ? `translateX(${translateX}%)` : "translateX(0)",
+                          right: position === "right" ? "0%" : 
+                                 position === "center" ? "33.33%" : 
+                                 position === "left" ? "66.66%" :
+                                 position === "right-entering" ? "-33.33%" : "100%"
+                        }}
+                      >
+                        <TestimonialCard testimonial={testimonial} />
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>

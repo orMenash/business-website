@@ -9,7 +9,6 @@ import { ResponsiveImage } from "@/components/ui/optimized-image";
 export const HeroSection = ({ section }: SectionProps) => {
   const { name, description } = useBusiness();
   
-  // Get background color from section configuration
   const backgroundColor = section.background?.backgroundColor || "#ffffff";
 
   return (

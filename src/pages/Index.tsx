@@ -1,4 +1,5 @@
 
+import { useMemo } from "react";
 import siteConfig from "@/config/site.json";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
@@ -10,50 +11,48 @@ import { GallerySection } from "@/components/sections/GallerySection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { ClientsSection } from "@/components/sections/ClientsSection";
 
+interface SectionComponentMap {
+  [key: string]: React.ComponentType<any>;
+}
+
+/**
+ * Main index page component that displays all visible sections
+ * in the order defined by their configuration
+ */
 const Index = () => {
-  // מיון האזורים לפי הסדר שהוגדר בקונפיגורציה
-  const sections = Object.entries(siteConfig.sections)
-    .sort(([, a], [, b]) => a.order - b.order)
-    .filter(([, section]) => section.show);
-
-  const renderSection = (sectionId: string) => {
-    const section = siteConfig.sections[sectionId];
-    
-    const SectionComponent = (() => {
-      switch (sectionId) {
-        case 'hero':
-          return <HeroSection key="hero" section={section} />;
-        case 'about':
-          return <AboutSection key="about" section={section} />;
-        case 'services':
-          return <ServicesSection key="services" section={section} />;
-        case 'clients':
-          return <ClientsSection key="clients" section={section} />;
-        case 'team':
-          return <TeamSection key="team" section={section} />;
-        case 'testimonials':
-          return <TestimonialsSection key="testimonials" section={section} />;
-        case 'projects':
-          return <ProjectsSection key="projects" section={section} />;
-        case 'gallery':
-          return <GallerySection key="gallery" section={section} />;
-        case 'contact':
-          return <ContactSection key="contact" section={section} />;
-        default:
-          return null;
-      }
-    })();
-
-    return (
-      <div key={sectionId}>
-        {SectionComponent}
-      </div>
-    );
+  // Map section IDs to their corresponding components
+  const sectionComponents: SectionComponentMap = {
+    hero: HeroSection,
+    about: AboutSection,
+    services: ServicesSection,
+    clients: ClientsSection,
+    team: TeamSection,
+    testimonials: TestimonialsSection,
+    projects: ProjectsSection,
+    gallery: GallerySection,
+    contact: ContactSection,
   };
+
+  // Memoize the sorted and filtered sections to prevent unnecessary re-renders
+  const orderedSections = useMemo(() => {
+    return Object.entries(siteConfig.sections)
+      .sort(([, a], [, b]) => a.order - b.order)
+      .filter(([, section]) => section.show);
+  }, []);
 
   return (
     <div className="min-h-screen">
-      {sections.map(([sectionId]) => renderSection(sectionId))}
+      {orderedSections.map(([sectionId, sectionConfig]) => {
+        const SectionComponent = sectionComponents[sectionId];
+        
+        if (!SectionComponent) return null;
+        
+        return (
+          <div key={sectionId} id={sectionId}>
+            <SectionComponent section={sectionConfig} />
+          </div>
+        );
+      })}
     </div>
   );
 };

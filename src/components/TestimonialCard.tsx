@@ -12,7 +12,7 @@ export type TestimonialType = {
   link?: string;
   showLink?: boolean;
   show: boolean;
-  linkText?: string; // New property for custom link text
+  linkText?: string; // Custom link text property
 };
 
 export type TestimonialCardProps = {
