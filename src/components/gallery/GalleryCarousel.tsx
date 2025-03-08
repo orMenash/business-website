@@ -41,6 +41,7 @@ export const GalleryCarousel = ({
   };
 
   const handleImageClick = (index: number) => {
+    // Important: Use the exact index that was clicked
     setModalImageIndex(index);
     setIsModalOpen(true);
     setIsPaused(true);
@@ -181,14 +182,25 @@ export const GalleryCarousel = ({
       </div>
 
       {/* Gallery Modal */}
-      {isModalOpen && (
+      {isModalOpen && modalImageIndex !== null && (
         <GalleryModal
           images={images}
           selectedImageIndex={modalImageIndex}
           onClose={handleCloseModal}
-          onPrevious={handlePrevImage}
-          onNext={handleNextImage}
-          onSelectImage={setCurrentIndex}
+          onPrevious={() => {
+            const newIndex = getPreviousIndex(modalImageIndex, images.length);
+            setModalImageIndex(newIndex);
+            setCurrentIndex(newIndex);
+          }}
+          onNext={() => {
+            const newIndex = getNextIndex(modalImageIndex, images.length);
+            setModalImageIndex(newIndex);
+            setCurrentIndex(newIndex);
+          }}
+          onSelectImage={(index) => {
+            setModalImageIndex(index);
+            setCurrentIndex(index);
+          }}
         />
       )}
     </>
