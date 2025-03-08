@@ -114,25 +114,25 @@ export const GalleryCarousel = ({
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
         
         {/* Side navigation buttons - always visible at mid-height */}
-        <div className="absolute inset-y-0 left-0 flex items-center">
+        <div className="absolute inset-y-0 right-0 flex items-center">
           <button 
             onClick={(e) => {
               e.stopPropagation();
               handlePrevImage();
             }}
-            className="bg-black/30 hover:bg-black/50 text-white p-3 rounded-r-xl transition-all duration-300 transform hover:-translate-x-1 hover:scale-105"
+            className="bg-black/30 hover:bg-black/50 text-white p-3 rounded-l-xl transition-all duration-300 transform hover:-translate-x-1 hover:scale-105"
             aria-label="תמונה קודמת"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
         </div>
-        <div className="absolute inset-y-0 right-0 flex items-center">
+        <div className="absolute inset-y-0 left-0 flex items-center">
           <button 
             onClick={(e) => {
               e.stopPropagation();
               handleNextImage();
             }}
-            className="bg-black/30 hover:bg-black/50 text-white p-3 rounded-l-xl transition-all duration-300 transform hover:translate-x-1 hover:scale-105"
+            className="bg-black/30 hover:bg-black/50 text-white p-3 rounded-r-xl transition-all duration-300 transform hover:translate-x-1 hover:scale-105"
             aria-label="תמונה הבאה"
           >
             <ChevronRight className="w-6 h-6" />
@@ -179,7 +179,7 @@ export const GalleryCarousel = ({
           onClose={handleCloseModal}
           onPrevious={handlePrevImage}
           onNext={handleNextImage}
-          onSelectImage={setModalImageIndex}
+          onSelectImage={setCurrentIndex}
         />
       )}
     </>

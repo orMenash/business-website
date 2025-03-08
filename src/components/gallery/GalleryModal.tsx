@@ -1,5 +1,5 @@
 
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronRight, ChevronLeft, X } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { GalleryImageWithAlbum } from "@/types/gallery";
 import { isYouTubeUrl } from "@/utils/videoUtils";
@@ -53,8 +53,8 @@ export const GalleryModal = ({
         <div 
           className="relative h-full flex items-center justify-center" 
           onKeyDown={(e) => {
-            if (e.key === "ArrowLeft") onPrevious();
-            if (e.key === "ArrowRight") onNext();
+            if (e.key === "ArrowLeft") onNext();
+            if (e.key === "ArrowRight") onPrevious();
             if (e.key === "Escape") onClose();
           }}
         >
@@ -104,14 +104,14 @@ export const GalleryModal = ({
                   onClick={onPrevious}
                   className="bg-white/90 hover:bg-white text-black p-3 rounded-full transition-all transform hover:-translate-x-1"
                 >
-                  <ChevronLeft className="w-6 h-6" />
+                  <ChevronRight className="w-6 h-6" />
                 </button>
                 
                 <button 
                   onClick={onNext}
                   className="bg-white/90 hover:bg-white text-black p-3 rounded-full transition-all transform hover:translate-x-1"
                 >
-                  <ChevronRight className="w-6 h-6" />
+                  <ChevronLeft className="w-6 h-6" />
                 </button>
               </div>
               
