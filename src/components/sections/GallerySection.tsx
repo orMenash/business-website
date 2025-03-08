@@ -1,15 +1,13 @@
 
 import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import galleryConfig from "@/config/gallery.json";
 import type { Section } from "@/types/section";
 import { ResponsiveImage } from "@/components/ui/optimized-image";
 import { processGalleryImages } from "@/utils/galleryUtils";
 import { GalleryCarousel } from "@/components/gallery/GalleryCarousel";
-import { GalleryModal } from "@/components/gallery/GalleryModal";
-import { GalleryImageWithAlbum } from "@/types/gallery";
 
 interface GallerySectionProps {
   section: Section;
@@ -49,7 +47,7 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
   return (
     <section 
       ref={sectionRef} 
-      className="py-24 bg-gradient-to-b from-secondary to-background relative"
+      className="py-24 bg-gradient-to-b from-secondary/50 to-background relative overflow-hidden"
       id="gallery-section"
     >
       {section.background && section.showBackground && (
@@ -82,48 +80,13 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
           )}
         </div>
 
-        <div className="max-w-5xl mx-auto animate-on-scroll delay-200 relative">
+        <div className="max-w-5xl mx-auto animate-on-scroll delay-200">
           <GalleryCarousel 
             images={images} 
             autoplayInterval={section.interval || 5000}
             pauseOnHover={true}
+            className="transform transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl"
           />
-          
-          {/* Add navigation buttons */}
-          <div className="absolute inset-y-0 left-0 flex items-center">
-            <button 
-              onClick={() => {
-                const carousel = document.querySelector('[data-carousel]');
-                if (carousel) {
-                  const previous = carousel.querySelector('[data-carousel-previous]');
-                  if (previous instanceof HTMLElement) {
-                    previous.click();
-                  }
-                }
-              }}
-              className="bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all mx-2"
-              aria-label="תמונה קודמת"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-          </div>
-          <div className="absolute inset-y-0 right-0 flex items-center">
-            <button 
-              onClick={() => {
-                const carousel = document.querySelector('[data-carousel]');
-                if (carousel) {
-                  const next = carousel.querySelector('[data-carousel-next]');
-                  if (next instanceof HTMLElement) {
-                    next.click();
-                  }
-                }
-              }}
-              className="bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all mx-2"
-              aria-label="תמונה הבאה"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
         </div>
 
         {section.showButton !== false && (

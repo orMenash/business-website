@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GalleryImageWithAlbum } from "@/types/gallery";
-import { GalleryNavigation } from "./GalleryNavigation";
 import { GalleryImageSlide } from "./GalleryImageSlide";
 import { GalleryCaption } from "./GalleryCaption";
 import { cn } from "@/lib/utils";
@@ -17,7 +17,7 @@ interface GalleryCarouselProps {
 }
 
 /**
- * A responsive image carousel component for gallery display
+ * A responsive and elegant image carousel component for gallery display
  */
 export const GalleryCarousel = ({ 
   images, 
@@ -38,10 +38,6 @@ export const GalleryCarousel = ({
 
   const handlePrevImage = () => {
     setCurrentIndex(prev => getPreviousIndex(prev, images.length));
-  };
-
-  const handleSelectIndex = (index: number) => {
-    setCurrentIndex(index);
   };
 
   const handleImageClick = (index: number) => {
@@ -90,7 +86,10 @@ export const GalleryCarousel = ({
   return (
     <>
       <div 
-        className={cn("relative rounded-2xl overflow-hidden shadow-2xl", className)}
+        className={cn(
+          "relative rounded-xl overflow-hidden shadow-2xl transition-all duration-300", 
+          className
+        )}
         onMouseEnter={() => pauseOnHover && setIsPaused(true)}
         onMouseLeave={() => pauseOnHover && setIsPaused(false)}
         data-carousel
@@ -111,31 +110,61 @@ export const GalleryCarousel = ({
           ))}
         </div>
         
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
         
-        <GalleryNavigation 
-          onNext={handleNextImage}
-          onPrevious={handlePrevImage}
-          totalItems={images.length}
-          currentIndex={currentIndex}
-          onSelectIndex={handleSelectIndex}
-          isVideoActive={isVideoActive}
-        />
+        {/* Side navigation buttons - always visible at mid-height */}
+        <div className="absolute inset-y-0 left-0 flex items-center">
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePrevImage();
+            }}
+            className="bg-black/30 hover:bg-black/50 text-white p-3 rounded-r-xl transition-all duration-300 transform hover:-translate-x-1 hover:scale-105"
+            aria-label="תמונה קודמת"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+        </div>
+        <div className="absolute inset-y-0 right-0 flex items-center">
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              handleNextImage();
+            }}
+            className="bg-black/30 hover:bg-black/50 text-white p-3 rounded-l-xl transition-all duration-300 transform hover:translate-x-1 hover:scale-105"
+            aria-label="תמונה הבאה"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
 
-        {/* Hidden buttons for external control */}
-        <button 
-          className="hidden" 
-          data-carousel-previous 
-          onClick={handlePrevImage}
-          aria-hidden="true"
-        />
-        <button 
-          className="hidden" 
-          data-carousel-next 
-          onClick={handleNextImage}
-          aria-hidden="true"
-        />
+        {/* Bottom pagination dots */}
+        <div className={cn(
+          "absolute left-0 right-0 bottom-4 px-8 z-20",
+          isVideoActive && "bottom-24"
+        )}>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: images.length }).map((_, idx) => (
+              <button
+                key={idx}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentIndex(idx);
+                }}
+                className={cn(
+                  "w-3 h-3 rounded-full transition-all duration-500",
+                  idx === currentIndex 
+                    ? "bg-white scale-125 shadow-glow" 
+                    : "bg-white/40 hover:bg-white/70"
+                )}
+                aria-label={`עבור לתמונה ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
 
+        {/* Caption */}
         <GalleryCaption 
           image={images[currentIndex]} 
           isVideoActive={isVideoActive}
@@ -148,16 +177,8 @@ export const GalleryCarousel = ({
           images={images}
           selectedImageIndex={modalImageIndex}
           onClose={handleCloseModal}
-          onPrevious={() => {
-            if (modalImageIndex !== null) {
-              setModalImageIndex(getPreviousIndex(modalImageIndex, images.length));
-            }
-          }}
-          onNext={() => {
-            if (modalImageIndex !== null) {
-              setModalImageIndex(getNextIndex(modalImageIndex, images.length));
-            }
-          }}
+          onPrevious={handlePrevImage}
+          onNext={handleNextImage}
           onSelectImage={setModalImageIndex}
         />
       )}

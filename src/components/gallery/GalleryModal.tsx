@@ -53,8 +53,8 @@ export const GalleryModal = ({
         <div 
           className="relative h-full flex items-center justify-center" 
           onKeyDown={(e) => {
-            if (e.key === "ArrowLeft") onNext();
-            if (e.key === "ArrowRight") onPrevious();
+            if (e.key === "ArrowLeft") onPrevious();
+            if (e.key === "ArrowRight") onNext();
             if (e.key === "Escape") onClose();
           }}
         >
@@ -93,39 +93,43 @@ export const GalleryModal = ({
               )}
 
               {currentImage.description && (
-                <div className="absolute bottom-20 left-0 right-0 p-6 bg-black/50 backdrop-blur-sm text-white text-center">
+                <div className="absolute bottom-24 left-0 right-0 p-6 bg-black/50 backdrop-blur-sm text-white text-center">
                   <p className="text-lg">{currentImage.description}</p>
                 </div>
               )}
 
-              {/* Navigation Controls */}
-              <div className={`absolute ${isPlaying ? 'bottom-24' : 'bottom-4'} left-0 right-0 flex flex-col items-center gap-4`}>
-                <div className="flex items-center gap-4">
-                  <button 
-                    onClick={onPrevious}
-                    className="bg-white/90 hover:bg-white text-black p-3 rounded-full transition-all transform hover:-translate-x-1"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-                  <div className="flex justify-center gap-2">
-                    {images.map((_, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => onSelectImage(idx)}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                          idx === selectedImageIndex 
-                            ? "bg-white scale-125" 
-                            : "bg-white/50 hover:bg-white/80"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <button 
-                    onClick={onNext}
-                    className="bg-white/90 hover:bg-white text-black p-3 rounded-full transition-all transform hover:translate-x-1"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
+              {/* Navigation Controls - centered at bottom */}
+              <div className="absolute bottom-4 left-0 right-0 flex justify-center items-center gap-8">
+                <button 
+                  onClick={onPrevious}
+                  className="bg-white/90 hover:bg-white text-black p-3 rounded-full transition-all transform hover:-translate-x-1"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                
+                <button 
+                  onClick={onNext}
+                  className="bg-white/90 hover:bg-white text-black p-3 rounded-full transition-all transform hover:translate-x-1"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+              
+              {/* Indicator dots */}
+              <div className="absolute bottom-20 left-0 right-0">
+                <div className="flex justify-center gap-3">
+                  {images.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => onSelectImage(idx)}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        idx === selectedImageIndex 
+                          ? "bg-white scale-125" 
+                          : "bg-white/50 hover:bg-white/80"
+                      }`}
+                      aria-label={`עבור לתמונה ${idx + 1}`}
+                    />
+                  ))}
                 </div>
               </div>
             </>
