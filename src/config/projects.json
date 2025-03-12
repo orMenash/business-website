@@ -11,7 +11,7 @@
       "date": "2024-01-15",
       "show": true,
       "clickable": true,
-      "showImage": true,
+      "showImage": false,
       "showImageOnPage": true,
       "showGalleryButton": true,
       "galleryLink": "/gallery/projects",

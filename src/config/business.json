@@ -3,12 +3,12 @@
   "name": "שם העסק",
   "description": "תיאור מקצועי של העסק שלך",
   "logo": {
-    "url": "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
+    "url": "imags/logo/exampl_logo.webp",
     "height": "32px",
     "width": "auto"
   },
   "favicon": {
-    "url": "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
+    "url": "imags/logo/exampl_logo.webp"
   },
   "contact": {
     "email": "your@gmail.com",

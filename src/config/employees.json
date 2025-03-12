@@ -25,7 +25,7 @@
       "phone": "050-7654321",
       "show": true,
       "clickable": true,
-      "showImage": true
+      "showImage": false
     },
     {
       "id": "3",
