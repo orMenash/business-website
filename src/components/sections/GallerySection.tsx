@@ -1,4 +1,3 @@
-
 import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
@@ -113,6 +112,7 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
           <div className="mt-12 flex justify-center animate-on-scroll delay-300">
             <Link to="/gallery" aria-label="לגלריה המלאה">
               <Button 
+                variant="navlink"
                 className="group hover-lift flex items-center gap-2"
               >
                 <span>לגלריה המלאה</span>

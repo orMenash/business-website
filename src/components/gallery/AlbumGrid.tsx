@@ -15,7 +15,7 @@ export const AlbumGrid = ({ images, onImageClick }: AlbumGridProps) => {
       {images.map((image, index) => (
         <div 
           key={index}
-          className="group aspect-square rounded-xl overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300 bg-gray-800"
+          className="group aspect-square rounded-xl overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300"
           onClick={() => onImageClick(index)}
         >
           <div className="relative h-full">

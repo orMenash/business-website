@@ -31,7 +31,7 @@ export const GalleryCarouselWrapper = ({
       data-carousel
       onClick={onClick}
     >
-      <div className="aspect-w-16 aspect-h-9 bg-gray-800" style={{ maxHeight: '85vh' }}>
+      <div className="aspect-[16/9] max-h-[85vh] bg-black" style={{ height: 'calc(85vh - 120px)', paddingBottom: '0' }}>
         {children}
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
