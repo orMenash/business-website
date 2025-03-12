@@ -7,6 +7,7 @@ import { YouTubePlayer } from "./YouTubePlayer";
 import { VideoPlayer } from "./VideoPlayer";
 import { useState, useEffect } from "react";
 import { VisuallyHidden } from "@/components/ui/visually-hidden";
+import { OptimizedImage } from "../ui/optimized-image";
 
 interface GalleryModalProps {
   images: GalleryImageWithAlbum[];
@@ -57,7 +58,7 @@ export const GalleryModal = ({
       }}
     >
       <DialogContent 
-        className="max-w-[100vw] w-full h-[90vh] sm:h-[95vh] p-0 bg-black border-none overflow-hidden"
+        className="max-w-[100vw] w-full h-[90vh] sm:h-[95vh] p-0 bg-black border-none overflow-hidden flex flex-col"
         aria-describedby="gallery-modal-description"
       >
         {/* Use DialogTitle for accessibility */}
@@ -65,14 +66,8 @@ export const GalleryModal = ({
           {modalTitle} - {itemNumber} - {currentImage.description || ""}
         </DialogTitle>
         
-        <div 
-          className="relative h-full flex flex-col items-center justify-center" 
-          onKeyDown={(e) => {
-            if (e.key === "ArrowLeft") onNext();
-            if (e.key === "ArrowRight") onPrevious();
-            if (e.key === "Escape") onClose();
-          }}
-        >
+        <div className="relative flex-grow flex flex-col h-full">
+          {/* Close button */}
           <button 
             className="absolute top-4 right-4 text-white/90 hover:text-white z-10 bg-black/50 p-2 rounded-full hover:bg-black/70 transition-all duration-300"
             onClick={onClose}
@@ -81,10 +76,18 @@ export const GalleryModal = ({
             <X className="w-6 h-6" />
           </button>
           
-          <div className="flex-grow w-full flex items-center justify-center overflow-hidden bg-gray-800">
+          {/* Media display area - flexbox with centered content */}
+          <div 
+            className="flex-grow flex items-center justify-center overflow-hidden bg-gray-800"
+            onKeyDown={(e) => {
+              if (e.key === "ArrowLeft") onNext();
+              if (e.key === "ArrowRight") onPrevious();
+              if (e.key === "Escape") onClose();
+            }}
+          >
             {currentImage.type === "video" && isYouTubeUrl(currentImage.url) && showImage ? (
               // YouTube Video
-              <div className="w-full max-h-[75vh]">
+              <div className="max-w-full max-h-[70vh] w-full">
                 <YouTubePlayer 
                   url={currentImage.url}
                   thumbnail={currentImage.thumbnail}
@@ -95,7 +98,7 @@ export const GalleryModal = ({
               </div>
             ) : currentImage.type === "video" && showImage ? (
               // Standard Video
-              <div className="w-full max-h-[75vh]">
+              <div className="max-w-full max-h-[70vh] w-full">
                 <VideoPlayer 
                   url={currentImage.url}
                   thumbnail={currentImage.thumbnail}
@@ -105,12 +108,15 @@ export const GalleryModal = ({
                 />
               </div>
             ) : showImage && currentImage.url ? (
-              // Image - now full-width for small screens
-              <img
-                src={currentImage.url}
-                alt={currentImage.description || "תמונת גלריה"}
-                className="max-h-[75vh] w-full sm:w-auto sm:max-w-full object-contain mx-auto"
-              />
+              // Image - using object-contain to preserve aspect ratio
+              <div className="flex items-center justify-center w-full h-full bg-gray-800">
+                <OptimizedImage
+                  src={currentImage.url}
+                  alt={currentImage.description || "תמונת גלריה"}
+                  className="max-h-[70vh] max-w-full object-contain"
+                  style={{ backgroundColor: 'transparent' }}
+                />
+              </div>
             ) : (
               // Fallback when media can't be shown
               <div className="w-full h-full flex items-center justify-center bg-gray-700">
@@ -126,8 +132,8 @@ export const GalleryModal = ({
             </div>
           </div>
 
-          {/* Footer area with all controls and description */}
-          <div className="w-full mt-auto bg-black/80 pt-3 pb-6">
+          {/* Footer area with fixed position at bottom */}
+          <div className="w-full mt-auto bg-black/90 pt-3 pb-6">
             {/* Description */}
             {currentImage.description && (
               <div 
@@ -138,7 +144,7 @@ export const GalleryModal = ({
               </div>
             )}
 
-            {/* Navigation Controls - All at the bottom now */}
+            {/* Navigation Controls - Fixed at the bottom */}
             <div className="flex justify-center items-center gap-8">
               <button 
                 onClick={onPrevious}
@@ -149,7 +155,7 @@ export const GalleryModal = ({
               </button>
               
               {/* Indicator dots */}
-              <div className="flex justify-center gap-3" role="tablist">
+              <div className="flex justify-center gap-3 overflow-x-auto px-2" role="tablist">
                 {images.map((_, idx) => (
                   <button
                     key={idx}
