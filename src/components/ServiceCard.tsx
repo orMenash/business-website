@@ -15,9 +15,9 @@ type ServiceCardProps = {
 
 export const ServiceCard = ({ id, title, description, icon, image, showImage, clickable }: ServiceCardProps) => {
   const Card = () => (
-    <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-      {showImage && image && (
-        <div className="mb-4 overflow-hidden rounded-lg aspect-w-16 aspect-h-9" style={{ paddingBottom: '56.25%', position: 'relative' }}>
+    <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
+      <div className="mb-4 overflow-hidden rounded-lg aspect-w-16 aspect-h-9" style={{ paddingBottom: '56.25%', position: 'relative' }}>
+        {showImage && image ? (
           <ResponsiveImage 
             src={image} 
             alt={title} 
@@ -27,14 +27,18 @@ export const ServiceCard = ({ id, title, description, icon, image, showImage, cl
             loading="lazy"
             sizes="(max-width: 768px) 100vw, 400px"
           />
-        </div>
-      )}
+        ) : (
+          <div className="absolute inset-0 bg-gray-700 flex items-center justify-center">
+            <span className="text-gray-400 text-sm">אין תמונה זמינה</span>
+          </div>
+        )}
+      </div>
       <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
         <Star className="w-6 h-6 text-accent" aria-hidden="true" />
       </div>
       <h3 className="text-xl font-serif font-semibold mb-2">{title}</h3>
       <div 
-        className="text-gray-600"
+        className="text-gray-600 flex-grow"
         dangerouslySetInnerHTML={{ __html: description }}
       />
     </div>
@@ -42,7 +46,7 @@ export const ServiceCard = ({ id, title, description, icon, image, showImage, cl
 
   if (clickable) {
     return (
-      <Link to={`/service/${id}`} className="block group" aria-label={`שירות: ${title}`}>
+      <Link to={`/service/${id}`} className="block group h-full" aria-label={`שירות: ${title}`}>
         <Card />
       </Link>
     );

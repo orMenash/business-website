@@ -46,7 +46,7 @@ export const GalleryImageSlide = ({
     return (
       <div 
         className={cn(
-          "absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out",
+          "absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gray-800",
           isActive ? 'opacity-100' : 'opacity-0',
           className
         )}
@@ -63,11 +63,11 @@ export const GalleryImageSlide = ({
                 loading="lazy"
               ></iframe>
             ) : (
-              <>
+              <div className="relative w-full h-full">
                 <img
                   src={image.thumbnail || `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
                   alt={altText}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain bg-gray-800"
                   loading={index === 0 ? "eager" : "lazy"}
                 />
                 <div 
@@ -84,7 +84,7 @@ export const GalleryImageSlide = ({
                     <Play className="w-12 h-12 text-white" />
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </>
         )}
@@ -97,34 +97,36 @@ export const GalleryImageSlide = ({
     return (
       <div 
         className={cn(
-          "absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out",
+          "absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gray-800",
           isActive ? 'opacity-100' : 'opacity-0',
           className
         )}
       >
         {isActive && (
-          <video
-            src={image.url}
-            poster={image.thumbnail}
-            controls
-            autoPlay={isPlaying}
-            className="w-full h-full object-contain"
-            onPlay={() => {
-              setIsPlaying(true);
-              if (onVideoPlayStateChange) {
-                onVideoPlayStateChange(true);
-              }
-            }}
-            onPause={() => {
-              setIsPlaying(false);
-              if (onVideoPlayStateChange) {
-                onVideoPlayStateChange(false);
-              }
-            }}
-          >
-            <source src={image.url} type="video/mp4" />
-            דפדפן זה אינו תומך בהצגת סרטוני וידאו.
-          </video>
+          <div className="w-full h-full flex items-center justify-center">
+            <video
+              src={image.url}
+              poster={image.thumbnail}
+              controls
+              autoPlay={isPlaying}
+              className="max-w-full max-h-full"
+              onPlay={() => {
+                setIsPlaying(true);
+                if (onVideoPlayStateChange) {
+                  onVideoPlayStateChange(true);
+                }
+              }}
+              onPause={() => {
+                setIsPlaying(false);
+                if (onVideoPlayStateChange) {
+                  onVideoPlayStateChange(false);
+                }
+              }}
+            >
+              <source src={image.url} type="video/mp4" />
+              דפדפן זה אינו תומך בהצגת סרטוני וידאו.
+            </video>
+          </div>
         )}
         {!isPlaying && isActive && (
           <div 
@@ -152,19 +154,23 @@ export const GalleryImageSlide = ({
   
   // Regular image slide
   return (
-    <ResponsiveImage
-      src={image.url}
-      alt={altText}
+    <div
       className={cn(
-        "absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out",
+        "absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out bg-gray-800",
         isActive ? 'opacity-100' : 'opacity-0',
         className
       )}
-      width={800}
-      height={450}
-      loading={index === 0 ? "eager" : "lazy"}
-      fetchPriority={index === 0 ? "high" : "auto"}
-      sizes="(max-width: 768px) 100vw, 800px"
-    />
+    >
+      <ResponsiveImage
+        src={image.url}
+        alt={altText}
+        className="w-full h-full object-contain"
+        width={800}
+        height={450}
+        loading={index === 0 ? "eager" : "lazy"}
+        fetchPriority={index === 0 ? "high" : "auto"}
+        sizes="(max-width: 768px) 100vw, 800px"
+      />
+    </div>
   );
 };

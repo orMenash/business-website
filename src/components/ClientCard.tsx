@@ -13,19 +13,25 @@ type ClientCardProps = {
 export const ClientCard = ({ id, name, description, logo, url }: ClientCardProps) => {
   const Card = () => (
     <div className="group bg-white rounded-lg shadow-md p-6 transition-all hover:shadow-lg h-full flex flex-col items-center">
-      <div className="w-32 h-32 mb-4 flex items-center justify-center">
-        <ResponsiveImage 
-          src={logo} 
-          alt={name} 
-          className="object-contain max-h-full max-w-full"
-          width={128} 
-          height={128}
-          loading="lazy"
-        />
+      <div className="w-32 h-32 mb-4 flex items-center justify-center overflow-hidden">
+        {logo ? (
+          <ResponsiveImage 
+            src={logo} 
+            alt={name} 
+            className="object-contain max-h-full max-w-full"
+            width={128} 
+            height={128}
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full bg-gray-700 flex items-center justify-center">
+            <span className="text-gray-400 text-sm">לוגו לא זמין</span>
+          </div>
+        )}
       </div>
       <h3 className="text-xl font-serif text-center mb-2">{name}</h3>
       <div 
-        className="text-gray-600 text-sm text-center"
+        className="text-gray-600 text-sm text-center flex-grow"
         dangerouslySetInnerHTML={{ __html: description }}
       />
     </div>

@@ -24,9 +24,9 @@ export const ArticleCard = ({ id, title, description, image, showImage = true, c
   });
 
   const Card = () => (
-    <div className="group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
-      {showImage && (
-        <div className="aspect-w-16 aspect-h-9 overflow-hidden" style={{ paddingBottom: '56.25%', position: 'relative' }}>
+    <div className="group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
+      <div className="aspect-w-16 aspect-h-9 overflow-hidden" style={{ paddingBottom: '56.25%', position: 'relative' }}>
+        {showImage && image ? (
           <ResponsiveImage 
             src={image} 
             alt={title} 
@@ -36,9 +36,13 @@ export const ArticleCard = ({ id, title, description, image, showImage = true, c
             loading="lazy"
             sizes="(max-width: 768px) 100vw, 400px"
           />
-        </div>
-      )}
-      <div className="p-6">
+        ) : (
+          <div className="absolute inset-0 bg-gray-700 flex items-center justify-center">
+            <span className="text-gray-400 text-sm">אין תמונה זמינה</span>
+          </div>
+        )}
+      </div>
+      <div className="p-6 flex flex-col flex-grow">
         <div className="flex items-center justify-between mb-3">
           <span className="text-sm text-accent bg-accent/10 px-3 py-1 rounded-full">
             {category}
@@ -52,11 +56,11 @@ export const ArticleCard = ({ id, title, description, image, showImage = true, c
         <h3 className="text-xl font-serif font-semibold mb-2">{title}</h3>
         
         <div 
-          className="text-gray-600 mb-4"
+          className="text-gray-600 mb-4 flex-grow"
           dangerouslySetInnerHTML={{ __html: description }}
         />
         
-        <div className="flex items-center text-gray-500 text-sm">
+        <div className="flex items-center text-gray-500 text-sm mt-auto">
           <UserIcon className="w-4 h-4 ml-1" />
           <span>{author}</span>
         </div>
@@ -66,7 +70,7 @@ export const ArticleCard = ({ id, title, description, image, showImage = true, c
 
   if (clickable) {
     return (
-      <Link to={`/article/${id}`} className="block" aria-label={`מאמר: ${title}`}>
+      <Link to={`/article/${id}`} className="block h-full" aria-label={`מאמר: ${title}`}>
         <Card />
       </Link>
     );

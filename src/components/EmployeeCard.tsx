@@ -15,20 +15,22 @@ type EmployeeCardProps = {
 
 export const EmployeeCard = ({ id, name, title, description, image, clickable, showImage = true }: EmployeeCardProps) => {
   const CardContent = () => (
-    <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+    <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
       <div className="flex items-center space-x-4 space-x-reverse mb-4">
         {image && showImage ? (
-          <ResponsiveImage 
-            src={image} 
-            alt={`${name} - ${title}`} 
-            className="w-12 h-12 rounded-full object-cover" 
-            width={48} 
-            height={48}
-            loading="lazy"
-          />
+          <div className="w-12 h-12 rounded-full overflow-hidden">
+            <ResponsiveImage 
+              src={image} 
+              alt={`${name} - ${title}`} 
+              className="w-12 h-12 object-cover" 
+              width={48} 
+              height={48}
+              loading="lazy"
+            />
+          </div>
         ) : (
-          <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
-            <User className="w-6 h-6 text-accent" aria-hidden="true" />
+          <div className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center">
+            <User className="w-6 h-6 text-gray-300" aria-hidden="true" />
           </div>
         )}
         <div>
@@ -37,7 +39,7 @@ export const EmployeeCard = ({ id, name, title, description, image, clickable, s
         </div>
       </div>
       <div 
-        className="text-gray-600"
+        className="text-gray-600 flex-grow"
         dangerouslySetInnerHTML={{ __html: description }}
       />
     </div>
@@ -45,7 +47,7 @@ export const EmployeeCard = ({ id, name, title, description, image, clickable, s
 
   if (clickable) {
     return (
-      <Link to={`/employee/${id}`} className="block group" aria-label={`צוות: ${name}, ${title}`}>
+      <Link to={`/employee/${id}`} className="block group h-full" aria-label={`צוות: ${name}, ${title}`}>
         <CardContent />
       </Link>
     );
