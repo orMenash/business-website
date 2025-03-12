@@ -49,7 +49,8 @@ export const OptimizedImage = ({
         ...props.style
       }}
       sizes={sizes}
-      fetchPriority={fetchPriority}
+      // Apply fetchPriority as a custom attribute using JSX spread for all lowercased DOM attributes
+      {...(fetchPriority ? { fetchpriority: fetchPriority } : {})}
       {...props}
     />
   );

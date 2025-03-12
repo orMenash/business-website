@@ -1,16 +1,16 @@
 
-import { ProjectCard } from "@/components/ProjectCard";
+import { ArticleCard } from "@/components/ArticleCard";
 import { SectionProps } from "@/types/section";
-import projectsConfig from "@/config/projects.json";
+import articles from "@/config/articles.json";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
-export const ProjectsSection = ({ section }: SectionProps) => {
-  if (projectsConfig.projects.length === 0) return null;
+export const ArticlesSection = ({ section }: SectionProps) => {
+  if (articles.articles.length === 0) return null;
 
   // Get background color from section configuration
-  const backgroundColor = section.background?.backgroundColor || "#f8f9fa";
+  const backgroundColor = section.background?.backgroundColor || "#ffffff";
 
   return (
     <section 
@@ -24,7 +24,7 @@ export const ProjectsSection = ({ section }: SectionProps) => {
         >
           <img
             src={section.background.image}
-            alt={section.background.alt || "רקע למדור פרויקטים"}
+            alt={section.background.alt || "רקע למדור מאמרים"}
             className="w-full h-full object-cover"
             width="1920"
             height="1080"
@@ -43,28 +43,30 @@ export const ProjectsSection = ({ section }: SectionProps) => {
           />
         </div>
         <div className="flex flex-wrap justify-center gap-8 mb-8">
-          {projectsConfig.projects
-            .filter(project => project.show)
+          {articles.articles
+            .filter(article => article.show)
             .slice(0, section.max_display)
-            .map((project, index) => (
-              <div key={project.id} className={`w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] animate-on-scroll delay-${index * 100}`}>
-                <ProjectCard
-                  title={project.title}
-                  description={project.description}
-                  image={project.image}
-                  showImage={project.showImage}
-                  category={project.category}
-                  clickable={project.clickable}
-                  id={project.id}
+            .map((article, index) => (
+              <div key={article.id} className={`w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] animate-on-scroll delay-${index * 100}`}>
+                <ArticleCard
+                  id={article.id}
+                  title={article.title}
+                  description={article.description}
+                  image={article.image}
+                  showImage={article.showImage}
+                  category={article.category}
+                  date={article.date}
+                  author={article.author}
+                  clickable={article.clickable}
                 />
               </div>
             ))}
         </div>
         {section.showButton !== false && (
           <div className="flex justify-center animate-on-scroll delay-300">
-            <Link to="/projects" aria-label="לכל הפרויקטים">
+            <Link to="/articles" aria-label="לכל המאמרים">
               <Button className="group hover-lift flex items-center gap-2">
-                <span>{section.cta || "לכל הפרויקטים"}</span>
+                <span>{section.cta || "לכל המאמרים"}</span>
                 <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
               </Button>
             </Link>

@@ -12,6 +12,7 @@ export interface Section {
   showButton?: boolean;
   showBackground?: boolean;
   interval?: number;
+  fullWidth?: boolean;
   background?: {
     image: string;
     alt: string;
@@ -23,4 +24,19 @@ export interface Section {
 
 export interface SectionProps {
   section: Section;
+}
+
+export interface Article {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  showImage: boolean;
+  showImageOnPage: boolean;
+  category: string;
+  date: string;
+  author: string;
+  show: boolean;
+  clickable: boolean;
+  fullDescription: string;
 }

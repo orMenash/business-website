@@ -10,13 +10,14 @@ type EmployeeCardProps = {
   description: string;
   image?: string;
   clickable?: boolean;
+  showImage?: boolean;
 };
 
-export const EmployeeCard = ({ id, name, title, description, image, clickable }: EmployeeCardProps) => {
+export const EmployeeCard = ({ id, name, title, description, image, clickable, showImage = true }: EmployeeCardProps) => {
   const CardContent = () => (
     <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
       <div className="flex items-center space-x-4 space-x-reverse mb-4">
-        {image ? (
+        {image && showImage ? (
           <ResponsiveImage 
             src={image} 
             alt={`${name} - ${title}`} 

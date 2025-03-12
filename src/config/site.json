@@ -123,6 +123,23 @@
         "backgroundColor": "#f8f9fa"
       }
     },
+    "articles": {
+      "show": true,
+      "order": 5.5,
+      "max_display": 3,
+      "title": "המאמרים שלנו",
+      "description": "<p><strong>מאמרים מקצועיים בתחומי האינטרנט, בניית אתרים וקידום</strong></p>",
+      "fullDescription": "<p>אנו מחויבים לשתף ידע מקצועי ועדכני עם הקהילה. במאמרים שלנו תוכלו למצוא טיפים, מדריכים וניתוחים מעמיקים שיעזרו לכם להבין טוב יותר את עולם האינטרנט והדיגיטל.</p>",
+      "cta": "לכל המאמרים",
+      "showButton": true,
+      "showBackground": true,
+      "background": {
+        "image": "",
+        "alt": "תמונת רקע של מאמרים",
+        "opacity": 0.05,
+        "backgroundColor": "#ffffff"
+      }
+    },
     "gallery": {
       "show": true,
       "order": 6,
@@ -133,6 +150,7 @@
       "cta": "",
       "showButton": true,
       "interval": 3000,
+      "fullWidth": true,
       "showBackground": true,
       "background": {
         "image": "",
@@ -202,6 +220,12 @@
         "path": "/projects",
         "show": true,
         "order": 5
+      },
+      {
+        "title": "מאמרים",
+        "path": "/articles",
+        "show": true,
+        "order": 5.5
       },
       {
         "title": "גלריה",

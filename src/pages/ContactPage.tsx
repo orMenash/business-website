@@ -1,8 +1,9 @@
 
 import { useBusiness } from "@/contexts/BusinessContext";
 import { ContactForm } from "@/components/ContactForm";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Navigation } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { openInNavigation } from "@/utils/addressUtils";
 
 const ContactPage = () => {
   const { contact } = useBusiness();
@@ -66,7 +67,18 @@ const ContactPage = () => {
                   <MapPin className="w-6 h-6 text-accent" />
                   <div>
                     <h3 className="font-semibold mb-1">כתובת</h3>
-                    <p className="text-gray-600">{contact.address}</p>
+                    {contact.addressClickable ? (
+                      <button 
+                        onClick={() => openInNavigation(contact.address)}
+                        className="text-gray-600 hover:text-accent transition-colors flex items-center gap-1 cursor-pointer"
+                        aria-label={`ניווט לכתובת: ${contact.address}`}
+                      >
+                        <span>{contact.address}</span>
+                        <Navigation className="w-4 h-4 inline-block" />
+                      </button>
+                    ) : (
+                      <p className="text-gray-600">{contact.address}</p>
+                    )}
                   </div>
                 </div>
               </div>

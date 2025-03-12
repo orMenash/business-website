@@ -11,6 +11,7 @@ interface GalleryImageSlideProps {
   isActive: boolean;
   index: number;
   className?: string;
+  onVideoPlayStateChange?: (isPlaying: boolean) => void;
 }
 
 /**
@@ -20,7 +21,8 @@ export const GalleryImageSlide = ({
   image, 
   isActive, 
   index, 
-  className 
+  className,
+  onVideoPlayStateChange
 }: GalleryImageSlideProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const isVideo = image.type === "video";
@@ -31,8 +33,11 @@ export const GalleryImageSlide = ({
   useEffect(() => {
     if (!isActive) {
       setIsPlaying(false);
+      if (onVideoPlayStateChange) {
+        onVideoPlayStateChange(false);
+      }
     }
-  }, [isActive]);
+  }, [isActive, onVideoPlayStateChange]);
   
   // For YouTube videos
   if (isVideo && isYouTube) {
@@ -50,7 +55,7 @@ export const GalleryImageSlide = ({
           <>
             {isPlaying ? (
               <iframe
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+                src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full"
@@ -70,6 +75,9 @@ export const GalleryImageSlide = ({
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsPlaying(true);
+                    if (onVideoPlayStateChange) {
+                      onVideoPlayStateChange(true);
+                    }
                   }}
                 >
                   <div className="bg-white/20 backdrop-blur-md p-8 rounded-full transition-transform hover:scale-110">
@@ -101,8 +109,18 @@ export const GalleryImageSlide = ({
             controls
             autoPlay={isPlaying}
             className="w-full h-full object-contain"
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
+            onPlay={() => {
+              setIsPlaying(true);
+              if (onVideoPlayStateChange) {
+                onVideoPlayStateChange(true);
+              }
+            }}
+            onPause={() => {
+              setIsPlaying(false);
+              if (onVideoPlayStateChange) {
+                onVideoPlayStateChange(false);
+              }
+            }}
           >
             <source src={image.url} type="video/mp4" />
             דפדפן זה אינו תומך בהצגת סרטוני וידאו.
@@ -117,6 +135,9 @@ export const GalleryImageSlide = ({
               if (videoElement) {
                 videoElement.play();
                 setIsPlaying(true);
+                if (onVideoPlayStateChange) {
+                  onVideoPlayStateChange(true);
+                }
               }
             }}
           >

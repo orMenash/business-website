@@ -1,33 +1,51 @@
-
 {
   "title": "הפרויקטים שלנו",
-  "description": "פרויקטים נבחרים שביצענו",
+  "description": "<p><strong>פרויקטים נבחרים</strong> שביצענו עבור לקוחותינו, showcasing the range and quality of our work.</p>",
   "projects": [
     {
       "id": "1",
-      "title": "פרויקט 1",
-      "description": "תיאור קצר של הפרויקט הראשון",
+      "title": "בניית אתר לעסק מקומי",
+      "description": "<p>יצרנו <strong>אתר תדמית</strong> מודרני לעסק מקומי תוך <b>48 שעות</b>.</p>",
       "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf",
-      "category": "קטגוריה 1",
-      "date": "2023-01-15",
+      "category": "בניית אתרים",
+      "date": "2024-01-15",
       "show": true,
       "clickable": true,
+      "showImage": true,
+      "showImageOnPage": true,
       "showGalleryButton": true,
       "galleryLink": "/gallery/projects",
-      "fullDescription": "תיאור מורחב ומפורט של הפרויקט הראשון. כאן נוכל לספר על האתגרים שעמדנו בפניהם, הפתרונות שיישמנו, והתוצאות שהשגנו. נוכל גם לשתף פרטים על הטכנולוגיות בהן השתמשנו ועל התהליך כולו."
+      "fullDescription": "<p>האתר נבנה עם <strong>עיצוב מותאם אישית</strong>, <em>ממשק ידידותי</em>, וחוויית משתמש מצוינת. בנוסף, שולבה בו <b>אופטימיזציה ל-SEO</b> ושירותי אחסון מהירים.</p>"
     },
     {
       "id": "2",
-      "title": "פרויקט 2",
-      "description": "תיאור קצר של הפרויקט השני",
+      "title": "דף נחיתה לקמפיין פרסומי",
+      "description": "<p>דף נחיתה מעוצב ליצירת <strong>לידים</strong> איכותיים לעסק.</p>",
       "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
-      "category": "קטגוריה 2",
-      "date": "2023-02-20",
+      "category": "שיווק דיגיטלי",
+      "date": "2024-02-10",
       "show": true,
       "clickable": true,
+      "showImage": true,
+      "showImageOnPage": true,
       "showGalleryButton": true,
       "galleryLink": "/gallery/events",
-      "fullDescription": "תיאור מורחב ומפורט של הפרויקט השני. כאן נוכל לספר על האתגרים שעמדנו בפניהם, הפתרונות שיישמנו, והתוצאות שהשגנו. נוכל גם לשתף פרטים על הטכנולוגיות בהן השתמשנו ועל התהליך כולו."
+      "fullDescription": "<p>יצרנו דף נחיתה ממוקד עם <b>עיצוב חדשני</b> ומערכת מעקב אחר פניות, שהובילה ל<strong>הגדלת אחוזי ההמרה</strong> של הלקוח.</p>"
+    },
+    {
+      "id": "3",
+      "title": "שדרוג אתר קיים ושיפור ביצועים",
+      "description": "<p>ביצענו <strong>אופטימיזציה</strong> מלאה לאתר עסקי לשיפור מהירות ונראות.</p>",
+      "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0",
+      "category": "תחזוקת אתרים",
+      "date": "2024-03-05",
+      "show": true,
+      "clickable": true,
+      "showImage": true,
+      "showImageOnPage": true,
+      "showGalleryButton": true,
+      "galleryLink": "/gallery/products",
+      "fullDescription": "<p>שיפרנו את מהירות האתר ב-<b>40%</b> על ידי <em>אופטימיזציה של קוד</em>, דחיסת תמונות ושיפור זמן טעינת הדפים.</p>"
     }
   ]
 }

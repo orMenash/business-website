@@ -1,3 +1,4 @@
+
 import { useBusiness } from "@/contexts/BusinessContext";
 import { EmployeeCard } from "@/components/EmployeeCard";
 import { SectionProps } from "@/types/section";
@@ -54,6 +55,7 @@ export const TeamSection = ({ section }: SectionProps) => {
                   description={employee.description}
                   image={employee.image}
                   clickable={employee.clickable}
+                  showImage={employee.showImage}
                 />
               </div>
             ))}

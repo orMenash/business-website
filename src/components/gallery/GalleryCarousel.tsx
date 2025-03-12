@@ -1,19 +1,22 @@
 
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GalleryImageWithAlbum } from "@/types/gallery";
 import { GalleryImageSlide } from "./GalleryImageSlide";
 import { GalleryCaption } from "./GalleryCaption";
-import { cn } from "@/lib/utils";
-import { getNextIndex, getPreviousIndex } from "@/utils/galleryUtils";
 import { GalleryModal } from "./GalleryModal";
+import { GalleryNavigationButton } from "./GalleryNavigationButton";
+import { GalleryPaginationIndicators } from "./GalleryPaginationIndicators";
+import { GalleryCarouselWrapper } from "./GalleryCarouselWrapper";
+import { getNextIndex, getPreviousIndex } from "@/utils/galleryUtils";
 
 interface GalleryCarouselProps {
   images: GalleryImageWithAlbum[];
   autoplayInterval?: number;
   className?: string;
   pauseOnHover?: boolean;
+  isPaused?: boolean;
   onImageClick?: (index: number) => void;
+  fullWidth?: boolean;
 }
 
 /**
@@ -24,13 +27,19 @@ export const GalleryCarousel = ({
   autoplayInterval = 5000, 
   className,
   pauseOnHover = true,
-  onImageClick
+  isPaused: externalPaused = false,
+  onImageClick,
+  fullWidth = false
 }: GalleryCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [internalPaused, setInternalPaused] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState<number | null>(null);
   const autoplayTimerRef = useRef<number | null>(null);
+  const [videoPlaying, setVideoPlaying] = useState(false);
+
+  // Combine all paused states
+  const isPaused = externalPaused || internalPaused || isModalOpen || videoPlaying;
 
   const handleNextImage = () => {
     setCurrentIndex(prev => getNextIndex(prev, images.length));
@@ -41,34 +50,33 @@ export const GalleryCarousel = ({
   };
 
   const handleImageClick = (index: number) => {
-    // Important: Use the exact index that was clicked
-    setModalImageIndex(index);
-    setIsModalOpen(true);
-    setIsPaused(true);
-    
     if (onImageClick) {
       onImageClick(index);
+    } else {
+      setModalImageIndex(index);
+      setIsModalOpen(true);
     }
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setModalImageIndex(null);
-    setIsPaused(false);
   };
 
   const currentImage = images[currentIndex];
   const isVideoActive = currentImage?.type === "video";
 
-  // Clear the previous timer and set a new one with consistent timing
+  // Handle video playback state
+  const handleVideoStateChange = (isPlaying: boolean) => {
+    setVideoPlaying(isPlaying);
+  };
+
   const resetAutoplayTimer = () => {
-    // Always clear any existing timer to prevent multiple timers
     if (autoplayTimerRef.current) {
       window.clearTimeout(autoplayTimerRef.current);
       autoplayTimerRef.current = null;
     }
     
-    // Only start a new timer if we're not paused and not in modal view
     if (!isPaused && !isModalOpen && images.length > 1) {
       autoplayTimerRef.current = window.setTimeout(() => {
         handleNextImage();
@@ -76,113 +84,73 @@ export const GalleryCarousel = ({
     }
   };
 
-  // Handle autoplay timing
+  // Set up and clear autoplay timer
   useEffect(() => {
-    // Reset the timer whenever relevant state changes
     resetAutoplayTimer();
     
-    // Clean up timer on unmount or when dependencies change
     return () => {
       if (autoplayTimerRef.current) {
         window.clearTimeout(autoplayTimerRef.current);
         autoplayTimerRef.current = null;
       }
     };
-  }, [currentIndex, isPaused, isModalOpen, autoplayInterval, images.length]);
+  }, [currentIndex, isPaused, isModalOpen, autoplayInterval, images.length, videoPlaying]);
 
   if (!images.length) return null;
 
   return (
     <>
-      <div 
-        className={cn(
-          "relative rounded-xl overflow-hidden shadow-2xl transition-all duration-300", 
-          className
-        )}
-        onMouseEnter={() => pauseOnHover && setIsPaused(true)}
-        onMouseLeave={() => pauseOnHover && setIsPaused(false)}
-        data-carousel
-        data-interval={autoplayInterval}
+      <GalleryCarouselWrapper
+        className={className}
+        onMouseEnter={() => pauseOnHover && setInternalPaused(true)}
+        onMouseLeave={() => pauseOnHover && setInternalPaused(false)}
+        fullWidth={fullWidth}
       >
-        <div className="aspect-[16/9] bg-black" style={{ height: '0', paddingBottom: '56.25%' }}>
-          {images.map((image, index) => (
-            <div 
-              key={index} 
-              className="cursor-pointer"
-              onClick={() => handleImageClick(index)}
-            >
-              <GalleryImageSlide 
-                image={image} 
-                isActive={index === currentIndex}
-                index={index} 
-              />
-            </div>
-          ))}
-        </div>
-        
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-        
-        {/* Side navigation buttons - always visible at mid-height */}
-        <div className="absolute inset-y-0 right-0 flex items-center">
-          <button 
-            onClick={(e) => {
-              e.stopPropagation();
-              handlePrevImage();
-            }}
-            className="bg-black/30 hover:bg-black/50 text-white p-3 rounded-l-xl transition-all duration-300 transform hover:-translate-x-1 hover:scale-105"
-            aria-label="תמונה קודמת"
+        {images.map((image, index) => (
+          <div 
+            key={index} 
+            className="cursor-pointer"
+            onClick={() => handleImageClick(index)}
           >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-        </div>
-        <div className="absolute inset-y-0 left-0 flex items-center">
-          <button 
-            onClick={(e) => {
-              e.stopPropagation();
-              handleNextImage();
-            }}
-            className="bg-black/30 hover:bg-black/50 text-white p-3 rounded-r-xl transition-all duration-300 transform hover:translate-x-1 hover:scale-105"
-            aria-label="תמונה הבאה"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-        </div>
-
-        {/* Bottom pagination dots */}
-        <div className={cn(
-          "absolute left-0 right-0 bottom-4 px-8 z-20",
-          isVideoActive && "bottom-24"
-        )}>
-          <div className="flex justify-center gap-3">
-            {Array.from({ length: images.length }).map((_, idx) => (
-              <button
-                key={idx}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentIndex(idx);
-                }}
-                className={cn(
-                  "w-3 h-3 rounded-full transition-all duration-500",
-                  idx === currentIndex 
-                    ? "bg-white scale-125 shadow-glow" 
-                    : "bg-white/40 hover:bg-white/70"
-                )}
-                aria-label={`עבור לתמונה ${idx + 1}`}
-              />
-            ))}
+            <GalleryImageSlide 
+              image={image} 
+              isActive={index === currentIndex}
+              index={index}
+              onVideoPlayStateChange={handleVideoStateChange}
+            />
           </div>
-        </div>
+        ))}
+        
+        <GalleryNavigationButton
+          direction="previous"
+          onClick={(e) => {
+            e.stopPropagation();
+            handlePrevImage();
+          }}
+        />
+        
+        <GalleryNavigationButton
+          direction="next"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleNextImage();
+          }}
+        />
 
-        {/* Caption */}
+        <GalleryPaginationIndicators
+          count={images.length}
+          currentIndex={currentIndex}
+          onClick={setCurrentIndex}
+          isVideoActive={isVideoActive}
+        />
+
         <GalleryCaption 
           image={images[currentIndex]} 
           isVideoActive={isVideoActive}
         />
-      </div>
+      </GalleryCarouselWrapper>
 
-      {/* Gallery Modal */}
-      {isModalOpen && modalImageIndex !== null && (
+      {isModalOpen && modalImageIndex !== null && !onImageClick && (
         <GalleryModal
           images={images}
           selectedImageIndex={modalImageIndex}

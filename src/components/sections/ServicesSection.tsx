@@ -58,6 +58,8 @@ export const ServicesSection = ({ section }: SectionProps) => {
                   title={service.title}
                   description={service.description}
                   icon={service.icon}
+                  image={service.image}
+                  showImage={service.showImage}
                   clickable={service.clickable}
                 />
               </div>

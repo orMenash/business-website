@@ -51,9 +51,11 @@ export const Header = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-gray-600 hover:text-accent transition-colors px-2 ${
-                  location.pathname === link.path ? "text-accent" : ""
-                }`}
+                className={`text-gray-600 hover:text-black relative px-2 py-1 transition-colors duration-300 text-sm
+                  ${location.pathname === link.path 
+                    ? "text-black after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-black after:transform after:origin-bottom after:scale-x-100 after:transition-transform" 
+                    : "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-black after:transform after:origin-bottom after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+                  }`}
                 aria-label={link.title}
                 aria-current={location.pathname === link.path ? "page" : undefined}
               >
@@ -85,9 +87,8 @@ export const Header = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`text-gray-600 hover:text-accent transition-colors ${
-                    location.pathname === link.path ? "text-accent" : ""
-                  }`}
+                  className={`text-gray-600 hover:text-black py-2 transition-colors 
+                    ${location.pathname === link.path ? "text-black border-r-2 border-black pr-2" : ""}`}
                   onClick={() => setIsMenuOpen(false)}
                   aria-label={link.title}
                   aria-current={location.pathname === link.path ? "page" : undefined}

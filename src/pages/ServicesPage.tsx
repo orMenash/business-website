@@ -37,6 +37,8 @@ const ServicesPage = () => {
                   title={service.title}
                   description={service.description}
                   icon={service.icon}
+                  image={service.image}
+                  showImage={service.showImage}
                   clickable={true}
                 />
               </div>

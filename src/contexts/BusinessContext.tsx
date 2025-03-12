@@ -1,4 +1,3 @@
-
 import { createContext, useContext } from "react";
 import businessConfig from "@/config/business.json";
 import services from "@/config/services.json";
@@ -6,6 +5,12 @@ import employees from "@/config/employees.json";
 import projects from "@/config/projects.json";
 import testimonials from "@/config/testimonials.json";
 import clients from "@/config/clients.json";
+import articles from "@/config/articles.json";
+
+export interface FAQ {
+  question: string;
+  answer: string;
+}
 
 export interface Service {
   id: string;
@@ -13,8 +18,12 @@ export interface Service {
   description: string;
   fullDescription: string;
   icon: string;
+  image?: string;
+  showImage?: boolean;
+  showImageOnPage?: boolean;
   show: boolean;
   clickable: boolean;
+  faq?: FAQ[];
 }
 
 export interface Employee {
@@ -28,6 +37,7 @@ export interface Employee {
   phone: string;
   show: boolean;
   clickable: boolean;
+  showImage?: boolean;
 }
 
 export interface Project {
@@ -36,12 +46,29 @@ export interface Project {
   description: string;
   fullDescription: string;
   image: string;
+  showImage?: boolean;
+  showImageOnPage?: boolean;
   category: string;
   date: string;
   show: boolean;
   clickable: boolean;
   showGalleryButton?: boolean;
   galleryLink?: string;
+}
+
+export interface Article {
+  id: string;
+  title: string;
+  description: string;
+  fullDescription: string;
+  image: string;
+  showImage: boolean;
+  showImageOnPage: boolean;
+  category: string;
+  date: string;
+  author: string;
+  show: boolean;
+  clickable: boolean;
 }
 
 export interface Client {
@@ -89,6 +116,7 @@ export interface BusinessContextType {
     phone: string;
     whatsapp: string;
     address: string;
+    addressClickable: boolean;
     showFloatingWhatsapp: boolean;
     showFloatingPhone: boolean;
     social: {
@@ -103,6 +131,7 @@ export interface BusinessContextType {
   services: Service[];
   employees: Employee[];
   projects: Project[];
+  articles: Article[];
   testimonials: Testimonial[];
   clients: Client[];
 }
@@ -123,6 +152,7 @@ const BusinessContext = createContext<BusinessContextType>({
     phone: "",
     whatsapp: "",
     address: "",
+    addressClickable: false,
     showFloatingWhatsapp: false,
     showFloatingPhone: false,
     social: {
@@ -137,6 +167,7 @@ const BusinessContext = createContext<BusinessContextType>({
   services: [],
   employees: [],
   projects: [],
+  articles: [],
   testimonials: [],
   clients: [],
 });
@@ -145,6 +176,7 @@ export const BusinessProvider = ({ children }: { children: React.ReactNode }) =>
   const filteredServices = services.services.filter((service) => service.show);
   const filteredEmployees = employees.employees.filter((employee) => employee.show);
   const filteredProjects = projects.projects.filter((project) => project.show);
+  const filteredArticles = articles.articles.filter((article) => article.show);
   const filteredTestimonials = testimonials.testimonials.filter((testimonial) => testimonial.show);
   const filteredClients = clients.clients.filter((client) => client.show);
 
@@ -161,10 +193,14 @@ export const BusinessProvider = ({ children }: { children: React.ReactNode }) =>
           height: businessConfig.logo.height,
           faviconUrl: businessConfig.favicon?.url || businessConfig.logo.url
         },
-        contact: businessConfig.contact,
+        contact: {
+          ...businessConfig.contact,
+          addressClickable: businessConfig.contact.addressClickable || false,
+        },
         services: filteredServices,
         employees: filteredEmployees,
         projects: filteredProjects,
+        articles: filteredArticles,
         testimonials: filteredTestimonials,
         clients: filteredClients,
       }}

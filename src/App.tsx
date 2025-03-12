@@ -19,6 +19,8 @@ import EmployeePage from "./pages/EmployeePage";
 import ContactPage from "./pages/ContactPage";
 import ProjectPage from "./pages/ProjectPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import ArticlesPage from "./pages/ArticlesPage";
+import ArticlePage from "./pages/ArticlePage";
 import TeamPage from "./pages/TeamPage";
 import GalleryPage from "./pages/GalleryPage";
 import AlbumPage from "./pages/AlbumPage";
@@ -80,6 +82,8 @@ const AppContent = () => {
             <Route path="/employee/:id" element={<EmployeePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/project/:id" element={<ProjectPage />} />
+            <Route path="/articles" element={<ArticlesPage />} />
+            <Route path="/article/:id" element={<ArticlePage />} />
             <Route path="/clients" element={<ClientsPage />} />
             <Route path="/team" element={<TeamPage />} />
             <Route path="/gallery" element={<GalleryPage />} />

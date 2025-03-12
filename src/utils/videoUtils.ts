@@ -1,47 +1,29 @@
 
 /**
- * Utility functions for handling video URLs and playback
- */
-
-/**
- * Checks if a URL is a YouTube link - supports multiple YouTube URL formats
- * @param url The URL to check
- * @returns Whether the URL is a YouTube video link
+ * Checks if a URL is a YouTube URL
+ * @param url URL to check
+ * @returns Boolean indicating if the URL is a YouTube URL
  */
 export const isYouTubeUrl = (url: string): boolean => {
   if (!url) return false;
-  
-  const youtubePatterns = [
-    'youtube.com',
-    'youtu.be',
-    'youtube-nocookie.com',
-    'youtube.com/embed',
-    'youtube.com/watch',
-    'youtu.be/',
-    'youtube.com/v/'
-  ];
-  
-  return youtubePatterns.some(pattern => url.includes(pattern));
+  return url.includes('youtube.com') || url.includes('youtu.be');
 };
 
 /**
- * Extracts the YouTube video ID from various YouTube URL formats
- * @param url The YouTube URL
- * @returns The video ID if valid, null otherwise
+ * Extracts the video ID from a YouTube URL
+ * @param url YouTube URL
+ * @returns YouTube video ID or null if not a valid YouTube URL
  */
 export const getYouTubeVideoId = (url: string): string | null => {
   if (!url) return null;
   
-  // Handle youtu.be/VIDEO_ID format
-  if (url.includes('youtu.be/')) {
-    const parts = url.split('youtu.be/');
-    if (parts.length > 1) {
-      const idWithParams = parts[1].split('?')[0].split('&')[0];
-      if (idWithParams.length === 11) return idWithParams;
-    }
+  // Handle youtu.be format
+  if (url.includes('youtu.be')) {
+    const urlParts = url.split('/');
+    return urlParts[urlParts.length - 1].split('?')[0];
   }
   
-  // Handle youtube.com/watch?v=VIDEO_ID format
+  // Handle youtube.com/watch format
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
   const match = url.match(regExp);
   
@@ -49,14 +31,24 @@ export const getYouTubeVideoId = (url: string): string | null => {
 };
 
 /**
- * Gets a valid YouTube embed URL from any YouTube URL format
- * @param url The YouTube URL
- * @returns A valid embed URL
+ * Generates a YouTube embed URL that respects privacy (using youtube-nocookie.com)
+ * @param videoId YouTube video ID
+ * @param autoplay Whether to autoplay the video
+ * @returns Embed URL for the YouTube video
  */
-export const getYouTubeEmbedUrl = (url: string): string | null => {
-  const videoId = getYouTubeVideoId(url);
-  if (!videoId) return null;
+export const getYouTubeEmbedUrl = (videoId: string | null, autoplay: boolean = false): string => {
+  if (!videoId) return '';
   
-  // Use youtube-nocookie.com for better privacy and compatibility
-  return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+  return `https://www.youtube-nocookie.com/embed/${videoId}?rel=0${autoplay ? '&autoplay=1' : ''}`;
+};
+
+/**
+ * Gets a thumbnail URL for a YouTube video
+ * @param videoId YouTube video ID
+ * @returns URL for the video thumbnail
+ */
+export const getYouTubeThumbnailUrl = (videoId: string | null): string => {
+  if (!videoId) return '';
+  
+  return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 };

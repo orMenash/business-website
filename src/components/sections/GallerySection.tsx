@@ -1,4 +1,3 @@
-
 import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
@@ -8,6 +7,7 @@ import type { Section } from "@/types/section";
 import { ResponsiveImage } from "@/components/ui/optimized-image";
 import { processGalleryImages } from "@/utils/galleryUtils";
 import { GalleryCarousel } from "@/components/gallery/GalleryCarousel";
+import { GalleryModal } from "@/components/gallery/GalleryModal";
 
 interface GallerySectionProps {
   section: Section;
@@ -18,11 +18,15 @@ interface GallerySectionProps {
  */
 export const GallerySection = ({ section }: GallerySectionProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   
   const images = processGalleryImages(galleryConfig.albums, section.max_display);
   // Ensure the interval is always passed correctly from JSON config
   const interval = section.interval || 5000;
+  // Get fullWidth setting from section config or default to false
+  const fullWidth = section.fullWidth || false;
 
   // Set up intersection observer to detect when section is visible
   useEffect(() => {
@@ -43,6 +47,16 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
       }
     };
   }, []);
+
+  const handleImageClick = (index: number) => {
+    setSelectedImageIndex(index);
+    setIsPaused(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImageIndex(null);
+    setIsPaused(false);
+  };
 
   if (!images.length) return null;
 
@@ -68,7 +82,7 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
           />
         </div>
       )}
-      <div className="container mx-auto px-4 relative z-10">
+      <div className={`${fullWidth ? 'w-full px-0' : 'container mx-auto px-4'} relative z-10`}>
         <div className="text-center mb-12 animate-on-scroll">
           <h2 
             className="text-4xl font-serif font-semibold mb-4"
@@ -82,12 +96,15 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
           )}
         </div>
 
-        <div className="max-w-5xl mx-auto animate-on-scroll delay-200">
+        <div className={`${fullWidth ? 'w-full' : 'max-w-5xl mx-auto'} animate-on-scroll delay-200`}>
           <GalleryCarousel 
             images={images} 
             autoplayInterval={interval}
             pauseOnHover={true}
-            className="transform transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl"
+            isPaused={isPaused || selectedImageIndex !== null}
+            className={`transform transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl ${fullWidth ? 'rounded-none' : ''}`}
+            onImageClick={handleImageClick}
+            fullWidth={fullWidth}
           />
         </div>
 
@@ -95,6 +112,7 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
           <div className="mt-12 flex justify-center animate-on-scroll delay-300">
             <Link to="/gallery" aria-label="לגלריה המלאה">
               <Button 
+                variant="navlink"
                 className="group hover-lift flex items-center gap-2"
               >
                 <span>לגלריה המלאה</span>
@@ -104,6 +122,24 @@ export const GallerySection = ({ section }: GallerySectionProps) => {
           </div>
         )}
       </div>
+
+      {/* Gallery Modal */}
+      {selectedImageIndex !== null && (
+        <GalleryModal
+          images={images}
+          selectedImageIndex={selectedImageIndex}
+          onClose={handleCloseModal}
+          onPrevious={() => {
+            const newIndex = (selectedImageIndex - 1 + images.length) % images.length;
+            setSelectedImageIndex(newIndex);
+          }}
+          onNext={() => {
+            const newIndex = (selectedImageIndex + 1) % images.length;
+            setSelectedImageIndex(newIndex);
+          }}
+          onSelectImage={setSelectedImageIndex}
+        />
+      )}
     </section>
   );
 };

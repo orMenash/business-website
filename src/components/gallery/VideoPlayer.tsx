@@ -1,70 +1,79 @@
 
+import { useState, useEffect, useRef } from "react";
 import { Play } from "lucide-react";
-import { useState } from "react";
 
 interface VideoPlayerProps {
   url: string;
   thumbnail?: string;
   description?: string;
   onPlayStateChange?: (isPlaying: boolean) => void;
+  autoplay?: boolean;
 }
 
 /**
- * Component for displaying and playing standard video files
+ * Component for playing local/direct video files
  */
-export const VideoPlayer = ({ 
-  url, 
-  thumbnail, 
-  description, 
-  onPlayStateChange 
+export const VideoPlayer = ({
+  url,
+  thumbnail,
+  description,
+  onPlayStateChange,
+  autoplay = false
 }: VideoPlayerProps) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(autoplay);
+  const videoRef = useRef<HTMLVideoElement>(null);
   
-  const handlePlay = () => {
-    const videoElement = document.querySelector('video');
-    if (videoElement) {
-      videoElement.play();
-      setIsPlaying(true);
-      if (onPlayStateChange) {
-        onPlayStateChange(true);
-      }
-    }
-  };
-  
-  const handleVideoStateChange = (playing: boolean) => {
-    setIsPlaying(playing);
+  // Notify parent component when playing state changes
+  useEffect(() => {
     if (onPlayStateChange) {
-      onPlayStateChange(playing);
+      onPlayStateChange(isPlaying);
     }
-  };
+  }, [isPlaying, onPlayStateChange]);
+  
+  // Handle autoplay
+  useEffect(() => {
+    if (autoplay && videoRef.current) {
+      videoRef.current.play().catch(err => {
+        console.error("Autoplay failed:", err);
+        setIsPlaying(false);
+      });
+    }
+  }, [autoplay]);
   
   return (
-    <>
+    <div className="relative w-full h-full flex justify-center">
       <video
+        ref={videoRef}
         src={url}
         poster={thumbnail}
-        controls
-        autoPlay={isPlaying}
-        className="max-h-[80vh] max-w-full object-contain mx-auto"
-        onPlay={() => handleVideoStateChange(true)}
-        onPause={() => handleVideoStateChange(false)}
+        controls={isPlaying}
+        className="max-h-full max-w-full"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onEnded={() => setIsPlaying(false)}
       >
         <source src={url} type="video/mp4" />
         דפדפן זה אינו תומך בהצגת סרטוני וידאו.
       </video>
+      
       {!isPlaying && (
         <div 
           className="absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer"
-          onClick={(e) => {
-            e.stopPropagation();
-            handlePlay();
+          onClick={() => {
+            const video = videoRef.current;
+            if (video) {
+              video.play().catch(err => {
+                console.error("Play failed:", err);
+              });
+              setIsPlaying(true);
+            }
           }}
         >
-          <div className="bg-white/20 backdrop-blur-md p-8 rounded-full transition-transform hover:scale-110">
-            <Play className="w-12 h-12 text-white" />
+          <div className="bg-white/20 backdrop-blur-md p-6 rounded-full transition-transform hover:scale-110">
+            <Play className="w-10 h-10 text-white" fill="white" />
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };

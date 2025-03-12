@@ -1,6 +1,7 @@
 
 import { GalleryImageWithAlbum } from "@/types/gallery";
 import { cn } from "@/lib/utils";
+import { VisuallyHidden } from "@/components/ui/visually-hidden";
 
 interface GalleryCaptionProps {
   image: GalleryImageWithAlbum;
@@ -20,6 +21,9 @@ export const GalleryCaption = ({ image, className, isVideoActive }: GalleryCapti
     )}>
       <h3 className="text-2xl font-medium mb-2 transform transition-transform duration-500">{image.albumName}</h3>
       <p className="text-white/90 transform transition-transform duration-500">{image.description}</p>
+      <VisuallyHidden>
+        {image.type === "video" ? "סרטון: " : "תמונה: "}{image.description} באלבום {image.albumName}
+      </VisuallyHidden>
     </div>
   );
 };

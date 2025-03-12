@@ -14,6 +14,7 @@
     "email": "your@gmail.com",
     "phone": "050-1234567",
     "address": "רחוב הרצל 1, תל אביב",
+    "addressClickable": true,
     "whatsapp": "972501234567",
     "showFloatingWhatsapp": true,
     "showFloatingPhone": true,
