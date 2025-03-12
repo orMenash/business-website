@@ -53,6 +53,7 @@ export const GalleryCarousel = ({
     if (onImageClick) {
       onImageClick(index);
     } else {
+      // Important fix: Use the clicked index, not currentIndex
       setModalImageIndex(index);
       setIsModalOpen(true);
     }
@@ -158,16 +159,13 @@ export const GalleryCarousel = ({
           onPrevious={() => {
             const newIndex = getPreviousIndex(modalImageIndex, images.length);
             setModalImageIndex(newIndex);
-            setCurrentIndex(newIndex);
           }}
           onNext={() => {
             const newIndex = getNextIndex(modalImageIndex, images.length);
             setModalImageIndex(newIndex);
-            setCurrentIndex(newIndex);
           }}
           onSelectImage={(index) => {
             setModalImageIndex(index);
-            setCurrentIndex(index);
           }}
         />
       )}
