@@ -1,3 +1,4 @@
+
 import { createContext, useContext } from "react";
 import businessConfig from "@/config/business.json";
 import services from "@/config/services.json";
@@ -79,6 +80,7 @@ export interface Client {
   logo: string;
   show: boolean;
   url?: string;
+  showImage?: boolean;
 }
 
 export interface Testimonial {
@@ -91,6 +93,7 @@ export interface Testimonial {
   avatar?: string;
   rating: number;
   show: boolean;
+  showImage?: boolean;
 }
 
 export interface SocialLink {

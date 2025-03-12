@@ -26,7 +26,7 @@ export const ArticleCard = ({ id, title, description, image, showImage = true, c
   const Card = () => (
     <div className="group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
       <div className="aspect-w-16 aspect-h-9 overflow-hidden" style={{ paddingBottom: '56.25%', position: 'relative' }}>
-        {showImage && image ? (
+        {image && showImage ? (
           <ResponsiveImage 
             src={image} 
             alt={title} 

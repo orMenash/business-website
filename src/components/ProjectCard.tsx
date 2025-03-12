@@ -16,7 +16,7 @@ export const ProjectCard = ({ id, title, description, image, showImage = true, c
   const Card = () => (
     <div className="group relative overflow-hidden rounded-lg shadow-lg h-full">
       <div className="aspect-w-16 aspect-h-9" style={{ paddingBottom: '56.25%', position: 'relative' }}>
-        {showImage && image ? (
+        {image && showImage ? (
           <ResponsiveImage 
             src={image} 
             alt={title} 

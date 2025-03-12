@@ -45,6 +45,7 @@ export const GalleryModal = ({
   const modalDescription = currentImage.description || (isVideo ? "סרטון" : "תמונה");
   const modalTitle = isVideo ? "סרטון מהגלריה" : "תמונה מהגלריה";
   const itemNumber = `${selectedImageIndex + 1} מתוך ${images.length}`;
+  const showImage = currentImage.show_image !== false;
   
   return (
     <Dialog 
@@ -80,8 +81,8 @@ export const GalleryModal = ({
             <X className="w-6 h-6" />
           </button>
           
-          <div className="flex-grow w-full flex items-center justify-center overflow-hidden">
-            {currentImage.type === "video" && isYouTubeUrl(currentImage.url) ? (
+          <div className="flex-grow w-full flex items-center justify-center overflow-hidden bg-gray-800">
+            {currentImage.type === "video" && isYouTubeUrl(currentImage.url) && showImage ? (
               // YouTube Video
               <div className="w-full max-h-[75vh]">
                 <YouTubePlayer 
@@ -92,7 +93,7 @@ export const GalleryModal = ({
                   autoplay={false}
                 />
               </div>
-            ) : currentImage.type === "video" ? (
+            ) : currentImage.type === "video" && showImage ? (
               // Standard Video
               <div className="w-full max-h-[75vh]">
                 <VideoPlayer 
@@ -103,13 +104,20 @@ export const GalleryModal = ({
                   autoplay={false}
                 />
               </div>
-            ) : (
+            ) : showImage && currentImage.url ? (
               // Image - now full-width for small screens
               <img
                 src={currentImage.url}
                 alt={currentImage.description || "תמונת גלריה"}
                 className="max-h-[75vh] w-full sm:w-auto sm:max-w-full object-contain mx-auto"
               />
+            ) : (
+              // Fallback when media can't be shown
+              <div className="w-full h-full flex items-center justify-center bg-gray-700">
+                <span className="text-gray-400">
+                  {currentImage.type === "video" ? "סרטון לא זמין" : "תמונה לא זמינה"}
+                </span>
+              </div>
             )}
 
             {/* Hidden description for screen readers */}

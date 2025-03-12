@@ -13,11 +13,11 @@ type ServiceCardProps = {
   clickable?: boolean;
 };
 
-export const ServiceCard = ({ id, title, description, icon, image, showImage, clickable }: ServiceCardProps) => {
+export const ServiceCard = ({ id, title, description, icon, image, showImage = false, clickable }: ServiceCardProps) => {
   const Card = () => (
     <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
       <div className="mb-4 overflow-hidden rounded-lg aspect-w-16 aspect-h-9" style={{ paddingBottom: '56.25%', position: 'relative' }}>
-        {showImage && image ? (
+        {image && showImage ? (
           <ResponsiveImage 
             src={image} 
             alt={title} 

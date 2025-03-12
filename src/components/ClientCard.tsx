@@ -8,13 +8,14 @@ type ClientCardProps = {
   description: string;
   logo: string;
   url?: string;
+  showImage?: boolean;
 };
 
-export const ClientCard = ({ id, name, description, logo, url }: ClientCardProps) => {
+export const ClientCard = ({ id, name, description, logo, url, showImage = true }: ClientCardProps) => {
   const Card = () => (
     <div className="group bg-white rounded-lg shadow-md p-6 transition-all hover:shadow-lg h-full flex flex-col items-center">
       <div className="w-32 h-32 mb-4 flex items-center justify-center overflow-hidden">
-        {logo ? (
+        {logo && showImage ? (
           <ResponsiveImage 
             src={logo} 
             alt={name} 

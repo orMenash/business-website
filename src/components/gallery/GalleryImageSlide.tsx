@@ -28,6 +28,7 @@ export const GalleryImageSlide = ({
   const isVideo = image.type === "video";
   const isYouTube = isVideo && isYouTubeUrl(image.url);
   const altText = image.alt || image.description || `מדיה ${index + 1} מתוך אלבום ${image.albumName}`;
+  const showImage = image.show_image !== false;
   
   // Reset playing state when slide changes
   useEffect(() => {
@@ -64,12 +65,18 @@ export const GalleryImageSlide = ({
               ></iframe>
             ) : (
               <div className="relative w-full h-full">
-                <img
-                  src={image.thumbnail || `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-                  alt={altText}
-                  className="w-full h-full object-contain bg-gray-800"
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
+                {showImage && image.thumbnail ? (
+                  <img
+                    src={image.thumbnail || `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+                    alt={altText}
+                    className="w-full h-full object-contain bg-gray-800"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-700 flex items-center justify-center">
+                    <span className="text-gray-400 text-sm">סרטון YouTube</span>
+                  </div>
+                )}
                 <div 
                   className="absolute inset-0 flex items-center justify-center bg-black/30 cursor-pointer"
                   onClick={(e) => {
@@ -104,28 +111,34 @@ export const GalleryImageSlide = ({
       >
         {isActive && (
           <div className="w-full h-full flex items-center justify-center">
-            <video
-              src={image.url}
-              poster={image.thumbnail}
-              controls
-              autoPlay={isPlaying}
-              className="max-w-full max-h-full"
-              onPlay={() => {
-                setIsPlaying(true);
-                if (onVideoPlayStateChange) {
-                  onVideoPlayStateChange(true);
-                }
-              }}
-              onPause={() => {
-                setIsPlaying(false);
-                if (onVideoPlayStateChange) {
-                  onVideoPlayStateChange(false);
-                }
-              }}
-            >
-              <source src={image.url} type="video/mp4" />
-              דפדפן זה אינו תומך בהצגת סרטוני וידאו.
-            </video>
+            {showImage ? (
+              <video
+                src={image.url}
+                poster={image.thumbnail}
+                controls
+                autoPlay={isPlaying}
+                className="max-w-full max-h-full"
+                onPlay={() => {
+                  setIsPlaying(true);
+                  if (onVideoPlayStateChange) {
+                    onVideoPlayStateChange(true);
+                  }
+                }}
+                onPause={() => {
+                  setIsPlaying(false);
+                  if (onVideoPlayStateChange) {
+                    onVideoPlayStateChange(false);
+                  }
+                }}
+              >
+                <source src={image.url} type="video/mp4" />
+                דפדפן זה אינו תומך בהצגת סרטוני וידאו.
+              </video>
+            ) : (
+              <div className="w-full h-full bg-gray-700 flex items-center justify-center">
+                <span className="text-gray-400 text-sm">סרטון</span>
+              </div>
+            )}
           </div>
         )}
         {!isPlaying && isActive && (
@@ -161,16 +174,22 @@ export const GalleryImageSlide = ({
         className
       )}
     >
-      <ResponsiveImage
-        src={image.url}
-        alt={altText}
-        className="w-full h-full object-contain"
-        width={800}
-        height={450}
-        loading={index === 0 ? "eager" : "lazy"}
-        fetchPriority={index === 0 ? "high" : "auto"}
-        sizes="(max-width: 768px) 100vw, 800px"
-      />
+      {showImage && image.url ? (
+        <ResponsiveImage
+          src={image.url}
+          alt={altText}
+          className="w-full h-full object-contain"
+          width={800}
+          height={450}
+          loading={index === 0 ? "eager" : "lazy"}
+          fetchPriority={index === 0 ? "high" : "auto"}
+          sizes="(max-width: 768px) 100vw, 800px"
+        />
+      ) : (
+        <div className="w-full h-full bg-gray-700 flex items-center justify-center">
+          <span className="text-gray-400 text-sm">תמונה לא זמינה</span>
+        </div>
+      )}
     </div>
   );
 };
