@@ -30,11 +30,11 @@ export const ProjectCard = ({ id, title, description, image, showImage = true, c
       ) : (
         <div className="aspect-w-16 aspect-h-9 bg-gray-200" style={{ paddingBottom: '56.25%', position: 'relative' }}>
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-gray-400 text-sm">אין תמונה זמינה</span>
+            <span className="text-gray-500">אין תמונה זמינה</span>
           </div>
         </div>
       )}
-      <div className={`absolute inset-0 ${showImage ? 'bg-gradient-to-t from-black/70 to-transparent' : 'bg-gray-800'} flex flex-col justify-end p-6`}>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
         <span className="text-sm text-white/80 mb-2">{category}</span>
         <h3 className="text-xl font-serif text-white mb-2">{title}</h3>
         <div 

@@ -8,7 +8,7 @@ interface GalleryPreviewListProps {
 }
 
 export const GalleryPreviewList = ({ albums, onImageClick }: GalleryPreviewListProps) => {
-  if (!albums.length) return <p className="text-center">לא נמצאו אלבומים זמינים</p>;
+  if (!albums.length) return <p className="text-center py-8 text-gray-500">לא נמצאו אלבומים זמינים</p>;
 
   return (
     <div className="space-y-16">
